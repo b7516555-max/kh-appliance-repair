@@ -8,7 +8,7 @@
 ## 狀態總覽
 
 ### ✅ 已完成 (Completed)
-- [x] **分析現有 GAS 系統**：確認正式 Web App 端點為 `https://script.google.com/macros/s/AKfycbwwutONntwhqljCXcdILF3pdtX6v4Rk74nKSq2j9f_ECmkkfIZ3CZ4eNPLlys5NNrYA/exec`，保護所有現有後端與資料庫串接不受影響。
+- [x] **分析現有 GAS 系統**：確認正式 Web App 端點為 `https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec`，保護所有現有後端與資料庫串接不受影響。
 - [x] **建立獨立 public/ 網站目錄**：
   - `public/index.html`（完整語意化 SEO HTML、Hero 區、服務內容、以修代買理念、流程步驟、據點導航、FAQ、CTA）
   - `public/robots.txt`（允許所有搜尋引擎抓取並宣告 Sitemap）

@@ -3,7 +3,7 @@
 ## 網站基本資訊
 - **SEO 網站名稱**：高雄市小家電檢修服務（線上預約、進度查詢與維修據點）
 - **SEO 網站 URL（預設目標）**：`https://b7516555-max.github.io/kh-appliance-repair/`
-- **GAS Web App 正式端點**：`https://script.google.com/macros/s/AKfycbwwutONntwhqljCXcdILF3pdtX6v4Rk74nKSq2j9f_ECmkkfIZ3CZ4eNPLlys5NNrYA/exec`
+- **GAS Web App 正式端點**：`https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec`
 - **GAS Project 編輯器 URL**：`https://script.google.com/u/0/home/projects/1a1cx4--n5CxkdOYTuYlNdiYJl2VVAQuix0HrXuqMOEswunza5M7zNu6I/edit`
 - **主辦/服務諮詢專線**：(07) 735-1684（黃先生／洪小姐／刁先生）
 
