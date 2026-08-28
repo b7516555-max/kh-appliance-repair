@@ -15,31 +15,33 @@
   - `public/sitemap.xml`（標準 XML Sitemap）
   - `public/manifest.webmanifest`（PWA 支援）
   - `public/favicon.svg`（輕量向量圖標）
-  - `public/og-image.svg`（高質感社群分享預覽圖）
-- [x] **SEO 與 Metadata 完善**：
+  - `public/og-image.png`（1200x630 高質感社群分享實體 PNG 預覽圖）
+- [x] **SEO 與 Metadata 完善與文字校驗**：
   - 繁體中文 `lang="zh-Hant-TW"` 與 `utf-8` 編碼
   - 精確 Title 與 Meta Description（涵蓋高雄小家電維修、以修代買等核心關鍵字）
-  - Open Graph 與 Twitter Card 標籤完整配置
-  - Schema.org JSON-LD（含 `GovernmentOrganization`、`WebSite`、`Service`、`FAQPage`）
-  - 核心 SEO 內容純 HTML 直接渲染（不依賴客戶端 JS）
-- [x] **Git 倉庫管理與 CI/CD 流程**：
+  - Open Graph 與 Twitter Card 標籤採用標準 PNG (`og-image.png`)
+  - Schema.org JSON-LD 精準配置（`WebSite`、`Service`、`FAQPage`，不冒充政府官方主站）
+  - 審核並對齊所有送修規定、據點、費用原則至 GAS 專案既有規定
+- [x] **本地 Git 倉庫管理與 CI/CD 流程**：
+  - 本地倉庫分支命名為 `main`
   - 配置完善 `.gitignore`，隔離暫存檔、敏感設定與巨大二進位檔
-  - 建立 `.github/workflows/deploy-pages.yml`，支援 main / master 自動觸發 GitHub Pages 部署
-- [x] **自動化結構與安全性驗證**：通過 18 項 SEO 與內容結構測試，確認無任何 API Key 或 Secret 洩漏。
+  - 建立 `.github/workflows/deploy-pages.yml`，支援 main 自動觸發 GitHub Pages 部署
+  - 本地 commit 完成 (`fix: finalize SEO deployment and social metadata`)
 
 ---
 
 ### ⏳ 執行中 (In Progress)
-- [x] 建立完整 `SEO_DEPLOYMENT.md` 部署文件與執行回報。
+- [x] 等待遠端 GitHub Repository 建立與推送
 
 ---
 
-### 📌 尚未完成 / 等待後續串接 (Pending)
-- [ ] 若需推送至遠端 GitHub，由使用者建立 GitHub 遠端倉庫並執行 `git remote add origin` 與 `git push`（受限於本地環境尚未登入 GitHub 帳號）。
-- [ ] Google Search Console 站點所有權驗證與 Sitemap 提交（已預留驗證標記位置與標準 sitemap.xml 檔案）。
+### 📌 尚未完成 (Pending)
+- [ ] 遠端 GitHub Repository (`b7516555/kh-appliance-repair`) 尚未在 GitHub 伺服器建立（回傳 404）。
+- [ ] GitHub Actions `deploy-pages.yml` 尚未於遠端執行。
+- [ ] GitHub Pages 公開網址目前仍為 404，尚未正式上線。
+- [ ] Google Search Console 提交與驗證（待網站正式上線後執行）。
 
 ---
 
 ### 🛡️ 外部權限阻擋紀錄 (External Permission Blockers)
-- **GitHub 帳號授權**：本機未安裝登入之 GitHub CLI (`gh`)，需使用者手動連結遠端 GitHub Repo。
-- **Search Console 驗證**：需由具備 Google 帳號權限之擁有者登入 Search Console 進行網站驗證。
+- **GitHub 遠端倉庫建立**：本地無 `gh` CLI，且遠端伺服器尚無 `b7516555/kh-appliance-repair` 倉庫。需由使用者於 GitHub 網頁端建立 public repo。
