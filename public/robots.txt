@@ -1,4 +1,4 @@
 ﻿User-agent: *
 Allow: /
 
-Sitemap: https://b7516555.github.io/kh-appliance-repair/sitemap.xml
+Sitemap: https://b7516555-max.github.io/kh-appliance-repair/sitemap.xml
