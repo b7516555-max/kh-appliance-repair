@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>常見問題 - 高雄市政府環境保護局</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .gov-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+    <div class="w-full max-w-3xl mx-auto px-4 py-6 sm:py-8">
+        <!-- 頂部政府品牌標頭 -->
+        <header class="gov-card p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-purple-600">
+            <div class="flex items-center space-x-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-800 text-2xl font-bold flex-shrink-0">
+                    ❓
+                </div>
+                <div>
+                    <div class="text-xs sm:text-sm text-purple-800 font-semibold tracking-wide">高雄市政府環境保護局 環境管理處</div>
+                    <h1 class="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">常見問題</h1>
+                </div>
+            </div>
+            <a href="<?= webAppUrl ?>?source=line" target="_top" class="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-bold bg-gray-100 hover:bg-gray-200 text-gray-700 transition">
+                ← 返回預約首頁
+            </a>
+        </header>
+
+        <!-- FAQ 手風琴卡片列表 -->
+        <main class="space-y-3.5 mb-8" id="faq-list">
+            <!-- Q1 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q1. 哪些家電可以拿來修？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    電風扇、檯燈、吹風機、各類玩具及小型常規小家電皆可受理；大型家電（如冰箱、洗衣機、冷氣、電視機）、高壓危險設備，以及 <b>Dyson、米家／小米品牌電器</b> 則不在受理範圍內。
+                </div>
+            </article>
+
+            <!-- Q2 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q2. 維修需要收取工資或檢測費用嗎？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    <b>檢修服務完全免費</b>。本活動由環保局熱心志工提供檢測與技術修復，不收取任何檢修工資。
+                </div>
+            </article>
+
+            <!-- Q3 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q3. 零件費用如何計算？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    若檢修過程經判定需要更換專用零件或耗材，志工將於<b>維修前事先徵詢您的同意</b>，相關材料工本費由民眾自行負擔。若無更換零件則無任何費用。
+                </div>
+            </article>
+
+            <!-- Q4 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q4. 預約完成後可以直接把物品送去現場嗎？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    請等待維修志工進行線上初步審核。收到系統寄發之「可維修」通知信件後，再於該場次之服務時間內攜帶物品至現場送件。
+                </div>
+            </article>
+
+            <!-- Q5 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q5. 沒有收到確認 Email 怎麼辦？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    請先至垃圾郵件匣確認；您也可以直接利用本系統的「<a href="<?= webAppUrl ?>?source=line&view=status" target="_top" class="text-blue-600 font-bold underline">查詢進度</a>」功能，輸入身分證字號或手機號碼即時查詢最新狀態。
+                </div>
+            </article>
+
+            <!-- Q6 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q6. 如何查詢我的維修進度？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    可點選 LINE 圖文選單中的「查詢進度」或前往「<a href="<?= webAppUrl ?>?source=line&view=status" target="_top" class="text-blue-600 font-bold underline">維修案件進度查詢</a>」頁面，輸入您的身分證字號或手機號碼即可查詢。
+                </div>
+            </article>
+
+            <!-- Q7 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q7. 維修完成後如何領回物品？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    維修完成後系統將發送領取通知；請於該站點之活動服務時間內，攜帶預約單號或身分證件至原送修地點領回。
+                </div>
+            </article>
+
+            <!-- Q8 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q8. 可以不預約直接去現場排隊維修嗎？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    本活動以線上預約為優先。若活動當天有釋出名額，將開放「現場補位登記」（第二波現場補位於活動結束前 2 小時開放至結束前 30 分鐘截止），名額有限額滿為止，強烈建議提早線上預約。
+                </div>
+            </article>
+
+            <!-- Q9 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q9. 每位民眾可以送修幾件物品？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    為維護公平性，<b>每人每年度最多登記 5 件，每場次每人限登記與攜帶 1 件</b>，且每位實際到場者限攜帶 1 件，不得持他人多張身分證重複攜帶。
+                </div>
+            </article>
+
+            <!-- Q10 -->
+            <article class="gov-card p-5 shadow-sm hover:border-purple-300 transition cursor-pointer" onclick="toggleFaq(this)">
+                <div class="flex items-center justify-between font-bold text-gray-900 text-base sm:text-lg">
+                    <span>Q10. 送修的電器一定能修好嗎？</span>
+                    <span class="faq-icon text-gray-400 text-sm ml-2">▼</span>
+                </div>
+                <div class="faq-answer hidden mt-3 pt-3 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+                    志工將盡最大努力進行檢測與修復。但若零件已停產、損壞過於嚴重或評估不具修復效益，仍可能判定為無法修復，敬請民眾體諒配合。
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="w-full bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-500">
+        <p>高雄市政府環境保護局環境管理處 版權所有 © 2026</p>
+        <p class="mt-1">洽詢電話：07-7351684（黃先生／洪小姐／刁先生）</p>
+    </footer>
+
+    <script>
+        function toggleFaq(el) {
+            var answer = el.querySelector('.faq-answer');
+            var icon = el.querySelector('.faq-icon');
+            var isHidden = answer.classList.contains('hidden');
+
+            document.querySelectorAll('.faq-answer').forEach(function(ans) {
+                ans.classList.add('hidden');
+            });
+            document.querySelectorAll('.faq-icon').forEach(function(ic) {
+                ic.textContent = '▼';
+            });
+
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                icon.textContent = '▲';
+            }
+        }
+    </script>
+</body>
+</html>

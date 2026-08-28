@@ -1,0 +1,16 @@
+﻿{
+  " name\: \高雄市小家電檢修服務\,
+ \short_name\: \高雄小家電檢修\,
+ \description\: \高雄市政府環境保護局小家電及玩具檢修服務線上預約與進度查詢\,
+ \start_url\: \./index.html\,
+ \display\: \standalone\,
+ \background_color\: \#ffffff\,
+ \theme_color\: \#047857\,
+ \icons\: [
+ {
+ \src\: \favicon.svg\,
+ \sizes\: \any\,
+ \type\: \image/svg+xml\
+ }
+ ]
+}

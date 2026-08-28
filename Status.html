@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>維修案件進度查詢 - 高雄市政府環境保護局</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .gov-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .tab-btn.active {
+            background-color: #2563eb;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .tab-btn:not(.active) {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+    <div class="w-full max-w-2xl mx-auto px-4 py-6 sm:py-8">
+        <!-- 頂部政府品牌標頭 -->
+        <header class="gov-card p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-blue-600">
+            <div class="flex items-center space-x-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-800 text-2xl font-bold flex-shrink-0">
+                    📋
+                </div>
+                <div>
+                    <div class="text-xs sm:text-sm text-blue-800 font-semibold tracking-wide">高雄市政府環境保護局 環境管理處</div>
+                    <h1 class="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">維修案件進度查詢</h1>
+                </div>
+            </div>
+            <a href="<?= webAppUrl ?>?source=line" target="_top" class="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-bold bg-gray-100 hover:bg-gray-200 text-gray-700 transition">
+                ← 返回預約首頁
+            </a>
+        </header>
+
+        <!-- 查詢表單卡片 -->
+        <section class="gov-card p-6 sm:p-7 shadow-sm mb-6">
+            <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 flex items-center">
+                <span class="mr-2">🔍</span> 案件進度快速查詢
+            </h2>
+            <p class="text-xs sm:text-sm text-gray-500 mb-5 leading-relaxed">
+                請輸入預約時填寫的身分證字號或手機號碼，即可查詢您的維修案件進度。
+            </p>
+
+            <!-- 二擇一 Tab 切換選單 -->
+            <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl mb-5">
+                <button type="button" id="tab-id" onclick="switchQueryType('idNumber')"
+                        class="tab-btn active py-2.5 px-3 rounded-lg text-sm transition text-center flex items-center justify-center gap-1.5">
+                    <span>🪪</span> 身分證字號
+                </button>
+                <button type="button" id="tab-phone" onclick="switchQueryType('phone')"
+                        class="tab-btn py-2.5 px-3 rounded-lg text-sm transition text-center flex items-center justify-center gap-1.5">
+                    <span>📱</span> 手機號碼
+                </button>
+            </div>
+
+            <form id="status-query-form" onsubmit="handleQuerySubmit(event)" class="space-y-4">
+                <!-- 方式一：身分證字號輸入區 -->
+                <div id="field-id-group">
+                    <label for="query-id" class="block text-sm font-bold text-gray-700 mb-1">
+                        身分證字號 <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="query-id" maxlength="10"
+                           class="w-full p-3.5 border rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none text-base tracking-widest uppercase"
+                           placeholder="請輸入身分證字號（例：A123456789）">
+                    <p class="text-xs text-gray-400 mt-1">格式：1 碼英文大寫字母 + 9 碼數字</p>
+                </div>
+
+                <!-- 方式二：手機號碼輸入區 -->
+                <div id="field-phone-group" class="hidden">
+                    <label for="query-phone" class="block text-sm font-bold text-gray-700 mb-1">
+                        手機號碼 <span class="text-red-500">*</span>
+                    </label>
+                    <input type="tel" id="query-phone" maxlength="12" inputmode="numeric"
+                           class="w-full p-3.5 border rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none text-base tracking-widest"
+                           placeholder="請輸入手機號碼（例：0912345678）">
+                    <p class="text-xs text-gray-400 mt-1">格式：09 開頭共 10 碼數字</p>
+                </div>
+
+                <!-- 錯誤訊息提示盒 -->
+                <div id="query-error-msg" class="hidden p-3.5 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm font-medium leading-relaxed"></div>
+
+                <!-- 送出按鈕 -->
+                <button type="submit" id="btn-submit-query"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-md text-base transition flex items-center justify-center gap-2">
+                    <span>🔍 查詢維修進度</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- 查詢結果區塊 (支援多筆案件卡片顯示) -->
+        <section id="result-container" class="hidden space-y-4 mb-6">
+            <div class="flex items-center justify-between px-1">
+                <div class="text-sm font-bold text-gray-700 flex items-center gap-1.5">
+                    <span>📁</span>
+                    <span>共查詢到 <span id="res-case-count" class="text-blue-600 font-extrabold text-base">0</span> 筆維修案件</span>
+                </div>
+                <button type="button" onclick="clearResults()" class="text-xs text-gray-400 hover:text-gray-600 font-medium underline">
+                    重新查詢
+                </button>
+            </div>
+
+            <!-- 動態插入案件卡片列表 -->
+            <div id="case-cards-list" class="space-y-4"></div>
+
+            <!-- 領件溫馨提醒 -->
+            <div class="gov-card p-4 bg-blue-50 text-blue-900 rounded-xl text-xs sm:text-sm leading-relaxed border border-blue-100">
+                💡 <b>領件溫馨提醒</b>：如案件狀態顯示為「待取件」或已完成檢修，請於該站點之活動服務時間內，攜帶預約單號或相關身分證件至原送修地點領回物品。
+            </div>
+        </section>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="w-full bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-500">
+        <p>高雄市政府環境保護局環境管理處 版權所有 © 2026</p>
+        <p class="mt-1">洽詢電話：07-7351684（黃先生／洪小姐／刁先生）</p>
+    </footer>
+
+    <script>
+        var currentQueryType = 'idNumber';
+
+        function switchQueryType(type) {
+            currentQueryType = type;
+            var tabId = document.getElementById('tab-id');
+            var tabPhone = document.getElementById('tab-phone');
+            var fieldIdGroup = document.getElementById('field-id-group');
+            var fieldPhoneGroup = document.getElementById('field-phone-group');
+            var errBox = document.getElementById('query-error-msg');
+
+            errBox.classList.add('hidden');
+            errBox.textContent = '';
+
+            if (type === 'idNumber') {
+                tabId.classList.add('active');
+                tabPhone.classList.remove('active');
+                fieldIdGroup.classList.remove('hidden');
+                fieldPhoneGroup.classList.add('hidden');
+                document.getElementById('query-id').focus();
+            } else {
+                tabPhone.classList.add('active');
+                tabId.classList.remove('active');
+                fieldPhoneGroup.classList.remove('hidden');
+                fieldIdGroup.classList.add('hidden');
+                document.getElementById('query-phone').focus();
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('result-container').classList.add('hidden');
+            document.getElementById('case-cards-list').innerHTML = '';
+            document.getElementById('query-error-msg').classList.add('hidden');
+            if (currentQueryType === 'idNumber') {
+                document.getElementById('query-id').focus();
+            } else {
+                document.getElementById('query-phone').focus();
+            }
+        }
+
+        function handleQuerySubmit(event) {
+            if (event) event.preventDefault();
+
+            var btn = document.getElementById('btn-submit-query');
+            var errBox = document.getElementById('query-error-msg');
+            var resultContainer = document.getElementById('result-container');
+            var caseCardsList = document.getElementById('case-cards-list');
+
+            errBox.classList.add('hidden');
+            errBox.textContent = '';
+            resultContainer.classList.add('hidden');
+            caseCardsList.innerHTML = '';
+
+            var queryValue = '';
+
+            if (currentQueryType === 'idNumber') {
+                var idInput = document.getElementById('query-id');
+                queryValue = (idInput.value || '').trim().toUpperCase();
+                idInput.value = queryValue;
+
+                if (!queryValue) {
+                    errBox.textContent = '請輸入身分證字號。';
+                    errBox.classList.remove('hidden');
+                    return;
+                }
+                if (!/^[A-Z][0-9]{9}$/.test(queryValue)) {
+                    errBox.textContent = '身分證字號格式不正確，請輸入 1 碼英文大寫字母加 9 碼數字。';
+                    errBox.classList.remove('hidden');
+                    return;
+                }
+            } else if (currentQueryType === 'phone') {
+                var phoneInput = document.getElementById('query-phone');
+                var rawPhone = (phoneInput.value || '').trim();
+                queryValue = rawPhone.replace(/\D/g, '');
+
+                if (!queryValue) {
+                    errBox.textContent = '請輸入手機號碼。';
+                    errBox.classList.remove('hidden');
+                    return;
+                }
+                if (queryValue.length !== 10 || !/^09\d{8}$/.test(queryValue)) {
+                    errBox.textContent = '手機號碼格式不正確，請輸入 10 碼 09 開頭之手機號碼。';
+                    errBox.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>查詢中...';
+
+            if (typeof google === 'undefined' || !google.script || !google.script.run) {
+                setTimeout(function() {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>🔍 查詢維修進度</span>';
+                    errBox.textContent = '目前為離線或本機預覽模式，請於 Google Apps Script 正式線上環境操作。';
+                    errBox.classList.remove('hidden');
+                }, 500);
+                return;
+            }
+
+            google.script.run
+                .withSuccessHandler(function(response) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>🔍 查詢維修進度</span>';
+
+                    if (response && response.success && response.cases && response.cases.length > 0) {
+                        renderCaseCards(response.cases);
+                    } else {
+                        errBox.textContent = (response && response.message) ? response.message : '查無符合資料，請確認輸入內容是否與預約時填寫的資料一致。';
+                        errBox.classList.remove('hidden');
+                    }
+                })
+                .withFailureHandler(function(err) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>🔍 查詢維修進度</span>';
+                    errBox.textContent = '系統連線異常，請稍後再試。';
+                    errBox.classList.remove('hidden');
+                })
+                .searchPublicRepairStatus(currentQueryType, queryValue);
+        }
+
+        function renderCaseCards(cases) {
+            var container = document.getElementById('result-container');
+            var listEl = document.getElementById('case-cards-list');
+            var countEl = document.getElementById('res-case-count');
+
+            countEl.textContent = cases.length;
+            listEl.innerHTML = '';
+
+            cases.forEach(function(item, idx) {
+                var card = document.createElement('article');
+                card.className = 'gov-card p-5 sm:p-6 shadow border-t-4 border-blue-600 transition';
+
+                var tagColor = item.statusColor || '#64748B';
+                var tagText = item.statusTag || item.displayStatus || '處理中';
+
+                card.innerHTML =
+                    '<div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">' +
+                    '  <div class="flex items-center space-x-2">' +
+                    '    <span class="text-xs font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-600">第 ' + (idx + 1) + ' 件</span>' +
+                    '    <h3 class="text-base sm:text-lg font-extrabold text-gray-900 tracking-wide">' + escapeHtml(item.serialNum || '案件單號') + '</h3>' +
+                    '  </div>' +
+                    '  <span class="px-3 py-1 rounded-full text-xs font-bold shadow-sm" style="background-color:' + tagColor + '20; color:' + tagColor + ';">' +
+                    '    ● ' + escapeHtml(tagText) +
+                    '  </span>' +
+                    '</div>' +
+                    '<div class="space-y-2.5 text-sm sm:text-base leading-relaxed">' +
+                    '  <div class="flex justify-between py-1 border-b border-gray-50">' +
+                    '    <span class="text-gray-500 font-medium w-24 flex-shrink-0">收件日期</span>' +
+                    '    <span class="font-bold text-gray-800 text-right">' + escapeHtml(item.eventDate || '—') + '</span>' +
+                    '  </div>' +
+                    '  <div class="flex justify-between py-1 border-b border-gray-50">' +
+                    '    <span class="text-gray-500 font-medium w-24 flex-shrink-0">維修據點</span>' +
+                    '    <span class="font-bold text-gray-800 text-right">' + escapeHtml(item.eventLoc || '—') + '</span>' +
+                    '  </div>' +
+                    '  <div class="flex justify-between py-1 border-b border-gray-50">' +
+                    '    <span class="text-gray-500 font-medium w-24 flex-shrink-0">維修品項</span>' +
+                    '    <span class="font-bold text-emerald-700 text-right">' + escapeHtml(item.category || '—') + '</span>' +
+                    '  </div>' +
+                    '  <div class="flex justify-between py-1 border-b border-gray-50">' +
+                    '    <span class="text-gray-500 font-medium w-24 flex-shrink-0">品牌／型號</span>' +
+                    '    <span class="font-bold text-gray-800 text-right">' + escapeHtml(item.brandModel || '—') + '</span>' +
+                    '  </div>' +
+                    '  <div class="flex justify-between py-1 border-b border-gray-50">' +
+                    '    <span class="text-gray-500 font-medium w-24 flex-shrink-0">目前進度</span>' +
+                    '    <span class="font-extrabold text-blue-700 text-right">' + escapeHtml(item.displayStatus || '處理中') + '</span>' +
+                    '  </div>' +
+                    '  <div class="flex justify-between py-1 border-b border-gray-50">' +
+                    '    <span class="text-gray-500 font-medium w-24 flex-shrink-0">維修結果</span>' +
+                    '    <span class="font-bold text-gray-800 text-right">' + escapeHtml(item.repairResult || '尚未登錄') + '</span>' +
+                    '  </div>' +
+                    '  <div class="flex justify-between py-1 text-xs text-gray-400">' +
+                    '    <span>最近更新時間</span>' +
+                    '    <span>' + escapeHtml(item.lastUpdated || '—') + '</span>' +
+                    '  </div>' +
+                    '</div>';
+
+                listEl.appendChild(card);
+            });
+
+            container.classList.remove('hidden');
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment & Secrets
+.env
+.env.*
+*.secret
+credentials.json
+token.json
+.clasprc.json
+
+# Temporary & Test scripts
+*.bak*
+temp_*
+test_*
+check_*
+inspect_*
+div_test_*
+final_test_*
+final_script_*
+build_final_index.js
+apply_v225_call_machine_fix.js
+append_pin_modal.js
+patch_call_machine_home.js
+patch_win_open.js
+replace_qrbtn.js
+run_full_verification.js
+run_home_tests.js
+test_*.js
+verify_*.js
+verif_*.js
+scan_overlays.js
+search_*.js
+find_form_init.js
+get_start_public_mode.js
+integrate_call_machine.js
+script_*.js
+last_full_good_index.html
+candidate_Index.html
+debug_gas.html
+rich_menu_base64.txt
+messageImage_*.jpg
+
+# OS & Backups
+.DS_Store
+Thumbs.db
+.sync-backups/
+.claude/

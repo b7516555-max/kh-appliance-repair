@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>小家電維修據點 - 高雄市政府環境保護局</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --gov-primary: #15803d;
+            --gov-primary-light: #f0fdf4;
+            --gov-primary-dark: #166534;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .gov-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+    <div class="w-full max-w-4xl mx-auto px-4 py-6 sm:py-8">
+        <!-- 頂部政府品牌標頭 -->
+        <header class="gov-card p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-emerald-600">
+            <div class="flex items-center space-x-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-800 text-2xl font-bold flex-shrink-0">
+                    📍
+                </div>
+                <div>
+                    <div class="text-xs sm:text-sm text-emerald-800 font-semibold tracking-wide">高雄市政府環境保護局 環境管理處</div>
+                    <h1 class="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">小家電維修據點</h1>
+                </div>
+            </div>
+            <a href="<?= webAppUrl ?>?source=line" target="_top" class="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-bold bg-gray-100 hover:bg-gray-200 text-gray-700 transition">
+                ← 返回預約首頁
+            </a>
+        </header>
+
+        <!-- 固定據點 1: 南鳳山清潔隊 -->
+        <section class="gov-card mb-6 p-6 sm:p-7 shadow-sm hover:shadow-md transition">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3.5 mb-4">
+                <div>
+                    <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full mb-1">
+                        固定維修站點 (定點 A)
+                    </span>
+                    <h2 class="text-lg sm:text-xl font-bold text-gray-900">南鳳山清潔隊</h2>
+                </div>
+                <div class="text-xs sm:text-sm text-gray-500 font-medium">
+                    服務項目：小家電、玩具檢修
+                </div>
+            </div>
+            
+            <div class="space-y-2.5 text-sm sm:text-base text-gray-700 mb-6">
+                <p class="flex items-start">
+                    <span class="font-bold text-gray-900 w-20 flex-shrink-0">📍 地址：</span>
+                    <span class="font-medium">高雄市鳳山區國泰路一段69巷1號（位於誠義路上）</span>
+                </p>
+                <p class="flex items-start">
+                    <span class="font-bold text-gray-900 w-20 flex-shrink-0">⏰ 時間：</span>
+                    <span class="font-bold text-emerald-700">每月第二、四週的星期三（下午 14:00 - 17:00）</span>
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 pt-3 border-t border-gray-100">
+                <a href="https://www.google.com/maps/search/?api=1&query=高雄市鳳山區國泰路一段69巷1號" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold px-5 py-2.5 rounded-xl text-sm transition">
+                    🗺️ Google Maps 導航
+                </a>
+                <a href="<?= webAppUrl ?>?source=line" target="_top" class="flex-1 sm:flex-none text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm shadow transition">
+                    📝 立即線上預約
+                </a>
+            </div>
+        </section>
+
+        <!-- 固定據點 2: 楠梓家具展示區 -->
+        <section class="gov-card mb-6 p-6 sm:p-7 shadow-sm hover:shadow-md transition">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3.5 mb-4">
+                <div>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-0.5 rounded-full mb-1">
+                        固定展示維修站 (定點 D)
+                    </span>
+                    <h2 class="text-lg sm:text-xl font-bold text-gray-900">楠梓家具展示區</h2>
+                </div>
+                <div class="text-xs sm:text-sm text-gray-500 font-medium">
+                    服務項目：小家電、玩具檢修
+                </div>
+            </div>
+            
+            <div class="space-y-2.5 text-sm sm:text-base text-gray-700 mb-6">
+                <p class="flex items-start">
+                    <span class="font-bold text-gray-900 w-20 flex-shrink-0">📍 地址：</span>
+                    <span class="font-medium">高雄市楠梓區清豐三路380號</span>
+                </p>
+                <p class="flex items-start">
+                    <span class="font-bold text-gray-900 w-20 flex-shrink-0">⏰ 時間：</span>
+                    <span class="font-bold text-blue-700">星期四及星期五（上午 09:00 - 12:00，下午 13:00 - 16:00）</span>
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 pt-3 border-t border-gray-100">
+                <a href="https://www.google.com/maps/search/?api=1&query=高雄市楠梓區清豐三路380號" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold px-5 py-2.5 rounded-xl text-sm transition">
+                    🗺️ Google Maps 導航
+                </a>
+                <a href="<?= webAppUrl ?>?source=line" target="_top" class="flex-1 sm:flex-none text-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm shadow transition">
+                    📝 立即線上預約
+                </a>
+            </div>
+        </section>
+
+        <!-- 近期巡迴活動場次（動態載入） -->
+        <section class="gov-card p-6 sm:p-7 shadow-sm">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
+                    <span class="mr-2">🎪</span> 巡迴與非定點推廣活動
+                </h2>
+                <span class="text-xs sm:text-sm text-gray-500 font-medium">依即時系統公告為準</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-600 mb-4 leading-relaxed">
+                除上述固定據點外，本局亦定期於各行政區辦理巡迴檢修服務，開放登記之場次如下：
+            </p>
+            
+            <div id="dynamic-event-list" class="space-y-3">
+                <div class="text-center py-8 text-gray-400 text-sm">
+                    <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-emerald-600 mb-2"></div>
+                    <p>正在載入近期巡迴活動場次資訊...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="w-full bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-500">
+        <p>高雄市政府環境保護局環境管理處 版權所有 © 2026</p>
+        <p class="mt-1">洽詢電話：07-7351684（黃先生／洪小姐／刁先生）</p>
+    </footer>
+
+    <script>
+        var webAppBaseUrl = '<?= webAppUrl ?>';
+
+        function loadTourEvents() {
+            var container = document.getElementById('dynamic-event-list');
+            if (typeof google === 'undefined' || !google.script || !google.script.run) {
+                container.innerHTML = '<div class="text-center py-6 text-gray-500 text-sm">若需預約非定點場次，請點擊下方按鈕至預約首頁查看。</div>';
+                return;
+            }
+
+            google.script.run
+                .withSuccessHandler(function(data) {
+                    if (!data || !data.events || !Array.isArray(data.events)) {
+                        container.innerHTML = '<div class="text-center py-6 text-gray-400 text-sm">目前尚無排定的巡迴場次。</div>';
+                        return;
+                    }
+
+                    var todayStr = new Date().toISOString().split('T')[0];
+                    var tourEvents = data.events.filter(function(ev) {
+                        return !ev.isPermanent && ev.date && ev.date >= todayStr;
+                    });
+
+                    if (tourEvents.length === 0) {
+                        container.innerHTML = '<div class="text-center py-6 text-gray-400 text-sm">近期巡迴場次規劃中，敬請期待。</div>';
+                        return;
+                    }
+
+                    var html = '';
+                    tourEvents.forEach(function(ev) {
+                        var locQuery = encodeURIComponent(ev.loc || ev.name);
+                        var bookingUrl = (webAppBaseUrl || '') + '?source=line';
+                        html += '<div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-3">' +
+                            '<div>' +
+                            '  <div class="font-bold text-gray-900 text-base mb-1">' + (ev.name || '巡迴維修場次') + '</div>' +
+                            '  <div class="text-xs sm:text-sm text-gray-600 space-y-0.5">' +
+                            '    <div>📅 日期：' + (ev.date || '') + ' (' + (ev.start || '') + ' - ' + (ev.end || '') + ')</div>' +
+                            '    <div>📍 地點：' + (ev.loc || '') + '</div>' +
+                            '  </div>' +
+                            '</div>' +
+                            '<div class="flex items-center gap-2 flex-shrink-0">' +
+                            '  <a href="https://www.google.com/maps/search/?api=1&query=' + locQuery + '" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-white hover:bg-gray-100 text-gray-700 border border-gray-300 rounded-lg text-xs font-bold transition">🗺️ 導航</a>' +
+                            '  <a href="' + bookingUrl + '" target="_top" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow transition">📝 預約此場次</a>' +
+                            '</div>' +
+                            '</div>';
+                    });
+                    container.innerHTML = html;
+                })
+                .withFailureHandler(function(err) {
+                    container.innerHTML = '<div class="text-center py-6 text-gray-400 text-sm">近期巡迴場次可至預約首頁查詢。</div>';
+                })
+                .getInitialData();
+        }
+
+        window.onload = function() {
+            loadTourEvents();
+        };
+    </script>
+</body>
+</html>

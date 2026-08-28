@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>問卷PDF預覽</title>
+<style>
+*{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;}
+body{background:#f3f4f6;margin:0;padding:0;}
+.no-print{padding:24px;display:flex;justify-content:center;gap:16px;background:#1f2937;}
+.no-print button{padding:12px 32px;border-radius:999px;font-size:16px;font-weight:900;border:none;cursor:pointer;}
+@media print{
+  .no-print{display:none!important;}
+  @page{size:A4 portrait;margin:10mm 12mm;}
+  .survey-page:last-child{page-break-after:avoid;}
+}
+.survey-page{padding:20px 28px;background:white;color:black;page-break-after:always;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.1);}
+</style></head><body>
+
+<div class="no-print">
+  <button onclick="window.print()" style="background:#0d9488;color:white;">🖨️ 列印 / 儲存為 PDF（共 2 張）</button>
+  <button onclick="window.close()" style="background:#374151;color:white;">關閉</button>
+</div>
+
+<script>
+var qs = [
+  '本場域動線規劃清楚，進出與參觀路徑容易辨識。',
+  '場域內安全指標（出口、標示）設置明確且易於辨識。',
+  '牆面、地貼與導引標示等軟硬體設施維護良好。',
+  '生態園圍維護良好，解說牌資訊清楚易讀。',
+  '回收設施（分類桶、標示、動線）使用便利且指引明確。',
+  '導覽地圖（電子／實體）清楚呈現場域動線與展示重點。',
+  '教材、教具與展示內容具教育性並能提升學習興趣。',
+  '本次活動增進我對環境教育與資源循環議題之理解。',
+  '我對本次在南鳳山館的參訪／學習體驗感到滿意。'
+];
+var q10Label = '您認為場域或活動未來可改善之處（開放式作答）：';
+
+var mockRows = [
+  { serialNum:'A-001', customerName:'王小明', eventDate:'2026-07-06', eventLoc:'南鳳山清潔隊', timestamp:'2026/7/6 上午10:23:15',
+    q1:5, q2:4, q3:5, q4:4, q5:5, q6:3, q7:4, q8:5, q9:5, q10:'整體服務很好，志工態度非常親切，希望以後多辦幾場！' },
+  { serialNum:'A-002', customerName:'李美玲', eventDate:'2026-07-06', eventLoc:'南鳳山清潔隊', timestamp:'2026/7/6 上午10:45:02',
+    q1:4, q2:5, q3:4, q4:3, q5:4, q6:4, q7:5, q8:4, q9:4, q10:'' }
+];
+
+var B = 'border:2px solid black;';
+var TH = B + 'padding:5px 8px;font-weight:900;background:#e5e7eb;text-align:center;';
+var TD = B + 'padding:6px 8px;';
+
+mockRows.forEach(function(r) {
+  var div = document.createElement('div');
+  div.className = 'survey-page';
+
+  var qRows = qs.map(function(q, qi) {
+    var qNum = qi + 1;
+    var ans = parseInt(r['q' + qNum]) || 0;
+    var cells = [1,2,3,4,5].map(function(n) {
+      return '<td style="' + TD + 'text-align:center;font-size:15pt;font-weight:900;color:#15803d;">' +
+        (ans === n ? '✓' : '') + '</td>';
+    }).join('');
+    return '<tr style="background:' + (qi%2===0?'#fff':'#f9fafb') + ';">' +
+      '<td style="' + TD + 'text-align:center;font-weight:900;font-size:12pt;">' + qNum + '</td>' +
+      '<td style="' + TD + 'line-height:1.5;">' + q + '</td>' +
+      cells + '</tr>';
+  }).join('');
+
+  var q10Val = r.q10 || '';
+  var q10Row = '<tr style="background:#fff;">' +
+    '<td style="' + TD + 'text-align:center;font-weight:900;font-size:12pt;">10</td>' +
+    '<td style="' + TD + 'line-height:1.5;" colspan="6">' +
+      '<div style="font-weight:900;margin-bottom:4px;">' + q10Label + '</div>' +
+      '<div style="min-height:48px;border-top:1px solid #ccc;padding-top:4px;color:' + (q10Val?'#000':'#9ca3af') + ';font-size:9.5pt;">' +
+        (q10Val || '（未填寫）') + '</div></td></tr>';
+
+  div.innerHTML =
+    '<div style="text-align:center;margin-bottom:10px;">' +
+      '<div style="font-size:14pt;font-weight:900;letter-spacing:2px;">高雄市政府環境保護局環境管理處</div>' +
+      '<div style="font-size:18pt;font-weight:900;border-bottom:5px double black;padding-bottom:6px;margin-top:4px;letter-spacing:2px;">' +
+        '表 4.3.1-2、高雄寶殿南鳳山館場域滿意度調查問卷</div></div>' +
+    '<div style="display:flex;justify-content:space-between;font-size:11pt;font-weight:900;margin-bottom:6px;">' +
+      '<span>活動場地：' + r.eventLoc + '</span>' +
+      '<span>活動日期：' + r.eventDate + '</span>' +
+      '<span>活動類別：小家電&amp;玩具檢修</span></div>' +
+    '<table style="width:100%;border-collapse:collapse;font-size:10pt;">' +
+      '<thead>' +
+        '<tr><th style="' + TH + 'width:40px;">題號</th>' +
+            '<th style="' + TH + 'text-align:left;">問卷題目</th>' +
+            '<th style="' + TH + 'background:#d1fae5;" colspan="5">選項（✓）</th></tr>' +
+        '<tr><th style="' + TH + 'font-size:9pt;"></th><th style="' + TH + 'font-size:9pt;"></th>' +
+            [1,2,3,4,5].map(function(n){ return '<th style="' + TH + 'width:42px;background:#d1fae5;">' + n + '</th>'; }).join('') + '</tr>' +
+      '</thead>' +
+      '<tbody>' + qRows + q10Row + '</tbody>' +
+    '</table>' +
+    '<div style="margin-top:8px;font-size:8pt;color:#6b7280;text-align:right;font-weight:bold;">' +
+      '填寫時間：' + r.timestamp + '　單號：' + r.serialNum + '　姓名：' + r.customerName + '</div>';
+
+  document.body.appendChild(div);
+});
+</script>
+</body></html>

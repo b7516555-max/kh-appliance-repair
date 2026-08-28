@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>小家電維修服務須知 - 高雄市政府環境保護局</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .gov-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+    <div class="w-full max-w-3xl mx-auto px-4 py-6 sm:py-8">
+        <!-- 頂部政府品牌標頭 -->
+        <header class="gov-card p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-amber-500">
+            <div class="flex items-center space-x-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-800 text-2xl font-bold flex-shrink-0">
+                    📖
+                </div>
+                <div>
+                    <div class="text-xs sm:text-sm text-amber-800 font-semibold tracking-wide">高雄市政府環境保護局 環境管理處</div>
+                    <h1 class="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">小家電維修服務須知</h1>
+                </div>
+            </div>
+            <a href="<?= webAppUrl ?>?source=line" target="_top" class="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-bold bg-gray-100 hover:bg-gray-200 text-gray-700 transition">
+                ← 返回預約首頁
+            </a>
+        </header>
+
+        <!-- 須知核心內容卡片 -->
+        <main class="gov-card p-6 sm:p-8 shadow-sm space-y-7 mb-6">
+            <!-- 1. 送修項目與受理標準 -->
+            <section>
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 flex items-center border-b border-gray-100 pb-2.5">
+                    <span class="mr-2">💡</span> 送修項目與受理標準
+                </h2>
+                <div class="space-y-3 text-sm sm:text-base leading-relaxed">
+                    <div class="p-4 bg-green-50 rounded-xl border border-green-200">
+                        <span class="inline-block bg-green-200 text-green-900 text-xs font-bold px-2.5 py-0.5 rounded-md mb-1.5">
+                            【志工可修／可受理項目】
+                        </span>
+                        <p class="text-gray-800 font-medium">電風扇、檯燈、吹風機、玩具、小型常規家電等一般家庭常見之小型生活電器。</p>
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-xl border border-red-200">
+                        <span class="inline-block bg-red-200 text-red-900 text-xs font-bold px-2.5 py-0.5 rounded-md mb-1.5">
+                            【不受理項目】
+                        </span>
+                        <p class="text-gray-800 font-medium">
+                            1. 冷氣、冰箱、洗衣機、電視機、高壓電器、大型家電及具高危險性之設備。<br>
+                            2. <b>不受理 Dyson、米家／小米品牌電器</b>：因相關零件不易取得，且部分產品外殼及機身設計不適合拆解，為避免拆解時造成損壞，恕無法提供維修服務。
+                        </p>
+                    </div>
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                        <span class="inline-block bg-amber-200 text-amber-900 text-xs font-bold px-2.5 py-0.5 rounded-md mb-1.5">
+                            【待現場判定項目】
+                        </span>
+                        <p class="text-gray-800 font-medium">微波爐、烤箱、音響等具特殊結構或專長需求之設備，需視活動當日現場志工專長與人力狀況進行評估。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 全面無紙化檢修服務流程 -->
+            <section>
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 flex items-center border-b border-gray-100 pb-2.5">
+                    <span class="mr-2">🔄</span> 檢修服務流程（全面無紙化）
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-center space-x-3">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <span class="font-medium text-gray-800">線上填寫預約表單</span>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-center space-x-3">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <span class="font-medium text-gray-800">上傳故障照片與描述</span>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-center space-x-3">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <span class="font-medium text-gray-800">維修志工線上初步審核</span>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-center space-x-3">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <span class="font-medium text-gray-800">收到「可維修」通知信件</span>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-center space-x-3">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <span class="font-medium text-gray-800">依活動場次時間送件現場</span>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-center space-x-3">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <span class="font-medium text-gray-800">志工現場專業檢測與維修</span>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-200 flex items-center space-x-3 sm:col-span-2">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0">7</span>
+                        <span class="font-medium text-gray-800">完成檢修後通知取件，依場次服務時間憑單領回</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 費用與零件規範 -->
+            <section>
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 flex items-center border-b border-gray-100 pb-2.5">
+                    <span class="mr-2">💰</span> 費用與零件更換規範
+                </h2>
+                <div class="p-4 bg-yellow-50 text-yellow-950 rounded-xl border border-yellow-200 text-sm sm:text-base leading-relaxed">
+                    <p class="font-bold mb-2 text-yellow-900">⚠️【費用規範說明】</p>
+                    <p>1. <b>檢修服務免費</b>：本活動由熱心維修志工提供檢測與技術服務，不收取任何工資。</p>
+                    <p class="mt-1.5">2. <b>零件工本費由民眾自理</b>：若檢修過程中經判定需要更換專用零件或特殊耗材，志工將於<b>維修前事先告知並徵詢您的同意</b>，相關零件材料費用由民眾自行負擔。</p>
+                </div>
+            </section>
+
+            <!-- 4. 登記件數限制與重要注意事項 -->
+            <section>
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 flex items-center border-b border-gray-100 pb-2.5">
+                    <span class="mr-2">📋</span> 登記件數限制與參加注意事項
+                </h2>
+                <ul class="list-disc pl-5 space-y-2.5 text-sm sm:text-base text-gray-700 leading-relaxed">
+                    <li>為保障全體市民公平參與機會，<b class="text-red-600">每人每年度最多登記 5 件，每場次限登記 1 件</b>。</li>
+                    <li><b class="text-red-600">每位實際到場者每場次只能攜帶 1 件物品維修</b>，不得持用他人身分證或使用兩張以上身分證，登記、攜帶兩件以上物品；即使持有多張身分證，仍僅認定 1 件。</li>
+                    <li>現場報到時，工作人員將核對身分證以確認身分，<b class="text-red-600">請務必攜帶身分證備用</b>。</li>
+                    <li>本活動維修人員均為志工性質，<b class="text-red-600">僅於各場次活動時間內提供維修服務</b>，恕無法接受場次以外的個別委託。</li>
+                    <li><b>線上預約截止時間</b>為<b class="text-red-600">活動前兩天下午 5 點整</b>；截止後若仍有剩餘名額，將開放活動當天現場補位登記（先到先登記）。</li>
+                    <li><b>已預約者報到截止</b>為<b class="text-red-600">活動結束前 2 小時</b>，逾時視同放棄；<b>補位登記截止</b>為<b class="text-red-600">活動結束前 30 分鐘</b>。</li>
+                    <li><b>第二波現場補位於活動結束前 2 小時開放</b>，至活動結束前 30 分鐘截止；屆時未到場的預約名額會自動釋出，<b class="text-red-600">原預約者視同放棄預約</b>，但仍可重新進行現場補位登記。</li>
+                    <li>現場補位名額有限，<b class="text-red-600">不保證每位候補民眾均能於當日完成登記</b>，請視個人時間彈性自行評估是否候補。</li>
+                </ul>
+
+                <div class="mt-4 flex items-center gap-3 bg-red-50 border-2 border-red-400 rounded-xl px-4 py-3">
+                    <span class="text-2xl flex-shrink-0">📵</span>
+                    <p class="text-red-700 font-bold text-xs sm:text-sm leading-snug">
+                        恕不接受電話預約！<br>
+                        <span class="font-normal text-red-600 text-xs">本活動<b>僅接受線上預約</b>，請透過本系統登記，感謝配合。</span>
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <!-- 預約行動按鈕 -->
+        <div class="text-center mb-8">
+            <a href="<?= webAppUrl ?>?source=line" target="_top" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md text-base transition">
+                📝 我已了解須知，前往預約
+            </a>
+        </div>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="w-full bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-500">
+        <p>高雄市政府環境保護局環境管理處 版權所有 © 2026</p>
+        <p class="mt-1">業務洽詢電話：07-7351684（黃先生／洪小姐／刁先生）</p>
+    </footer>
+</body>
+</html>

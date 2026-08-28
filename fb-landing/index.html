@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#075985">
+  <meta name="description" content="高雄市小家電及玩具維修雲端收件系統入口">
+  <meta property="og:title" content="小家電及玩具維修｜雲端收件系統">
+  <meta property="og:description" content="線上預約、現場報到及維修服務入口">
+  <meta property="og:type" content="website">
+  <title>小家電及玩具維修｜雲端收件系統</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #083a5b;
+      --blue: #075985;
+      --blue-light: #e0f2fe;
+      --teal: #0f766e;
+      --ink: #172033;
+      --muted: #5c677d;
+      --line: #d8e2ec;
+      --paper: rgba(255, 255, 255, .92);
+      --warning: #9a3412;
+      --warning-bg: #fff7ed;
+      --shadow: 0 24px 60px rgba(8, 58, 91, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100svh;
+      padding: max(18px, env(safe-area-inset-top)) 16px max(22px, env(safe-area-inset-bottom));
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(14, 165, 233, .18), transparent 32%),
+        radial-gradient(circle at 95% 90%, rgba(20, 184, 166, .15), transparent 34%),
+        linear-gradient(145deg, #f0f9ff 0%, #f8fafc 48%, #ecfeff 100%);
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .shell {
+      width: min(100%, 480px);
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 4px 4px 18px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      place-items: center;
+      border-radius: 15px;
+      color: #fff;
+      font-size: 25px;
+      background: linear-gradient(145deg, var(--blue), var(--teal));
+      box-shadow: 0 10px 24px rgba(7, 89, 133, .24);
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    .brand-copy strong {
+      display: block;
+      margin-top: 3px;
+      color: var(--navy);
+      font-size: 16px;
+      letter-spacing: .02em;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 28px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .hero {
+      position: relative;
+      padding: 30px 24px 25px;
+      color: #fff;
+      background: linear-gradient(135deg, #064e74 0%, #075985 55%, #0f766e 100%);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: -42px;
+      bottom: -65px;
+      width: 170px;
+      height: 170px;
+      border: 26px solid rgba(255, 255, 255, .08);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, .26);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      background: rgba(255, 255, 255, .1);
+    }
+
+    .eyebrow::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #5eead4;
+      box-shadow: 0 0 0 4px rgba(94, 234, 212, .15);
+      content: "";
+    }
+
+    h1 {
+      max-width: 330px;
+      margin: 18px 0 10px;
+      font-size: clamp(28px, 8vw, 38px);
+      line-height: 1.18;
+      letter-spacing: -.03em;
+    }
+
+    .lead {
+      position: relative;
+      z-index: 1;
+      max-width: 340px;
+      margin: 0;
+      color: rgba(255, 255, 255, .82);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .content { padding: 22px; }
+
+    .browser-state {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 14px;
+      border: 1px solid #bae6fd;
+      border-radius: 16px;
+      background: #f0f9ff;
+    }
+
+    .browser-state.warning {
+      border-color: #fed7aa;
+      background: var(--warning-bg);
+    }
+
+    .state-icon {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      place-items: center;
+      border-radius: 11px;
+      background: #dbeafe;
+      font-size: 19px;
+    }
+
+    .warning .state-icon { background: #ffedd5; }
+
+    .browser-state strong {
+      display: block;
+      margin: 1px 0 4px;
+      color: var(--blue);
+      font-size: 15px;
+    }
+
+    .browser-state.warning strong { color: var(--warning); }
+
+    .browser-state p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .steps {
+      display: none;
+      margin-bottom: 18px;
+      padding: 16px;
+      border: 2px solid #fb923c;
+      border-radius: 16px;
+      background: #fff7ed;
+    }
+
+    .steps-title {
+      margin: 0 0 12px;
+      color: var(--warning);
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 11px;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .step-number {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 9px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      background: var(--blue);
+    }
+
+    .step p {
+      margin: 3px 0 0;
+      color: #344054;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .actions { display: grid; gap: 10px; }
+
+    .button {
+      display: flex;
+      min-height: 54px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 15px;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 900;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+    }
+
+    .button:active { transform: scale(.985); }
+    .button:focus-visible { outline: 3px solid #38bdf8; outline-offset: 3px; }
+
+    .button-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      box-shadow: 0 10px 22px rgba(7, 89, 133, .24);
+    }
+
+    .button-secondary {
+      border: 1px solid #bfd1df;
+      color: var(--blue);
+      background: #fff;
+    }
+
+    .url-panel {
+      margin-top: 14px;
+      padding: 12px 13px;
+      border: 1px dashed #b7c6d4;
+      border-radius: 13px;
+      background: #f8fafc;
+    }
+
+    .url-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .url-text {
+      display: block;
+      overflow: hidden;
+      color: #475467;
+      font-size: 11px;
+      line-height: 1.5;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .privacy {
+      margin: 16px 4px 0;
+      color: #748094;
+      font-size: 11px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      z-index: 10;
+      width: max-content;
+      max-width: calc(100% - 32px);
+      padding: 11px 16px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      background: #172033;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .22);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 14px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 360px) {
+      body { padding-inline: 10px; }
+      .hero { padding: 26px 19px 22px; }
+      .content { padding: 18px; }
+      h1 { font-size: 27px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="brand" aria-label="主辦單位">
+      <div class="brand-mark" aria-hidden="true">🔧</div>
+      <div class="brand-copy">
+        <span>高雄市政府環境保護局</span>
+        <strong>維修服務雲端入口</strong>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="page-title">
+      <div class="hero">
+        <div class="eyebrow">線上服務入口</div>
+        <h1 id="page-title">小家電及玩具<br>維修收件系統</h1>
+        <p class="lead">線上預約、現場報到與維修案件服務，請使用 Safari、Chrome 或其他外部瀏覽器開啟。</p>
+      </div>
+
+      <div class="content">
+        <div id="browser-state" class="browser-state" role="status" aria-live="polite">
+          <div class="state-icon" aria-hidden="true">🌐</div>
+          <div>
+            <strong id="state-title">可以開始使用</strong>
+            <p id="state-message">點選下方按鈕，即可進入維修收件系統。</p>
+          </div>
+        </div>
+
+        <div id="fb-steps" class="steps">
+          <p class="steps-title">請點右上角「⋯」，選擇「使用外部瀏覽器開啟」</p>
+          <div class="step">
+            <span class="step-number">1</span>
+            <p>點選 Facebook 畫面右上角的「<strong>⋯</strong>」選單。</p>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <p>選擇「<strong>使用外部瀏覽器開啟</strong>」或「<strong>在 Safari 開啟</strong>」。</p>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <p>若找不到選項，請複製網址，再貼到 Safari 或 Chrome 開啟。</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a id="open-system" class="button button-primary" href="https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec" rel="noopener">
+            <span aria-hidden="true">↗</span>
+            <span>進入維修收件系統</span>
+          </a>
+          <button id="copy-url" class="button button-secondary" type="button">
+            <span aria-hidden="true">⧉</span>
+            <span>複製系統網址</span>
+          </button>
+        </div>
+
+        <div class="url-panel" aria-label="系統網址">
+          <span class="url-label">Google Apps Script 正式網址</span>
+          <span id="gas-url-text" class="url-text">https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec</span>
+        </div>
+      </div>
+    </section>
+
+    <p class="privacy">本頁僅協助開啟正式維修系統，不會蒐集或儲存您的個人資料。</p>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">系統網址已複製</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var GAS_URL = 'https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec';
+      var userAgent = navigator.userAgent || '';
+      var isInAppBrowser = /FBAN|FBAV|FB_IAB|FBIOS|FB4A|Messenger|Instagram/i.test(userAgent);
+      var state = document.getElementById('browser-state');
+      var stateTitle = document.getElementById('state-title');
+      var stateMessage = document.getElementById('state-message');
+      var steps = document.getElementById('fb-steps');
+      var copyButton = document.getElementById('copy-url');
+      var toast = document.getElementById('toast');
+      var toastTimer;
+
+      if (isInAppBrowser) {
+        state.classList.add('warning');
+        state.querySelector('.state-icon').textContent = '⚠️';
+        stateTitle.textContent = '目前是 Facebook 內建瀏覽器';
+        stateMessage.textContent = 'Google Apps Script 可能顯示空白頁，建議改用 Safari 或 Chrome。';
+        steps.style.display = 'block';
+        document.getElementById('open-system').style.display = 'none';
+        copyButton.querySelector('span:last-child').textContent = '複製系統網址後到外部瀏覽器開啟';
+      }
+
+      function showToast(message) {
+        window.clearTimeout(toastTimer);
+        toast.textContent = message;
+        toast.classList.add('show');
+        toastTimer = window.setTimeout(function () {
+          toast.classList.remove('show');
+        }, 2200);
+      }
+
+      function fallbackCopy(text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        var copied = false;
+        try { copied = document.execCommand('copy'); } catch (error) { console.error('複製網址失敗', error); }
+        document.body.removeChild(textarea);
+        if (copied) showToast('系統網址已複製');
+        else window.prompt('請長按並複製以下網址：', text);
+      }
+
+      copyButton.addEventListener('click', function () {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(GAS_URL)
+            .then(function () { showToast('系統網址已複製'); })
+            .catch(function (error) {
+              console.error('Clipboard API 複製失敗', error);
+              fallbackCopy(GAS_URL);
+            });
+        } else {
+          fallbackCopy(GAS_URL);
+        }
+      });
+    }());
+  </script>
+</body>
+</html>
