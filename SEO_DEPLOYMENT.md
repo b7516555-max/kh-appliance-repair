@@ -25,11 +25,15 @@
 ---
 
 ## 當前真實狀態紀錄 (Real Status)
+- **網站上線**：是 (HTTP 200)
 - **GitHub Repository 狀態**：已建立並完成 Push (`b7516555-max/kh-appliance-repair`)
 - **GitHub Actions 狀態**：Success
 - **GitHub Pages 狀態**：已正式上線（HTTP 200）
-- **Lighthouse 實測**：因本機 Headless Chrome 產生 NO_FCP 與 Google PageSpeed API 配額限制，CLI 實測未完成，故標記為「未實測」
-- **Google Search Console 狀態**：前置檔案已就緒，等待所有權驗證與提交 Sitemap
-- **Google 索引狀態**：尚未提交（等待 Search Console 驗證）
+- **Lighthouse 實測**：未實測（本機 Headless Chrome 產生 NO_FCP，且 PageSpeed API 配額受限）
+- **Search Console 資源**：`https://b7516555-max.github.io/kh-appliance-repair/`
+- **Search Console 所有權驗證**：等待 Google 帳號本人登入
+- **Sitemap 提交**：前置檔案已就緒 (`sitemap.xml`)
+- **網址檢查 / 要求建立索引**：等待 Search Console 驗證後執行
+- **目前 Google 索引**：索引申請前置已就緒，等待 Search Console 驗證完成後觸發即時爬取
 - **安全掃描**：全專案無任何 Google API Secret、LINE Token 或機密私鑰洩漏。
 - **最後更新日期**：2026-08-28
