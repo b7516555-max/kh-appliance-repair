@@ -21,7 +21,7 @@
   - Sitemap 網址：`https://b7516555-max.github.io/kh-appliance-repair/sitemap.xml` (HTTP 200)
   - Canonical 網址：`https://b7516555-max.github.io/kh-appliance-repair/`
   - Open Graph 預覽圖：`https://b7516555-max.github.io/kh-appliance-repair/og-image.png` (HTTP 200)
-  - GSC 驗證檔案：`https://b7516555-max.github.io/kh-appliance-repair/googlee33cc6c2aea21cae.html` (HTTP 200)
+  - Search Console 驗證檔案：`https://b7516555-max.github.io/kh-appliance-repair/googlee33cc6c2aea21cae.html` (HTTP 200)
 
 ---
 
@@ -32,7 +32,9 @@
 - **GitHub Pages 狀態**：已正式上線（HTTP 200）
 - **Lighthouse 實測**：未實測（本機 Headless Chrome 產生 NO_FCP，且 PageSpeed API 配額受限）
 - **Search Console 資源**：`https://b7516555-max.github.io/kh-appliance-repair/`
-- **Search Console 所有權驗證**：驗證檔案與 Meta Tag 已上線 (HTTP 200)，等待在 GSC 控制台點擊「驗證」
-- **Sitemap 提交**：已就緒 (`sitemap.xml`)
+- **Search Console 所有權驗證**：已通過驗證
+- **Sitemap 提交**：已提交 (`sitemap.xml`)
+- **要求建立索引**：已送出
+- **目前 Google 索引**：索引申請已提交，等待 Google 爬蟲處理
 - **安全掃描**：全專案無任何 Google API Secret、LINE Token 或機密私鑰洩漏。
 - **最後更新日期**：2026-08-28
