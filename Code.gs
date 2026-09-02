@@ -10,7 +10,7 @@ function doGet(e) {
     }
 
     var templateName = 'Index';
-    var pageTitle = '小家電及玩具維修 - 雲端收件系統';
+    var pageTitle = '小家電、玩具維修雲端系統｜高雄市政府環境保護局';
 
     if (view === 'locations') {
       templateName = 'Locations';
@@ -65,7 +65,7 @@ function getPublicWebAppUrl_() {
     var url = ScriptApp.getService().getUrl();
     if (url) return url;
   } catch (e) {}
-  return 'https://script.google.com/macros/s/AKfycbwwutONntwhqljCXcdILF3pdtX6v4Rk74nKSq2j9f_ECmkkfIZ3CZ4eNPLlys5NNrYA/exec';
+  return 'https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec';
 }
 
 function s(val) { return (val === null || val === undefined) ? "" : String(val); }

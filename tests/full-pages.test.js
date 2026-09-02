@@ -30,6 +30,10 @@ for (const file of ['Code.gs', 'Line.gs']) {
   check(true, file + ' syntax');
 }
 
+const code = fs.readFileSync('Code.gs', 'utf8');
+check(code.includes("var pageTitle = '小家電、玩具維修雲端系統｜高雄市政府環境保護局'"), 'Apps Script browser title');
+check(code.includes('AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec'), 'canonical deployment fallback URL');
+
 const line = fs.readFileSync('Line.gs', 'utf8');
 for (const view of ['locations', 'status', 'guide', 'faq']) {
   check(line.includes('view=' + view), 'LINE route ' + view);
