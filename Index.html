@@ -643,62 +643,62 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 mb-6 items-stretch">
             
             <!-- 左欄：5 個功能按鈕區塊 -->
-            <!-- 左欄：系統快捷功能 (1 大卡 + 2 小卡) -->
-            <div class="md:col-span-5 flex flex-col justify-between bg-white/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/80 shadow-lg h-full space-y-3 sm:space-y-4">
-                <div class="gov-eyebrow text-xs sm:text-sm font-bold text-gray-500">⚡ 系統快捷功能</div>
+            <!-- 左欄：系統快捷功能 (1 大卡 + 2 小卡 + 3 輔助按鈕) -->
+            <div class="md:col-span-5 flex flex-col justify-between bg-white/60 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-2xl border border-white/80 shadow-lg h-full space-y-3 sm:space-y-4 md:space-y-5">
+                <div class="gov-eyebrow text-xs sm:text-sm md:text-base font-bold text-gray-500">⚡ 系統快捷功能</div>
                 
-                <!-- 1. 第一排：民眾預約登記 大卡片 (100% 寬度、最醒目、高度約 1.5~2 倍) -->
+                <!-- 1. 第一排：民眾預約登記 大卡片 (100% 寬度、最醒目、桌面版高度充實飽滿) -->
                 <button type="button" id="btn-home-booking" onclick="scrollToLocationFilter()"
-                        class="w-full text-left p-5 sm:p-6 rounded-2xl text-white shadow-xl transition transform active:scale-98 flex flex-col justify-center relative overflow-hidden group cursor-pointer"
+                        class="w-full text-left p-5 sm:p-6 md:p-7 rounded-2xl text-white shadow-xl transition transform active:scale-98 flex flex-col justify-center relative overflow-hidden group cursor-pointer md:min-h-[140px]"
                         style="background: linear-gradient(135deg, #15803d 0%, #166534 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                    <div class="absolute -right-4 -bottom-4 opacity-10 text-7xl select-none group-hover:scale-110 transition duration-300">📝</div>
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-3xl sm:text-4xl bg-white/20 p-2.5 rounded-xl shadow-inner flex-shrink-0">📝</span>
+                    <div class="absolute -right-4 -bottom-4 opacity-10 text-7xl md:text-8xl select-none group-hover:scale-110 transition duration-300">📝</div>
+                    <div class="flex items-center gap-3.5 mb-2">
+                        <span class="text-3xl sm:text-4xl md:text-5xl bg-white/20 p-2.5 md:p-3 rounded-xl shadow-inner flex-shrink-0">📝</span>
                         <div>
-                            <span class="inline-block bg-yellow-400 text-gray-900 text-xs font-black px-2 py-0.5 rounded-md mb-1 shadow-sm">★ 市民首選</span>
-                            <h2 class="text-xl sm:text-2xl font-black tracking-wide text-white leading-tight">民眾預約登記</h2>
+                            <span class="inline-block bg-yellow-400 text-gray-900 text-xs md:text-sm font-black px-2.5 py-0.5 rounded-md mb-1 shadow-sm">★ 市民首選</span>
+                            <h2 class="text-xl sm:text-2xl md:text-3xl font-black tracking-wide text-white leading-tight">民眾預約登記</h2>
                         </div>
                     </div>
-                    <p class="text-xs sm:text-sm text-green-100 font-medium pl-1 leading-relaxed">
+                    <p class="text-xs sm:text-sm md:text-base text-green-100 font-medium pl-1 leading-relaxed">
                         選擇維修地點與場次，填寫線上預約資料
                     </p>
                 </button>
 
-                <!-- 2. 第二排：兩張小卡片並排 (各約 50% 寬度、高度精簡) -->
-                <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
+                <!-- 2. 第二排：兩張小卡片並排 (桌面版高度適度放大至 76~84px，文字清晰飽滿) -->
+                <div class="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
                     <button type="button" id="btn-home-volunteer" onclick="promptWorkerPin('repair')"
-                            class="w-full text-left p-3.5 sm:p-4 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-2.5 cursor-pointer min-h-[56px]"
+                            class="w-full text-left p-3.5 sm:p-4 md:p-5 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-2.5 md:gap-3.5 cursor-pointer min-h-[56px] md:min-h-[78px]"
                             style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                        <span class="text-2xl sm:text-3xl flex-shrink-0">🔧</span>
+                        <span class="text-2xl sm:text-3xl md:text-4xl flex-shrink-0">🔧</span>
                         <div class="min-w-0">
-                            <div class="text-sm sm:text-base font-black leading-snug truncate">現場維修</div>
-                            <div class="text-[11px] sm:text-xs text-sky-100 font-medium truncate">志工作業區</div>
+                            <div class="text-sm sm:text-base md:text-lg font-black leading-snug truncate">現場維修</div>
+                            <div class="text-[11px] sm:text-xs md:text-sm text-sky-100 font-medium truncate">志工作業區</div>
                         </div>
                     </button>
 
                     <button type="button" id="btn-home-checkout" onclick="promptWorkerPin('checkout')"
-                            class="w-full text-left p-3.5 sm:p-4 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-2.5 cursor-pointer min-h-[56px]"
+                            class="w-full text-left p-3.5 sm:p-4 md:p-5 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-2.5 md:gap-3.5 cursor-pointer min-h-[56px] md:min-h-[78px]"
                             style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                        <span class="text-2xl sm:text-3xl flex-shrink-0">📦</span>
+                        <span class="text-2xl sm:text-3xl md:text-4xl flex-shrink-0">📦</span>
                         <div class="min-w-0">
-                            <div class="text-sm sm:text-base font-black leading-snug truncate">待領/結案</div>
-                            <div class="text-[11px] sm:text-xs text-amber-100 font-medium truncate">領件專區</div>
+                            <div class="text-sm sm:text-base md:text-lg font-black leading-snug truncate">待領/結案</div>
+                            <div class="text-[11px] sm:text-xs md:text-sm text-amber-100 font-medium truncate">領件專區</div>
                         </div>
                     </button>
                 </div>
                 
-                <div class="gov-divider my-1"></div>
+                <div class="gov-divider my-1 md:my-2"></div>
                 
-                <!-- 3. 系統後台與輔助功能按鈕 -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <button type="button" onclick="promptAdmin()" class="gov-btn-outline w-full py-2 text-xs font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-lg border border-gray-300">
-                        <span>⚙️</span> 系統後台
+                <!-- 3. 系統後台與輔助功能按鈕 (桌面版高度 48~52px，按鈕易按大器) -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-3">
+                    <button type="button" onclick="promptAdmin()" class="gov-btn-outline w-full py-2 md:py-3 text-xs sm:text-sm md:text-base font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 md:gap-2 rounded-xl border border-gray-300 min-h-[44px] md:min-h-[50px]">
+                        <span class="text-sm md:text-lg">⚙️</span> 系統後台
                     </button>
-                    <button type="button" onclick="promptModeC()" class="gov-btn-outline w-full py-2 text-xs font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-lg border border-gray-300">
-                        <span>📋</span> 區隊申請
+                    <button type="button" onclick="promptModeC()" class="gov-btn-outline w-full py-2 md:py-3 text-xs sm:text-sm md:text-base font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 md:gap-2 rounded-xl border border-gray-300 min-h-[44px] md:min-h-[50px]">
+                        <span class="text-sm md:text-lg">📋</span> 區隊申請
                     </button>
-                    <button type="button" onclick="window.location.hash='#tv-landscape';applyDisplayMode();" class="gov-btn-outline w-full py-2 text-xs font-bold opacity-90 hover:opacity-100 hidden sm:flex items-center justify-center gap-1.5 rounded-lg border border-gray-300 col-span-2 sm:col-span-1">
-                        <span>📺</span> 電視牆
+                    <button type="button" onclick="window.location.hash='#tv-landscape';applyDisplayMode();" class="gov-btn-outline w-full py-2 md:py-3 text-xs sm:text-sm md:text-base font-bold opacity-90 hover:opacity-100 hidden sm:flex items-center justify-center gap-1.5 md:gap-2 rounded-xl border border-gray-300 col-span-2 sm:col-span-1 min-h-[44px] md:min-h-[50px]">
+                        <span class="text-sm md:text-lg">📺</span> 電視牆
                     </button>
                 </div>
             </div>
@@ -5780,217 +5780,228 @@ function showWalkInQR(evtId) {
             }
             noEvt.classList.add('hidden');
 
-            container.innerHTML = filtered.map(function(e) {
-                var mi = modeInfo[e.mode] || { label: e.mode, color: 'blue', icon: '📋' };
-                var cl = colorMap[mi.color];
-                var qi = getEventQueueInfo(e.id);
-                var quota = getEventQuota(e.id);
-                var onlineCurrent = qi.recs.filter(function(r) { return r.triageStatus !== '現場補位'; }).length;
-                var remain = Math.max(0, quota - onlineCurrent);
-                var snapshot = (window.globalWalkInAvailability || {})[e.id] || {};
-                var effectiveWalkInSlots = getWalkInAvailability(e.id);
-                var dateStr = e.isPermanent ? '常態開放' : e.date;
-                var timeStr = e.isPermanent ? '' : (e.start && e.end ? e.start + ' ~ ' + e.end : '');
-                var now = new Date();
-                var eventStartAt = null, receiveDeadlineAt = null;
-                var deadlineStr = '', checkinDeadlineStr = '', walkInOpenStr = '', walkInCloseStr = '';
-                if (!e.isPermanent && e.date && e.start && e.end) {
-                    eventStartAt = new Date(e.date + 'T' + e.start + ':00');
-                    receiveDeadlineAt = new Date(e.date + 'T' + e.end + ':00');
-                    receiveDeadlineAt.setMinutes(receiveDeadlineAt.getMinutes() - 90);
-                    var dl = new Date(e.date + 'T00:00:00');
-                    dl.setDate(dl.getDate() - 2); dl.setHours(17, 0, 0, 0);
-                    deadlineStr = (dl.getMonth()+1) + ' 月 ' + dl.getDate() + ' 日 17:00';
-                    var timeText = function(d) { return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes(); };
-                    walkInOpenStr = timeText(eventStartAt);
-                    walkInCloseStr = timeText(receiveDeadlineAt);
-                    checkinDeadlineStr = walkInCloseStr;
-                }
-                var bookingCutoffPassed = false;
-                if (!window.testMode && !e.isPermanent && e.date) {
-                    var cutoff = new Date(e.date + 'T00:00:00');
-                    cutoff.setDate(cutoff.getDate() - 2); cutoff.setHours(17, 0, 0, 0);
-                    bookingCutoffPassed = now > cutoff;
-                }
-                var eventStarted = e.isPermanent || (eventStartAt && now >= eventStartAt);
-                var receiveWindowOpen = e.isPermanent || (eventStartAt && receiveDeadlineAt && now >= eventStartAt && now < receiveDeadlineAt);
-                var receiveWindowClosed = !!(receiveDeadlineAt && now >= receiveDeadlineAt);
-                var onlineAtStart = Number(snapshot.onlineBookedAtEventStart != null ? snapshot.onlineBookedAtEventStart : onlineCurrent);
-                var totalCapacity = quota + Math.max(0, Number(e.extraWalkInSlots || 0));
-                var onlineFull = (eventStarted ? onlineAtStart : onlineCurrent) >= totalCapacity;
-                var fullWarning = onlineFull
-                    ? '<div class="mt-3 p-4 sm:p-5 bg-red-50 border-2 border-red-500 rounded-xl text-red-800 leading-relaxed shadow-sm"><div class="text-xl sm:text-2xl font-black">⚠ 本場次預約已滿</div><div class="mt-2 text-base sm:text-lg font-bold">恕不接受現場補位或過號補位</div><div class="text-sm sm:text-base font-bold">預約者未到場之名額亦不再釋出</div></div>'
-                    : '';
-                var statusBadge, actionBtn;
-                if (onlineFull) {
-                    statusBadge = '<span class="inline-flex items-center gap-1 bg-red-100 border-2 border-red-500 text-red-700 font-black px-4 py-2 rounded-xl text-xl sm:text-2xl">⛔ 預約已滿</span>';
-                    actionBtn = '<button type="button" disabled class="bg-red-100 border border-red-300 text-red-700 font-black px-6 py-3 rounded-xl text-base cursor-not-allowed w-full md:w-auto">本場次已滿額</button>';
-                } else if (e.mode === 'B' && !eventStarted) {
-                    statusBadge = '<span class="inline-flex items-center bg-blue-100 text-blue-700 font-bold px-3 py-1.5 rounded-full text-base">🏃 現場登記制</span>';
-                    actionBtn = '<button type="button" disabled class="bg-gray-200 text-gray-600 font-bold px-6 py-3 rounded-xl w-full md:w-auto">活動開始後開放現場登記</button>';
-                } else if (receiveWindowOpen && effectiveWalkInSlots > 0) {
-                    statusBadge = '<span class="inline-flex items-center gap-1 bg-orange-100 text-orange-700 font-bold px-3 py-1.5 rounded-full text-base">🚶 補位開放 <b class="font-black">' + effectiveWalkInSlots + '</b> 件</span>';
-                    actionBtn = '<button type="button" onclick="openWalkInForm(\'' + e.id + '\')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-xl text-base shadow w-full md:w-auto">🚶 該場次補位 ➔</button>';
-                } else if (receiveWindowClosed) {
-                    statusBadge = '<span class="inline-flex items-center bg-gray-100 text-gray-600 font-bold px-3 py-1.5 rounded-full text-base">🔒 報到／收件已截止</span>';
-                    actionBtn = '<button type="button" disabled class="bg-gray-200 text-gray-500 font-bold px-6 py-3 rounded-xl w-full md:w-auto">本場次已停止收件</button>';
-                } else if (bookingCutoffPassed) {
-                    statusBadge = '<span class="inline-flex items-center bg-gray-100 text-gray-600 font-bold px-3 py-1.5 rounded-full text-base">🔒 預約已截止</span>';
-                    actionBtn = '<button type="button" disabled class="bg-gray-200 text-gray-500 font-bold px-6 py-3 rounded-xl w-full md:w-auto">現場補位尚未開放</button>';
-                } else {
-                    statusBadge = '<span class="inline-flex items-center bg-green-100 text-green-700 font-bold px-3 py-1.5 rounded-full text-base">✅ 尚有名額 <b class="font-black">' + remain + '</b> 件</span>';
-                    actionBtn = e.mode === 'B'
-                        ? '<button type="button" disabled class="bg-gray-200 text-gray-600 font-bold px-6 py-3 rounded-xl w-full md:w-auto">不開放線上預約</button>'
-                        : '<button type="button" onclick="startPublicModeWithEvent(\'' + e.mode + '\',\'' + e.id + '\')" class="' + cl.btn + ' text-white font-bold px-6 py-3 rounded-xl text-base shadow w-full md:w-auto">立即預約 ➔</button>';
-                }
-                var notesHtml = fullWarning +
-                    '<div class="mt-3 pt-3 border-t border-gray-100 text-sm text-gray-600 leading-loose space-y-1">' +
-                    '<div class="px-3 py-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-900"><b>📌 參加注意事項</b><ul class="list-disc list-inside mt-1 space-y-1">' +
-                    (deadlineStr ? '<li>線上預約截止：<b class="text-red-600">' + deadlineStr + '</b>（沿用既有規則）</li>' : '') +
-                    '<li>活動報到於<b class="text-red-600">活動開始時間</b>正式開放，活動開始前不提供提前報到。</li>' +
-                    '<li>已完成線上預約者，請於<b class="text-red-600">活動結束前 1 小時 30 分</b>' + (checkinDeadlineStr ? '（' + checkinDeadlineStr + '）' : '') + '以前完成報到。</li>' +
-                    '<li>線上預約已滿額時，活動當天恕不接受現場補位，亦不會因預約者未到場而額外釋出名額。</li>' +
-                    '<li>線上預約未滿額時，僅原本未被預約的剩餘名額於<b class="text-red-600">活動開始時間</b>開放現場補位。</li>' +
-                    '<li>現場補位名額不會因預約者未報到、遲到或資格失效而增加。</li>' +
-                    '<li>超過截止時間未報到者，原預約資格失效，且不提供任何恢復或優先資格。</li>' +
-                    '<li>現場補位與收件亦於<b class="text-red-600">活動結束前 1 小時 30 分</b>停止。</li>' +
-                    '<li>現場補位僅限已抵達現場者，填寫前須由工作人員輸入確認碼。</li>' +
-                    '<li><b class="text-red-600">同一人持不同身分證攜帶多件物品，將取消後續預約資格。</b></li>' +
-                    '</ul></div>' +
-                    '<div>🔧 當場未完成案件仍保留於原登記場次；如需續修，由工作人員另行安排。</div>' +
-                    '</div>';
-
-                // 建立本場次已判定名單（遮蔽姓名，排除已退件/逾時釋出紀錄）
-                var allRecs = sys.getRecords().filter(function(r) {
-                    return r.eventId === e.id && r.customerName && r.status !== '已退件' && r.status !== '已退回';
-                });
-                var rosterHtml = '';
-                if (allRecs.length > 0) {
-                    // 補位序號對照表（補1、補2...）
-                    var walkInNumMap = {};
-                    var _wiIdx = 0;
-                    allRecs.forEach(function(r) {
-                        if (r.triageStatus === '現場補位') { _wiIdx++; walkInNumMap[r.id] = _wiIdx; }
-                    });
-
-                    var rows = allRecs.map(function(r) {
-                        // 正式案件狀態優先於初步判定，避免已結案仍顯示「可維修」。
-                        var displayStatus = r.status === '已結案' ? '已結案'
-                            : (r.status === '已退件' || r.status === '已退回') ? r.status
-                            : r.triageStatus === '待現場判定' ? '現場判定'
-                            : r.triageStatus ? r.triageStatus : (r.status || '待現場判定');
-                        var statusColor = displayStatus === '已結案' ? 'text-slate-700 bg-slate-100'
-                            : displayStatus === '可維修' || displayStatus === '現場判定' ? 'text-green-700 bg-green-50'
-                            : displayStatus === '無法維修' || displayStatus === '已退件' || displayStatus === '已退回' ? 'text-red-600 bg-red-50'
-                            : 'text-yellow-700 bg-yellow-50';
-                        // 報到 / 簽收按鈕
-                        var checkinBtn = '';
-                        var checkinLabel = r.checkinNumber ? '✅ 第 ' + r.checkinNumber + ' 號' : '✅ 已報到';
-                        var pickupCompleted = !!(r.customerSigned || r.returnSignature);
-                        if (r.status === '待取件') {
-                            checkinBtn = '<button type="button" onclick="openPickupSign(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-1.5 rounded-full transition">' + checkinLabel + '｜🤝 取件簽收</button>';
-                        } else if (r.status === '已結案' && r.checkedIn) {
-                            // 已結案案件仍可從報到號碼位置完成簽收。
-                            checkinBtn = pickupCompleted
-                                ? '<span class="flex-shrink-0 text-sm font-black text-purple-700 bg-purple-100 px-3 py-1.5 rounded-full">' + checkinLabel + '｜✍ 已簽收</span>'
-                                : '<button type="button" onclick="openPickupSign(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-1.5 rounded-full transition">' + checkinLabel + '｜✍ 簽收</button>';
-                        } else if (r.checkedIn && r.checkinNumber) {
-                            checkinBtn = '<span class="flex-shrink-0 text-sm font-black text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full">' + checkinLabel + '</span>';
+            try {
+                container.innerHTML = filtered.map(function(e) {
+                    try {
+                        var mi = modeInfo[e.mode] || { label: e.mode, color: 'blue', icon: '📋' };
+                        var cl = colorMap[mi.color] || colorMap['blue'];
+                        var qi = getEventQueueInfo(e.id);
+                        var quota = getEventQuota(e.id);
+                        var onlineCurrent = qi.recs.filter(function(r) { return r.triageStatus !== '現場補位'; }).length;
+                        var count = onlineCurrent; // ★ 修正：已登記件數
+                        var remain = Math.max(0, quota - onlineCurrent);
+                        var snapshot = (window.globalWalkInAvailability || {})[e.id] || {};
+                        var effectiveWalkInSlots = getWalkInAvailability(e.id);
+                        var dateStr = e.isPermanent ? '常態開放' : (e.date || '');
+                        var timeStr = e.isPermanent ? '' : (e.start && e.end ? e.start + ' ~ ' + e.end : '');
+                        var now = new Date();
+                        var eventStartAt = null, receiveDeadlineAt = null;
+                        var deadlineStr = '', checkinDeadlineStr = '', walkInOpenStr = '', walkInCloseStr = '';
+                        if (!e.isPermanent && e.date && e.start && e.end) {
+                            eventStartAt = new Date(e.date + 'T' + e.start + ':00');
+                            receiveDeadlineAt = new Date(e.date + 'T' + e.end + ':00');
+                            receiveDeadlineAt.setMinutes(receiveDeadlineAt.getMinutes() - 90);
+                            var dl = new Date(e.date + 'T00:00:00');
+                            dl.setDate(dl.getDate() - 2); dl.setHours(17, 0, 0, 0);
+                            deadlineStr = (dl.getMonth()+1) + ' 月 ' + dl.getDate() + ' 日 17:00';
+                            var timeText = function(d) { return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes(); };
+                            walkInOpenStr = timeText(eventStartAt);
+                            walkInCloseStr = timeText(receiveDeadlineAt);
+                            checkinDeadlineStr = walkInCloseStr;
+                        }
+                        var bookingCutoffPassed = false;
+                        if (!window.testMode && !e.isPermanent && e.date) {
+                            var cutoff = new Date(e.date + 'T00:00:00');
+                            cutoff.setDate(cutoff.getDate() - 2); cutoff.setHours(17, 0, 0, 0);
+                            bookingCutoffPassed = now > cutoff;
+                        }
+                        var eventStarted = e.isPermanent || (eventStartAt && now >= eventStartAt);
+                        var receiveWindowOpen = e.isPermanent || (eventStartAt && receiveDeadlineAt && now >= eventStartAt && now < receiveDeadlineAt);
+                        var receiveWindowClosed = !!(receiveDeadlineAt && now >= receiveDeadlineAt);
+                        var onlineAtStart = Number(snapshot.onlineBookedAtEventStart != null ? snapshot.onlineBookedAtEventStart : onlineCurrent);
+                        var totalCapacity = quota + Math.max(0, Number(e.extraWalkInSlots || 0));
+                        var onlineFull = (eventStarted ? onlineAtStart : onlineCurrent) >= totalCapacity;
+                        var fullWarning = onlineFull
+                            ? '<div class="mt-3 p-4 sm:p-5 bg-red-50 border-2 border-red-500 rounded-xl text-red-800 leading-relaxed shadow-sm"><div class="text-xl sm:text-2xl font-black">⚠ 本場次預約已滿</div><div class="mt-2 text-base sm:text-lg font-bold">恕不接受現場補位或過號補位</div><div class="text-sm sm:text-base font-bold">預約者未到場之名額亦不再釋出</div></div>'
+                            : '';
+                        var statusBadge, actionBtn;
+                        if (onlineFull) {
+                            statusBadge = '<span class="inline-flex items-center gap-1 bg-red-100 border-2 border-red-500 text-red-700 font-black px-4 py-2 rounded-xl text-xl sm:text-2xl">⛔ 預約已滿</span>';
+                            actionBtn = '<button type="button" disabled class="bg-red-100 border border-red-300 text-red-700 font-black px-6 py-3 rounded-xl text-base cursor-not-allowed w-full md:w-auto">本場次已滿額</button>';
+                        } else if (e.mode === 'B' && !eventStarted) {
+                            statusBadge = '<span class="inline-flex items-center bg-blue-100 text-blue-700 font-bold px-3 py-1.5 rounded-full text-base">🏃 現場登記制</span>';
+                            actionBtn = '<button type="button" disabled class="bg-gray-200 text-gray-600 font-bold px-6 py-3 rounded-xl w-full md:w-auto">活動開始後開放現場登記</button>';
+                        } else if (receiveWindowOpen && effectiveWalkInSlots > 0) {
+                            statusBadge = '<span class="inline-flex items-center gap-1 bg-orange-100 text-orange-700 font-bold px-3 py-1.5 rounded-full text-base">🚶 補位開放 <b class="font-black">' + effectiveWalkInSlots + '</b> 件</span>';
+                            actionBtn = '<button type="button" onclick="openWalkInForm(\'' + e.id + '\')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-xl text-base shadow w-full md:w-auto">🚶 該場次補位 ➔</button>';
+                        } else if (receiveWindowClosed) {
+                            statusBadge = '<span class="inline-flex items-center bg-gray-100 text-gray-600 font-bold px-3 py-1.5 rounded-full text-base">🔒 報到／收件已截止</span>';
+                            actionBtn = '<button type="button" disabled class="bg-gray-200 text-gray-500 font-bold px-6 py-3 rounded-xl w-full md:w-auto">本場次已停止收件</button>';
+                        } else if (bookingCutoffPassed) {
+                            statusBadge = '<span class="inline-flex items-center bg-gray-100 text-gray-600 font-bold px-3 py-1.5 rounded-full text-base">🔒 預約已截止</span>';
+                            actionBtn = '<button type="button" disabled class="bg-gray-200 text-gray-500 font-bold px-6 py-3 rounded-xl w-full md:w-auto">現場補位尚未開放</button>';
                         } else {
-                            var checkinEligible = (r.status === '待檢修' || r.status === '待現場判定' || r.status === '待判定');
-                            if (checkinEligible && !r.checkedIn) {
-                                var checkinOpen = false;
-                                var evt = sys.getEvents().find(function(ev) { return ev.id === r.eventId; });
-                                if (evt && evt.date && evt.start && evt.end) {
-                                    var now = new Date();
-                                    var openT = new Date(evt.date + 'T' + evt.start + ':00');
-                                    var closeT = new Date(evt.date + 'T' + evt.end + ':00');
-                                    closeT.setMinutes(closeT.getMinutes() - 90);
-                                    checkinOpen = now >= openT && now < closeT;
-                                } else if (evt && evt.isPermanent) {
-                                    checkinOpen = true;
-                                }
-                                if (checkinOpen) {
-                                    checkinBtn = '<button type="button" onclick="checkInAtEvent(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-1.5 rounded-full transition">📲 報到</button>';
+                            statusBadge = '<span class="inline-flex items-center bg-green-100 text-green-700 font-bold px-3 py-1.5 rounded-full text-base">✅ 尚有名額 <b class="font-black">' + remain + '</b> 件</span>';
+                            actionBtn = e.mode === 'B'
+                                ? '<button type="button" disabled class="bg-gray-200 text-gray-600 font-bold px-6 py-3 rounded-xl w-full md:w-auto">不開放線上預約</button>'
+                                : '<button type="button" onclick="startPublicModeWithEvent(\'' + e.mode + '\',\'' + e.id + '\')" class="' + cl.btn + ' text-white font-bold px-6 py-3 rounded-xl text-base shadow w-full md:w-auto">立即預約 ➔</button>';
+                        }
+                        var notesHtml = fullWarning +
+                            '<div class="mt-3 pt-3 border-t border-gray-100 text-sm text-gray-600 leading-loose space-y-1">' +
+                            '<div class="px-3 py-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-900"><b>📌 參加注意事項</b><ul class="list-disc list-inside mt-1 space-y-1">' +
+                            (deadlineStr ? '<li>線上預約截止：<b class="text-red-600">' + deadlineStr + '</b>（沿用既有規則）</li>' : '') +
+                            '<li>活動報到於<b class="text-red-600">活動開始時間</b>正式開放，活動開始前不提供提前報到。</li>' +
+                            '<li>已完成線上預約者，請於<b class="text-red-600">活動結束前 1 小時 30 分</b>' + (checkinDeadlineStr ? '（' + checkinDeadlineStr + '）' : '') + '以前完成報到。</li>' +
+                            '<li>線上預約已滿額時，活動當天恕不接受現場補位，亦不會因預約者未到場而額外釋出名額。</li>' +
+                            '<li>線上預約未滿額時，僅原本未被預約的剩餘名額於<b class="text-red-600">活動開始時間</b>開放現場補位。</li>' +
+                            '<li>現場補位名額不會因預約者未報到、遲到或資格失效而增加。</li>' +
+                            '<li>超過截止時間未報到者，原預約資格失效，且不提供任何恢復或優先資格。</li>' +
+                            '<li>現場補位與收件亦於<b class="text-red-600">活動結束前 1 小時 30 分</b>停止。</li>' +
+                            '<li>現場補位僅限已抵達現場者，填寫前須由工作人員輸入確認碼。</li>' +
+                            '<li><b class="text-red-600">同一人持不同身分證攜帶多件物品，將取消後續預約資格。</b></li>' +
+                            '</ul></div>' +
+                            '<div>🔧 當場未完成案件仍保留於原登記場次；如需續修，由工作人員另行安排。</div>' +
+                            '</div>';
+
+                        // 建立本場次已判定名單（遮蔽姓名，排除已退件/逾時釋出紀錄）
+                        var allRecs = sys.getRecords().filter(function(r) {
+                            return r.eventId === e.id && r.customerName && r.status !== '已退件' && r.status !== '已退回';
+                        });
+                        var rosterHtml = '';
+                        if (allRecs.length > 0) {
+                            // 補位序號對照表（補1、補2...）
+                            var walkInNumMap = {};
+                            var _wiIdx = 0;
+                            allRecs.forEach(function(r) {
+                                if (r.triageStatus === '現場補位') { _wiIdx++; walkInNumMap[r.id] = _wiIdx; }
+                            });
+
+                            var rows = allRecs.map(function(r) {
+                                // 正式案件狀態優先於初步判定，避免已結案仍顯示「可維修」。
+                                var displayStatus = r.status === '已結案' ? '已結案'
+                                    : (r.status === '已退件' || r.status === '已退回') ? r.status
+                                    : r.triageStatus === '待現場判定' ? '現場判定'
+                                    : r.triageStatus ? r.triageStatus : (r.status || '待現場判定');
+                                var statusColor = displayStatus === '已結案' ? 'text-slate-700 bg-slate-100'
+                                    : displayStatus === '可維修' || displayStatus === '現場判定' ? 'text-green-700 bg-green-50'
+                                    : displayStatus === '無法維修' || displayStatus === '已退件' || displayStatus === '已退回' ? 'text-red-600 bg-red-50'
+                                    : 'text-yellow-700 bg-yellow-50';
+                                // 報到 / 簽收按鈕
+                                var checkinBtn = '';
+                                var checkinLabel = r.checkinNumber ? '✅ 第 ' + r.checkinNumber + ' 號' : '✅ 已報到';
+                                var pickupCompleted = !!(r.customerSigned || r.returnSignature);
+                                if (r.status === '待取件') {
+                                    checkinBtn = '<button type="button" onclick="openPickupSign(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-1.5 rounded-full transition">' + checkinLabel + '｜🤝 取件簽收</button>';
+                                } else if (r.status === '已結案' && r.checkedIn) {
+                                    // 已結案案件仍可從報到號碼位置完成簽收。
+                                    checkinBtn = pickupCompleted
+                                        ? '<span class="flex-shrink-0 text-sm font-black text-purple-700 bg-purple-100 px-3 py-1.5 rounded-full">' + checkinLabel + '｜✍ 已簽收</span>'
+                                        : '<button type="button" onclick="openPickupSign(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-1.5 rounded-full transition">' + checkinLabel + '｜✍ 簽收</button>';
+                                } else if (r.checkedIn && r.checkinNumber) {
+                                    checkinBtn = '<span class="flex-shrink-0 text-sm font-black text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full">' + checkinLabel + '</span>';
                                 } else {
-                                    var _pastClose = evt && evt.date && evt.end && (new Date() > closeT);
-                                    checkinBtn = _pastClose
-                                        ? '<span class="flex-shrink-0 text-sm text-red-400 font-bold px-3 py-1.5 border border-red-200 rounded-full bg-red-50">未報到</span>'
-                                        : '<span class="flex-shrink-0 text-sm text-gray-400 px-3 py-1.5 border border-gray-200 rounded-full">報到未開放</span>';
+                                    var checkinEligible = (r.status === '待檢修' || r.status === '待現場判定' || r.status === '待判定');
+                                    if (checkinEligible && !r.checkedIn) {
+                                        var checkinOpen = false;
+                                        var evt = sys.getEvents().find(function(ev) { return ev.id === r.eventId; });
+                                        if (evt && evt.date && evt.start && evt.end) {
+                                            var now = new Date();
+                                            var openT = new Date(evt.date + 'T' + evt.start + ':00');
+                                            var closeT = new Date(evt.date + 'T' + evt.end + ':00');
+                                            closeT.setMinutes(closeT.getMinutes() - 90);
+                                            checkinOpen = now >= openT && now < closeT;
+                                        } else if (evt && evt.isPermanent) {
+                                            checkinOpen = true;
+                                        }
+                                        if (checkinOpen) {
+                                            checkinBtn = '<button type="button" onclick="checkInAtEvent(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-1.5 rounded-full transition">📲 報到</button>';
+                                        } else {
+                                            var _pastClose = evt && evt.date && evt.end && (new Date() > closeT);
+                                            checkinBtn = _pastClose
+                                                ? '<span class="flex-shrink-0 text-sm text-red-400 font-bold px-3 py-1.5 border border-red-200 rounded-full bg-red-50">未報到</span>'
+                                                : '<span class="flex-shrink-0 text-sm text-gray-400 px-3 py-1.5 border border-gray-200 rounded-full">報到未開放</span>';
+                                        }
+                                    }
+                                }
+                                return '<div class="flex items-center gap-2 py-2.5 border-b border-gray-200 last:border-0">' +
+                                    '<span class="text-gray-700 text-base font-bold w-16 flex-shrink-0">' + maskName(r.customerName) + '</span>' +
+                                    '<span class="text-gray-500 text-base flex-1 truncate">' + (r.brandModel || r.itemName || '—') + '</span>' +
+                                    '<span class="text-sm font-bold px-2 py-0.5 rounded-full ' + statusColor + '">' + displayStatus + '</span>' +
+                                    checkinBtn +
+                                '</div>';
+                            }).join('');
+                            rosterHtml = '<div class="mt-2 pt-2 border-t border-gray-100">' +
+                                '<button type="button" onclick="toggleEventRoster(\'' + e.id + '\')" class="w-full flex items-center justify-between text-sm text-gray-500 hover:text-gray-700 font-bold py-2 transition">' +
+                                    '<span>📋 本場次登記名單（' + allRecs.length + ' 件）</span>' +
+                                    '<span id="roster-arrow-' + e.id + '">▼</span>' +
+                                '</button>' +
+                                '<div id="roster-' + e.id + '" class="hidden mt-1 px-1">' + rows + '</div>' +
+                            '</div>';
+                        }
+
+                        var qrBtn = (function() {
+                            var isB = (e.mode === 'B');
+                            var qrLabel = isB ? '📍 現場登記 QR Code' : '🔢 叫號機';
+                            var qrLabelOff = isB ? '📍 現場登記 QR（未開放）' : '🔢 叫號機（未開放）';
+                            var qrOpen = false;
+                            if (e.isPermanent || window.testMode) {
+                                qrOpen = true;
+                            } else if (e.date) {
+                                var now2 = new Date();
+                                var pad2 = function(v) { return v < 10 ? '0' + v : '' + v; };
+                                var todayStr = now2.getFullYear() + '-' + pad2(now2.getMonth() + 1) + '-' + pad2(now2.getDate());
+                                if (e.date === todayStr) {
+                                    if (e.start && e.end) {
+                                        var qrO = new Date(e.date + 'T' + e.start + ':00');
+                                        var qrC = new Date(e.date + 'T' + e.end + ':00'); qrC.setMinutes(qrC.getMinutes() - 90);
+                                        qrOpen = (now2 >= qrO && now2 < qrC);
+                                    } else {
+                                        qrOpen = true;
+                                    }
+                                } else if (e.date > todayStr) {
+                                    qrOpen = false;
+                                } else {
+                                    qrOpen = true;
                                 }
                             }
-                        }
-                        return '<div class="flex items-center gap-2 py-2.5 border-b border-gray-200 last:border-0">' +
-                            '<span class="text-gray-700 text-base font-bold w-16 flex-shrink-0">' + maskName(r.customerName) + '</span>' +
-                            '<span class="text-gray-500 text-base flex-1 truncate">' + (r.brandModel || r.itemName || '—') + '</span>' +
-                            '<span class="text-sm font-bold px-2 py-0.5 rounded-full ' + statusColor + '">' + displayStatus + '</span>' +
-                            checkinBtn +
-                        '</div>';
-                    }).join('');
-                    rosterHtml = '<div class="mt-2 pt-2 border-t border-gray-100">' +
-                        '<button type="button" onclick="toggleEventRoster(\'' + e.id + '\')" class="w-full flex items-center justify-between text-sm text-gray-500 hover:text-gray-700 font-bold py-2 transition">' +
-                            '<span>📋 本場次登記名單（' + allRecs.length + ' 件）</span>' +
-                            '<span id="roster-arrow-' + e.id + '">▼</span>' +
-                        '</button>' +
-                        '<div id="roster-' + e.id + '" class="hidden mt-1 px-1">' + rows + '</div>' +
-                    '</div>';
-                }
+                            return qrOpen
+                                ? '<button type="button" data-call-machine-event-id="' + e.id + '" class="w-full md:w-auto bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-bold px-4 py-2.5 rounded-lg text-sm shadow transition transform active:scale-98 cursor-pointer" style="touch-action: manipulation; pointer-events: auto;">' + qrLabel + '</button>'
+                                : '<button type="button" disabled class="w-full md:w-auto bg-gray-200 text-gray-400 font-bold px-4 py-2.5 rounded-lg text-sm cursor-not-allowed">' + qrLabelOff + '</button>';
+                        })();
 
-                var qrBtn = (function() {
-                    var isB = (e.mode === 'B');
-                    var qrLabel = isB ? '📍 現場登記 QR Code' : '🔢 叫號機';
-                    var qrLabelOff = isB ? '📍 現場登記 QR（未開放）' : '🔢 叫號機（未開放）';
-                    var qrOpen = false;
-                    if (e.isPermanent || window.testMode) {
-                        qrOpen = true;
-                    } else if (e.date) {
-                        var now2 = new Date();
-                        var pad2 = function(v) { return v < 10 ? '0' + v : '' + v; };
-                        var todayStr = now2.getFullYear() + '-' + pad2(now2.getMonth() + 1) + '-' + pad2(now2.getDate());
-                        if (e.date === todayStr) {
-                            if (e.start && e.end) {
-                                var qrO = new Date(e.date + 'T' + e.start + ':00');
-                                var qrC = new Date(e.date + 'T' + e.end + ':00'); qrC.setMinutes(qrC.getMinutes() - 90);
-                                qrOpen = (now2 >= qrO && now2 < qrC);
-                            } else {
-                                qrOpen = true;
-                            }
-                        } else if (e.date > todayStr) {
-                            qrOpen = false;
-                        } else {
-                            qrOpen = true;
-                        }
-                    }
-                    return qrOpen
-                        ? '<button type="button" data-call-machine-event-id="' + e.id + '" class="w-full md:w-auto bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-bold px-4 py-2.5 rounded-lg text-sm shadow transition transform active:scale-98 cursor-pointer" style="touch-action: manipulation; pointer-events: auto;">' + qrLabel + '</button>'
-                        : '<button type="button" disabled class="w-full md:w-auto bg-gray-200 text-gray-400 font-bold px-4 py-2.5 rounded-lg text-sm cursor-not-allowed">' + qrLabelOff + '</button>';
-                })();
-
-                return '<div class="bg-white rounded-xl shadow border-l-4 ' + cl.border + ' p-4 flex flex-col gap-3">' +
-                    '<div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">' +
-                    '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-                        '<span class="text-4xl flex-shrink-0">' + mi.icon + '</span>' +
-                        '<div class="min-w-0">' +
-                            '<div class="flex flex-wrap items-center gap-2 mb-1">' +
-                                '<span class="font-black text-gray-800 text-lg">' + e.name + '</span>' +
-                                '<span class="text-sm font-bold px-2 py-0.5 rounded ' + cl.tag + '">' + mi.label + '</span>' +
+                        return '<div class="bg-white rounded-xl shadow border-l-4 ' + cl.border + ' p-4 flex flex-col gap-3">' +
+                            '<div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">' +
+                            '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+                                '<span class="text-4xl flex-shrink-0">' + mi.icon + '</span>' +
+                                '<div class="min-w-0">' +
+                                    '<div class="flex flex-wrap items-center gap-2 mb-1">' +
+                                        '<span class="font-black text-gray-800 text-lg">' + (e.name || '') + '</span>' +
+                                        '<span class="text-sm font-bold px-2 py-0.5 rounded ' + cl.tag + '">' + mi.label + '</span>' +
+                                    '</div>' +
+                                    '<div class="text-base text-gray-500">📍 ' + (e.loc || '') + '</div>' +
+                                    '<div class="text-base text-gray-600 font-bold mt-0.5 whitespace-nowrap">🗓 ' + dateStr + '</div>' +
+                                    (timeStr ? '<div class="text-base text-gray-600 font-bold whitespace-nowrap">🕒 ' + timeStr + '</div>' : '') +
+                                '</div>' +
                             '</div>' +
-                            '<div class="text-base text-gray-500">📍 ' + e.loc + '</div>' +
-                            '<div class="text-base text-gray-600 font-bold mt-0.5 whitespace-nowrap">🗓 ' + dateStr + '</div>' +
-                            (timeStr ? '<div class="text-base text-gray-600 font-bold whitespace-nowrap">🕒 ' + timeStr + '</div>' : '') +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="flex flex-col md:items-end gap-2 flex-shrink-0">' +
-                        statusBadge +
-                        '<div class="text-sm text-gray-400">上限 ' + quota + ' 件，已登記 ' + count + ' 件</div>' +
-                        actionBtn +
-                        qrBtn +
-                    '</div>' +
-                    '</div>' +
-                    notesHtml +
-                    rosterHtml +
-                '</div>';
-            }).join('');
+                            '<div class="flex flex-col md:items-end gap-2 flex-shrink-0">' +
+                                statusBadge +
+                                '<div class="text-sm text-gray-400">上限 ' + quota + ' 件，已登記 ' + count + ' 件</div>' +
+                                actionBtn +
+                                qrBtn +
+                            '</div>' +
+                            '</div>' +
+                            notesHtml +
+                            rosterHtml +
+                        '</div>';
+                    } catch (cardErr) {
+                        console.error('Render single event card error for event:', e ? e.id : 'unknown', cardErr);
+                        return '';
+                    }
+                }).filter(Boolean).join('');
+            } catch (renderErr) {
+                console.error('renderHomeEvents mapping error:', renderErr);
+                container.innerHTML = '<p class="text-center text-red-500 font-bold py-8">場次資料暫時無法載入，請稍後重新整理。</p>';
+            }
         }
 
         // ==========================================
