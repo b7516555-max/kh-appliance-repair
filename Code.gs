@@ -236,6 +236,26 @@ function getInitialData() {
     });
   }
 
+  // 唯讀回傳各場次固定補位容量；不因未報到、遲到或活動開始後取消而增加。
+  var walkInAvailability = {};
+  var readNow = getTaipeiNow_();
+  for (var wi = 0; wi < events.length; wi++) {
+    var evt = {
+      id: events[wi].id, mode: events[wi].mode, isPermanent: events[wi].isPermanent,
+      date: events[wi].date, start: events[wi].start, end: events[wi].end,
+      capacity: events[wi].maxSlots, extraWalkInSlots: events[wi].extraWalkInSlots
+    };
+    var wiCounts = countEventRecords_(recordData, evt.id);
+    var wiOnline = getOnlineBookedAtStart_(evt, recordData, readNow, false);
+    var wiCapacity = computeWalkInAvailability_(evt.capacity, wiOnline, wiCounts.walkIn, evt.extraWalkInSlots);
+    walkInAvailability[evt.id] = {
+      onlineBookedAtEventStart: wiOnline,
+      successfulWalkInCount: wiCounts.walkIn,
+      walkInCapacity: wiCapacity.walkInCapacity,
+      remainingWalkInCapacity: wiCapacity.remainingWalkInCapacity
+    };
+  }
+
   // 讀取區隊後台開放時間設定
   var props = PropertiesService.getScriptProperties();
   var configStr = props.getProperty('sys_mode_c_config');
@@ -245,7 +265,7 @@ function getInitialData() {
   var volunteerCode = props.getProperty('volunteer_code') || '0000';
 
   var blocklist = getBlocklist();
-  return { events: events, records: records, modeCConfig: modeCConfig, volunteerCode: volunteerCode, blocklist: blocklist, carryoverSummary: carryoverSummary };
+  return { events: events, records: records, modeCConfig: modeCConfig, volunteerCode: volunteerCode, blocklist: blocklist, carryoverSummary: carryoverSummary, walkInAvailability: walkInAvailability };
 }
 
 // 點擊案件詳情時才按需讀取單筆紀錄照片（大幅減輕首頁載入負擔）
@@ -313,6 +333,7 @@ function saveVolunteerCode(code) {
 // ==========================================
 function saveEvent(eventObj) {
   setupSheets().eventSheet.appendRow([ eventObj.id, eventObj.mode, eventObj.name, eventObj.loc, eventObj.isPermanent, eventObj.date, eventObj.start, eventObj.end, eventObj.maxSlots || 15, Math.max(0, parseInt(eventObj.extraWalkInSlots) || 0) ]);
+  refreshOnlineSnapshotBeforeStart_(eventObj.id);
   return "Success";
 }
 
@@ -332,6 +353,7 @@ function updateEventInSheet(eventObj) {
         sheet.getRange(row, 8).setValue(s(eventObj.end));
         sheet.getRange(row, 9).setValue(eventObj.maxSlots || 15);
         sheet.getRange(row, 10).setValue(Math.max(0, parseInt(eventObj.extraWalkInSlots) || 0));
+        refreshOnlineSnapshotBeforeStart_(eventObj.id);
         return "Updated";
       }
     }
@@ -358,6 +380,7 @@ function deleteEvent(eventId) {
   for (var i = 1; i < data.length; i++) {
     if (s(data[i][0]) === eventId) {
       sheet.deleteRow(i + 1);
+      PropertiesService.getScriptProperties().deleteProperty(snapshotKey_(eventId));
       return "Success";
     }
   }
@@ -381,6 +404,182 @@ function isUnsupportedBrand_() {
   return false;
 }
 
+// ==========================================
+// 報到／現場補位規則（Asia/Taipei）
+// ==========================================
+var WALKIN_TOKEN_TTL_SECONDS_ = 600;
+var WALKIN_SNAPSHOT_PREFIX_ = 'ONLINE_BOOKED_AT_START_';
+
+function getTaipeiNow_() { return new Date(); }
+
+function getEventById_(eventId, sheets) {
+  var rows = (sheets || setupSheets()).eventSheet.getDataRange().getValues();
+  for (var i = 1; i < rows.length; i++) {
+    if (s(rows[i][0]) === s(eventId)) {
+      return {
+        id: s(rows[i][0]), mode: s(rows[i][1]), name: s(rows[i][2]), loc: s(rows[i][3]),
+        isPermanent: rows[i][4] === true || s(rows[i][4]) === 'true',
+        date: formatDate(rows[i][5]), start: formatTime(rows[i][6]), end: formatTime(rows[i][7]),
+        capacity: parseInt(rows[i][8], 10) || 15,
+        extraWalkInSlots: Math.max(0, parseInt(rows[i][9], 10) || 0)
+      };
+    }
+  }
+  throw new Error('INVALID_EVENT:找不到指定場次，請重新整理後再試。');
+}
+
+function getEventWindow_(event) {
+  if (!event || event.isPermanent || !event.date || !event.start || !event.end) return null;
+  var startAt = new Date(event.date + 'T' + event.start + ':00+08:00');
+  var endAt = new Date(event.date + 'T' + event.end + ':00+08:00');
+  var deadlineAt = new Date(endAt.getTime() - 90 * 60 * 1000);
+  return { startAt: startAt, endAt: endAt, deadlineAt: deadlineAt };
+}
+
+function isActiveRecordRow_(row, eventId) {
+  var status = s(row[22]);
+  return s(row[34]) === s(eventId) &&
+    (s(row[35]) === 'A' || s(row[35]) === 'B' || s(row[35]) === 'D') &&
+    status !== '已退回' && status !== '已退件';
+}
+
+function countEventRecords_(rows, eventId) {
+  var online = 0, walkIn = 0;
+  for (var i = 1; i < rows.length; i++) {
+    if (!isActiveRecordRow_(rows[i], eventId)) continue;
+    if (s(rows[i][29]) === '現場補位') walkIn++;
+    else online++;
+  }
+  return { online: online, walkIn: walkIn };
+}
+
+function snapshotKey_(eventId) { return WALKIN_SNAPSHOT_PREFIX_ + s(eventId); }
+
+function getOnlineBookedAtStart_(event, rows, now, allowCreate) {
+  var counts = countEventRecords_(rows, event.id);
+  var windowInfo = getEventWindow_(event);
+  if (!windowInfo || now < windowInfo.startAt) return counts.online;
+  var props = PropertiesService.getScriptProperties();
+  var stored = props.getProperty(snapshotKey_(event.id));
+  if (stored !== null && stored !== '') return Math.max(0, parseInt(stored, 10) || 0);
+  if (allowCreate) props.setProperty(snapshotKey_(event.id), String(counts.online));
+  return counts.online;
+}
+
+function refreshOnlineSnapshotBeforeStart_(eventId, sheets) {
+  if (!eventId) return;
+  var localSheets = sheets || setupSheets();
+  var event = getEventById_(eventId, localSheets);
+  var windowInfo = getEventWindow_(event);
+  if (!windowInfo || getTaipeiNow_() >= windowInfo.startAt) return;
+  var rows = localSheets.recordSheet.getDataRange().getValues();
+  var counts = countEventRecords_(rows, eventId);
+  PropertiesService.getScriptProperties().setProperty(snapshotKey_(eventId), String(counts.online));
+}
+
+function computeWalkInAvailability_(capacity, onlineBookedAtStart, successfulWalkInCount, extraWalkInSlots) {
+  var walkInCapacity = Math.max(0, Number(capacity || 0) + Number(extraWalkInSlots || 0) - Number(onlineBookedAtStart || 0));
+  return {
+    walkInCapacity: walkInCapacity,
+    remainingWalkInCapacity: Math.max(0, walkInCapacity - Number(successfulWalkInCount || 0))
+  };
+}
+
+function getWalkInAvailabilityServer(eventId) {
+  var sheets = setupSheets();
+  var event = getEventById_(eventId, sheets);
+  var rows = sheets.recordSheet.getDataRange().getValues();
+  var now = getTaipeiNow_();
+  var counts = countEventRecords_(rows, eventId);
+  var onlineAtStart = getOnlineBookedAtStart_(event, rows, now, true);
+  var capacity = computeWalkInAvailability_(event.capacity, onlineAtStart, counts.walkIn, event.extraWalkInSlots);
+  var windowInfo = getEventWindow_(event);
+  var state = 'OPEN';
+  if (windowInfo && now < windowInfo.startAt) state = 'NOT_STARTED';
+  else if (windowInfo && now >= windowInfo.deadlineAt) state = 'CLOSED';
+  else if (capacity.walkInCapacity <= 0 && onlineAtStart >= event.capacity + event.extraWalkInSlots) state = 'ONLINE_FULL';
+  else if (capacity.remainingWalkInCapacity <= 0) state = 'FULL';
+  return {
+    eventId: event.id, state: state, now: now.toISOString(),
+    startAt: windowInfo ? windowInfo.startAt.toISOString() : '',
+    deadlineAt: windowInfo ? windowInfo.deadlineAt.toISOString() : '',
+    totalCapacity: event.capacity + event.extraWalkInSlots,
+    onlineBookedAtEventStart: onlineAtStart,
+    successfulWalkInCount: counts.walkIn,
+    walkInCapacity: capacity.walkInCapacity,
+    remainingWalkInCapacity: capacity.remainingWalkInCapacity,
+    message: state === 'NOT_STARTED' ? '現場補位尚未開放，請於活動開始時間後再辦理。' :
+      state === 'CLOSED' ? '本場次已停止現場補位及收件。' :
+      state === 'ONLINE_FULL' ? '本場次預約已滿，恕不接受現場補位或過號補位，未到場名額亦不再釋出。' :
+      state === 'FULL' ? '本場次目前無現場補位名額。' : '現場補位可辦理。'
+  };
+}
+
+function walkInTokenKey_(token) {
+  var digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, s(token), Utilities.Charset.UTF_8);
+  return 'WALKIN_TOKEN_' + Utilities.base64EncodeWebSafe(digest).replace(/=+$/, '');
+}
+
+function verifyWalkInStaffCode(eventId, code, sessionId) {
+  var availability = getWalkInAvailabilityServer(eventId);
+  if (availability.state !== 'OPEN') throw new Error('WALKIN_UNAVAILABLE:' + availability.message);
+  var sid = s(sessionId).slice(0, 80) || 'anonymous';
+  var cache = CacheService.getScriptCache();
+  var rateKey = 'WALKIN_RATE_' + sid;
+  var rate = JSON.parse(cache.get(rateKey) || '{"failures":0,"blockedUntil":0}');
+  var nowMs = getTaipeiNow_().getTime();
+  if (Number(rate.blockedUntil || 0) > nowMs) throw new Error('WALKIN_RATE_LIMIT:確認碼錯誤次數過多，請約 30 秒後再試。');
+  var correct = PropertiesService.getScriptProperties().getProperty('WALKIN_STAFF_CODE') || '0000';
+  if (s(code) !== correct) {
+    rate.failures = Number(rate.failures || 0) + 1;
+    if (rate.failures >= 5) { rate.failures = 0; rate.blockedUntil = nowMs + 30000; }
+    cache.put(rateKey, JSON.stringify(rate), 60);
+    throw new Error('WALKIN_STAFF_CODE_INVALID:工作人員確認碼錯誤，請重新輸入。');
+  }
+  cache.remove(rateKey);
+  var token = Utilities.getUuid() + Utilities.getUuid();
+  var payload = { token: token, eventId: s(eventId), sessionId: sid, authorizedAt: nowMs, expiresAt: nowMs + 600000, used: false };
+  cache.put(walkInTokenKey_(token), JSON.stringify(payload), WALKIN_TOKEN_TTL_SECONDS_);
+  return { success: true, token: token, eventId: s(eventId), expiresAt: new Date(payload.expiresAt).toISOString(), message: '現場確認完成，請於 10 分鐘內完成收件資料填寫。' };
+}
+
+function validateWalkInToken_(token, eventId, sessionId) {
+  if (!token) throw new Error('WALKIN_TOKEN_REQUIRED:現場補位須先由工作人員完成確認。');
+  var cache = CacheService.getScriptCache();
+  var key = walkInTokenKey_(token);
+  var raw = cache.get(key);
+  if (!raw) throw new Error('WALKIN_TOKEN_EXPIRED:補位確認已逾時，請洽現場工作人員重新驗證。');
+  var payload = JSON.parse(raw);
+  if (payload.used) throw new Error('WALKIN_TOKEN_USED:此補位確認已使用，請重新驗證。');
+  if (s(payload.eventId) !== s(eventId) || s(payload.sessionId) !== s(sessionId)) throw new Error('WALKIN_TOKEN_EVENT_MISMATCH:補位確認與本場次不符，請重新驗證。');
+  if (Number(payload.expiresAt || 0) <= getTaipeiNow_().getTime()) throw new Error('WALKIN_TOKEN_EXPIRED:補位確認已逾時，請洽現場工作人員重新驗證。');
+  return { key: key, payload: payload };
+}
+
+function validateEventOperationTime_(event, operation) {
+  var windowInfo = getEventWindow_(event);
+  if (!windowInfo) return;
+  var now = getTaipeiNow_();
+  if (now < windowInfo.startAt) throw new Error((operation === 'CHECKIN' ? 'CHECKIN_NOT_STARTED:' : 'WALKIN_NOT_OPEN:') + '本場次尚未開始，請於活動開始時間後再辦理報到。');
+  if (now >= windowInfo.deadlineAt) throw new Error((operation === 'CHECKIN' ? 'CHECKIN_CLOSED:' : 'WALKIN_CLOSED:') + '已超過本場次報到／收件截止時間，無法完成' + (operation === 'CHECKIN' ? '報到。' : '補位登記。'));
+}
+
+function seedOnlineBookedAtEventStartSnapshots() {
+  var sheets = setupSheets();
+  var eventRows = sheets.eventSheet.getDataRange().getValues();
+  var recordRows = sheets.recordSheet.getDataRange().getValues();
+  var props = PropertiesService.getScriptProperties();
+  var seeded = [];
+  for (var i = 1; i < eventRows.length; i++) {
+    var eventId = s(eventRows[i][0]);
+    if (!eventId) continue;
+    var counts = countEventRecords_(recordRows, eventId);
+    props.setProperty(snapshotKey_(eventId), String(counts.online));
+    seeded.push({ eventId: eventId, onlineBookedAtEventStart: counts.online });
+  }
+  return seeded;
+}
+
 function saveToSheet(formData) {
   var lock = LockService.getScriptLock();
   try {
@@ -397,14 +596,10 @@ function saveToSheet(formData) {
       throw new Error('UNSUPPORTED_BRAND:此品牌目前無法提供維修服務（小米／米家／Dyson）');
     }
 
-    // 現場補位（含一般現場補位與逾時重補位）必須具備工作人員確認碼授權
-    if (s(formData.triageStatus) === '現場補位') {
-      var correctVolunteerCode = PropertiesService.getScriptProperties().getProperty('volunteer_code') || '0000';
-      var submittedCode = s(formData.staffCode || formData.volunteerCode);
-      if (!submittedCode || (submittedCode !== correctVolunteerCode && submittedCode !== '0000')) {
-        throw new Error('STAFF_PIN_INVALID:現場補位必須由現場工作人員輸入確認碼授權。');
-      }
-      // 所有現場補位均直接視為可維修，略過可維修／無法維修／現場判定階段。
+    var isWalkInSubmission = s(formData.triageStatus) === '現場補位';
+    var validatedWalkInToken = null;
+    if (isWalkInSubmission) {
+      validatedWalkInToken = validateWalkInToken_(formData.walkInAuthorizationToken, formData.eventId, formData.walkInSessionId);
       formData.status = '待檢修';
     }
 
@@ -417,68 +612,25 @@ function saveToSheet(formData) {
     if (formData.eventId && (formData.mode === 'A' || formData.mode === 'B' || formData.mode === 'D')) {
       // 取得該場次名額上限
       var eventRows = sheets.eventSheet.getDataRange().getValues();
-      var quota = 15;
-      var eventDate = '';
-      var eventEnd = '';
-      var eventStart = '';
-      var eventLoc = '';
-      var eventMode = '';
-      var eventIsPermanent = false;
-      var extraWalkInSlots = 0;
-      var eventFound = false;
-      for (var ei = 1; ei < eventRows.length; ei++) {
-        if (s(eventRows[ei][0]) === formData.eventId) {
-          eventFound = true;
-          quota = parseInt(eventRows[ei][8]) || 15;
-          eventIsPermanent = eventRows[ei][4] === true || s(eventRows[ei][4]) === 'true';
-          eventDate = formatDate(eventRows[ei][5]);
-          eventStart = formatTime(eventRows[ei][6]);
-          eventEnd = formatTime(eventRows[ei][7]);
-          eventLoc = s(eventRows[ei][3]);
-          eventMode = s(eventRows[ei][1]);
-          extraWalkInSlots = Math.max(0, parseInt(eventRows[ei][9]) || 0);
-          break;
-        }
-      }
-      if (!eventFound) throw new Error('INVALID_EVENT:找不到指定場次，請重新整理後再試。');
-      if (eventMode !== formData.mode) throw new Error('EVENT_MODE_MISMATCH:場次類型不一致，請重新整理後再試。');
+      var event = getEventById_(formData.eventId, sheets);
+      var quota = event.capacity;
+      if (event.mode !== formData.mode) throw new Error('EVENT_MODE_MISMATCH:場次類型不一致，請重新整理後再試。');
 
       // 場次 ID 是唯一資料來源；日期、時間與地點不得採信瀏覽器傳入值。
-      formData.eventDate = eventIsPermanent ? '常態' : eventDate;
-      formData.eventTime = eventIsPermanent ? '常態' : (eventStart + (eventEnd ? '~' + eventEnd : ''));
-      formData.eventLoc = eventLoc;
-      // 計算目前已登記件數（排除已退回/已退件）
+      formData.eventDate = event.isPermanent ? '常態' : event.date;
+      formData.eventTime = event.isPermanent ? '常態' : (event.start + (event.end ? '~' + event.end : ''));
+      formData.eventLoc = event.loc;
       var allRows = sheet.getDataRange().getValues();
-      var count = 0;
-      var releasedNoShowCount = 0;
-      for (var ri = 1; ri < allRows.length; ri++) {
-        var rowEvtId = s(allRows[ri][34]); // col 35
-        var rowMode  = s(allRows[ri][35]); // col 36
-        var rowStat  = s(allRows[ri][22]); // col 23
-        var isActiveRow = rowEvtId === formData.eventId &&
-          (rowMode === 'A' || rowMode === 'B' || rowMode === 'D') &&
-          rowStat !== '已退回' && rowStat !== '已退件';
-        if (isActiveRow) {
-          count++;
-          var rowTriage = s(allRows[ri][29]); // col 30
-          var rowCheckedIn = s(allRows[ri][40]) === 'true'; // col 41
-          if (rowTriage !== '現場補位' && !rowCheckedIn) releasedNoShowCount++;
+      var counts = countEventRecords_(allRows, formData.eventId);
+      if (isWalkInSubmission) {
+        validateEventOperationTime_(event, 'WALKIN');
+        var onlineAtStart = getOnlineBookedAtStart_(event, allRows, getTaipeiNow_(), true);
+        var capacityInfo = computeWalkInAvailability_(quota, onlineAtStart, counts.walkIn, event.extraWalkInSlots);
+        if (capacityInfo.walkInCapacity <= 0 && onlineAtStart >= quota + event.extraWalkInSlots) {
+          throw new Error('WALKIN_ONLINE_FULL:本場次預約已滿，恕不接受現場補位或過號補位，未到場名額亦不再釋出。');
         }
-      }
-
-      // 第二波現場補位可使用活動結束前 2 小時仍未報到者釋出的名額。
-      var allowedCapacity = quota;
-      var isWalkIn = s(formData.triageStatus) === '現場補位';
-      if (isWalkIn) allowedCapacity += extraWalkInSlots;
-      var inSecondWave = false;
-      if (isWalkIn && !eventIsPermanent && eventDate && eventEnd) {
-        var secondWaveAt = new Date(eventDate + 'T' + eventEnd + ':00');
-        secondWaveAt.setMinutes(secondWaveAt.getMinutes() - 120);
-        inSecondWave = (new Date() >= secondWaveAt);
-      }
-      // 未報到原預約保留紀錄但不占第二波名額；每筆新補位仍須扣除容量。
-      if (inSecondWave) allowedCapacity += releasedNoShowCount;
-      if (count >= allowedCapacity) {
+        if (capacityInfo.remainingWalkInCapacity <= 0) throw new Error('WALKIN_FULL:本場次現場名額已額滿，無法完成補位登記。');
+      } else if (counts.online + counts.walkIn >= quota) {
         throw new Error('QUOTA_EXCEEDED:' + quota);
       }
     }
@@ -517,18 +669,11 @@ function saveToSheet(formData) {
       s(formData.idNumber) // col 43: 身分證字號
     ];
     sheet.appendRow(rowData);
-
-    // 若為逾時重補位，將原預約記錄標記為「已退件」（逾時未到釋出補位），避免重複與混淆
-    if (formData.origRecordId) {
-      var allDataNow = sheet.getDataRange().getValues();
-      for (var oi = 1; oi < allDataNow.length; oi++) {
-        if (s(allDataNow[oi][33]) === s(formData.origRecordId)) {
-          sheet.getRange(oi + 1, 23).setValue('已退件'); // col 23: status
-          sheet.getRange(oi + 1, 20).setValue('逾時未到已釋出補位（重新登記補位第 ' + (serverCheckinNumber || '') + ' 號）'); // col 20: repairDetails
-          break;
-        }
-      }
+    if (isWalkInSubmission && validatedWalkInToken) {
+      validatedWalkInToken.payload.used = true;
+      CacheService.getScriptCache().put(validatedWalkInToken.key, JSON.stringify(validatedWalkInToken.payload), WALKIN_TOKEN_TTL_SECONDS_);
     }
+    if (!isWalkInSubmission) refreshOnlineSnapshotBeforeStart_(formData.eventId, sheets);
 
     return { success: true, checkinNumber: serverCheckinNumber || 0 };
   } catch(error) {
@@ -575,6 +720,8 @@ function updateRecordInSheet(updateData) {
             if (recEventDate && recEventDate !== todayU) {
               throw new Error('CHECKIN_DATE_MISMATCH:活動日期（' + recEventDate + '）與今日（' + todayU + '）不符，無法報到。');
             }
+            var updateEventId = s(data[i][34]);
+            if (updateEventId) validateEventOperationTime_(getEventById_(updateEventId), 'CHECKIN');
           }
           sheet.getRange(row, 41).setValue(updateData.checkedIn ? 'true' : 'false');
         }
@@ -584,6 +731,7 @@ function updateRecordInSheet(updateData) {
           var exportResult = appendSingleClosedCaseToResultSheet(updateData, data[i]);
           if (!exportResult.success) throw new Error('RESULT_EXPORT_FAILED:' + exportResult.message);
         }
+        if (s(data[i][34])) refreshOnlineSnapshotBeforeStart_(s(data[i][34]));
         return "Updated";
       }
     }
@@ -617,6 +765,7 @@ function checkInRecord(recordId, serialNum) {
 
     if (s(data[targetIndex][40]) === 'true') return { success: true, checkinNumber: parseInt(data[targetIndex][39]) || 0, alreadyCheckedIn: true };
     var eventId = s(data[targetIndex][34]);
+    if (eventId) validateEventOperationTime_(getEventById_(eventId), 'CHECKIN');
     var maxNum = 0;
     for (var j = 1; j < data.length; j++) {
       if (s(data[j][34]) === eventId && s(data[j][40]) === 'true') maxNum = Math.max(maxNum, parseInt(data[j][39]) || 0);

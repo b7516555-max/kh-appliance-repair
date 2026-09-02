@@ -599,7 +599,7 @@ function createRepairInfoFlex_() {
           },
           {
             type: 'text',
-            text: '• 線上預約於活動日前 2 天截止；預約者最晚須於活動結束前 2 小時完成報到。',
+            text: '• 線上預約於活動日前 2 天截止；報到於活動開始時間開放，最晚須於活動結束前 1 小時 30 分完成。',
             wrap: true,
             size: 'xs',
             color: '#1E293B'
