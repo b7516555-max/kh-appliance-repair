@@ -6680,17 +6680,17 @@ function renderTvBoard() {
             '</div>';
     }).join('');
 
-    var systemUrl = window.location.href.split('#')[0];
-    var qrImgApiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(systemUrl);
+    var lineUrl = "https://lin.ee/Y1qWz75x";
+    var qrImgApiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(lineUrl);
 
     infoBox.innerHTML = '<div class="flex flex-col items-center justify-center text-center h-full p-2">' +
-        '<div class="text-xl md:text-2xl font-black mb-2 tracking-wide text-yellow-300">📱 掃描 QR Code 立即線上預約</div>' +
-        '<p class="text-sm opacity-80 mb-4">歡迎民眾使用手機掃描下方二維碼，進入雲端系統預約登記維修案件</p>' +
+        '<div class="text-xl md:text-2xl font-black mb-2 tracking-wide text-yellow-300">📱 掃描 QR Code 加入官方 LINE</div>' +
+        '<p class="text-sm opacity-80 mb-4">歡迎民眾使用手機掃描下方二維碼，加入官方 LINE 獲取最新維修與預約資訊</p>' +
         '<div class="bg-white p-4 rounded-2xl shadow-2xl inline-block border-4 border-yellow-400 mb-4 transform hover:scale-105 transition">' +
-        '<img src="' + qrImgApiUrl + '" alt="線上預約系統 QR Code" class="w-48 h-48 md:w-56 md:h-56 object-contain rounded-lg mx-auto">' +
+        '<img src="' + qrImgApiUrl + '" alt="官方 LINE QR Code" class="w-48 h-48 md:w-56 md:h-56 object-contain rounded-lg mx-auto">' +
         '</div>' +
-        '<a href="' + systemUrl + '" target="_blank" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-black px-6 py-2.5 rounded-xl shadow-lg transition text-base">' +
-        '🔗 點擊開啟預約系統網址' +
+        '<a href="' + lineUrl + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-black px-6 py-2.5 rounded-xl shadow-lg transition text-base">' +
+        '🔗 點擊開啟官方 LINE 連結' +
         '</a>' +
         '</div>';
 
