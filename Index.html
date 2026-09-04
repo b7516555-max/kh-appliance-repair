@@ -4334,6 +4334,45 @@
 
         // --- 共用與圖片上傳模組 ---
         var pads = { A: {}, B: {}, C: {} };
+
+        // 簽名資料最佳化壓縮工具函式：限制尺寸與體積，確保清楚且 Base64 絕不超過試算表限制
+        function getCompressedSignature(sourceCanvas, maxWidth, maxHeight) {
+            if (!sourceCanvas) return '';
+            var maxW = maxWidth || 480;
+            var maxH = maxHeight || 180;
+            var w = sourceCanvas.width;
+            var h = sourceCanvas.height;
+            if (!w || !h) return '';
+
+            var scale = Math.min(1, maxW / w, maxH / h);
+            var targetW = Math.round(w * scale);
+            var targetH = Math.round(h * scale);
+
+            var tempCanvas = document.createElement('canvas');
+            tempCanvas.width = targetW;
+            tempCanvas.height = targetH;
+            var tCtx = tempCanvas.getContext('2d');
+
+            // 保持透明背景繪製平滑縮放黑線簽名
+            tCtx.imageSmoothingEnabled = true;
+            tCtx.imageSmoothingQuality = 'high';
+            tCtx.drawImage(sourceCanvas, 0, 0, targetW, targetH);
+
+            var dataUrl = tempCanvas.toDataURL('image/png');
+            // 若筆畫特別複雜導致 PNG base64 超過 38000 字元，轉為白底高畫質 JPEG 壓縮
+            if (dataUrl.length > 38000) {
+                var jpgCanvas = document.createElement('canvas');
+                jpgCanvas.width = targetW;
+                jpgCanvas.height = targetH;
+                var jCtx = jpgCanvas.getContext('2d');
+                jCtx.fillStyle = '#ffffff';
+                jCtx.fillRect(0, 0, targetW, targetH);
+                jCtx.drawImage(tempCanvas, 0, 0);
+                dataUrl = jpgCanvas.toDataURL('image/jpeg', 0.82);
+            }
+            return dataUrl;
+        }
+
         function initSig(t) {
             if(pads[t].canvas) return;
             var c = document.getElementById('pad-'+t.toLowerCase()), cx = c.getContext('2d');
@@ -4342,7 +4381,7 @@
             var getPos = function(e) { var r = c.getBoundingClientRect(), cxClient = e.clientX || (e.touches && e.touches[0].clientX), cyClient = e.clientY || (e.touches && e.touches[0].clientY); return { x: (cxClient - r.left) * (c.width / r.width), y: (cyClient - r.top) * (c.height / r.height) }; };
             var start = function(e) { e.preventDefault(); pads[t].isDrawing = pads[t].hasSig = true; pads[t].ph.style.display = 'none'; cx.beginPath(); var p = getPos(e); cx.moveTo(p.x, p.y); };
             var draw = function(e) { if(!pads[t].isDrawing) return; e.preventDefault(); var p = getPos(e); cx.lineTo(p.x, p.y); cx.stroke(); };
-            var stop = function() { if(!pads[t].isDrawing) return; pads[t].isDrawing = false; pads[t].input.value = c.toDataURL(); };
+            var stop = function() { if(!pads[t].isDrawing) return; pads[t].isDrawing = false; pads[t].input.value = getCompressedSignature(c, 480, 180); };
             c.addEventListener('mousedown', start); c.addEventListener('mousemove', draw); c.addEventListener('mouseup', stop); c.addEventListener('mouseout', stop);
             c.addEventListener('touchstart', start, {passive:false}); c.addEventListener('touchmove', draw, {passive:false}); c.addEventListener('touchend', stop);
             // 點一下開啟全螢幕簽名
@@ -4394,7 +4433,7 @@
         }
         function confirmSigFS() {
             if(!_sigFSPad.hasSig) { alert('請先完成簽名！'); return; }
-            var data = _sigFSPad.canvas.toDataURL();
+            var data = getCompressedSignature(_sigFSPad.canvas, 480, 180);
             document.getElementById('sig-fullscreen-modal').classList.add('hidden');
             if(_sigFSCallback) _sigFSCallback(data);
             _sigFSCallback = null;
@@ -5167,6 +5206,9 @@ function showWalkInQR(evtId) {
             }
 
             if (!pads.A.hasSig) return SysModal.alert('請在最下方【簽名處】完成簽名！');
+            if (!pads.A.input.value && pads.A.canvas) {
+                pads.A.input.value = getCompressedSignature(pads.A.canvas, 480, 180);
+            }
 
             var appearanceNodes = document.querySelectorAll('input[name="appearance"]:checked');
             var appearanceArr = [];
