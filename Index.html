@@ -642,14 +642,22 @@
         <!-- 雙欄排版區：左側 5 個功能按鈕，右側宣導海報（完全對齊、無白邊、清晰可見全貌） -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 mb-6 items-stretch">
             
-            <!-- 左欄：5 個功能按鈕區塊 -->
-            <!-- 左欄：系統快捷功能 (1 大卡 + 2 小卡 + 3 輔助按鈕) -->
-            <div class="md:col-span-5 flex flex-col justify-between bg-white/60 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-2xl border border-white/80 shadow-lg h-full space-y-3 sm:space-y-4 md:space-y-5">
-                <div class="gov-eyebrow text-xs sm:text-sm md:text-base font-bold text-gray-500">⚡ 系統快捷功能</div>
+            <!-- 左欄：系統快捷功能 (還原 264 版市民線上服務專區 + 現場作業專區) -->
+            <div class="md:col-span-5 flex flex-col justify-between bg-white/60 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-2xl border border-white/80 shadow-lg h-full space-y-3 sm:space-y-4 md:space-y-4">
                 
-                <!-- 1. 第一排：民眾預約登記 大卡片 (100% 寬度、最醒目、桌面版高度充實飽滿) -->
+                <!-- 標題與市民線上服務專區標籤 -->
+                <div class="flex items-center justify-between">
+                    <div class="gov-eyebrow text-xs sm:text-sm md:text-base font-bold text-gray-700 bg-white/80 px-3 py-1 rounded-full border border-gray-200 shadow-sm flex items-center gap-1.5">
+                        <span class="text-amber-500 font-bold">⚡</span> 系統快捷功能
+                    </div>
+                    <span class="text-xs sm:text-sm font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 shadow-sm">
+                        市民線上服務專區
+                    </span>
+                </div>
+                
+                <!-- 1. 第一排：民眾預約登記 大卡片 (100% 寬度、最醒目) -->
                 <button type="button" id="btn-home-booking" onclick="scrollToLocationFilter()"
-                        class="w-full text-left p-5 sm:p-6 md:p-7 rounded-2xl text-white shadow-xl transition transform active:scale-98 flex flex-col justify-center relative overflow-hidden group cursor-pointer md:min-h-[140px]"
+                        class="w-full text-left p-5 sm:p-6 md:p-6 rounded-2xl text-white shadow-xl transition transform active:scale-98 flex flex-col justify-center relative overflow-hidden group cursor-pointer min-h-[130px] md:min-h-[140px]"
                         style="background: linear-gradient(135deg, #15803d 0%, #166534 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                     <div class="absolute -right-4 -bottom-4 opacity-10 text-7xl md:text-8xl select-none group-hover:scale-110 transition duration-300">📝</div>
                     <div class="flex items-center gap-3.5 mb-2">
@@ -664,53 +672,84 @@
                     </p>
                 </button>
 
-                <!-- 2. 第二排：功能小卡片 (現場維修、待領/結案、參加須知) -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3 md:gap-3.5">
-                    <button type="button" id="btn-home-volunteer" onclick="promptWorkerPin('repair')"
-                            class="w-full text-left p-3 sm:p-3.5 md:p-4 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-2 md:gap-3 cursor-pointer min-h-[56px] md:min-h-[74px]"
-                            style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                        <span class="text-2xl sm:text-3xl md:text-3xl flex-shrink-0">🔧</span>
+                <!-- 2. 第二排：查詢進度、維修據點 (兩張中卡片) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                    <a id="home-link-status" href="<?= webAppUrl ?>?source=line&amp;view=status" target="_top"
+                       class="w-full text-left p-3.5 sm:p-4 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-3 cursor-pointer min-h-[64px]"
+                       style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                        <span class="text-3xl sm:text-4xl flex-shrink-0">📋</span>
                         <div class="min-w-0">
-                            <div class="text-sm sm:text-base md:text-base font-black leading-snug truncate">現場維修</div>
-                            <div class="text-[11px] sm:text-xs text-sky-100 font-medium truncate">志工作業區</div>
+                            <div class="text-base sm:text-lg font-black leading-snug truncate">查詢進度</div>
+                            <div class="text-xs text-sky-100 font-medium truncate">維修案件查詢</div>
                         </div>
-                    </button>
+                    </a>
 
-                    <button type="button" id="btn-home-checkout" onclick="promptWorkerPin('checkout')"
-                            class="w-full text-left p-3 sm:p-3.5 md:p-4 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-2 md:gap-3 cursor-pointer min-h-[56px] md:min-h-[74px]"
-                            style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                        <span class="text-2xl sm:text-3xl md:text-3xl flex-shrink-0">📦</span>
+                    <a id="home-link-locations" href="<?= webAppUrl ?>?source=line&amp;view=locations" target="_top"
+                       class="w-full text-left p-3.5 sm:p-4 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-3 cursor-pointer min-h-[64px]"
+                       style="background: linear-gradient(135deg, #059669 0%, #047857 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                        <span class="text-3xl sm:text-4xl flex-shrink-0">📍</span>
                         <div class="min-w-0">
-                            <div class="text-sm sm:text-base md:text-base font-black leading-snug truncate">待領/結案</div>
-                            <div class="text-[11px] sm:text-xs text-amber-100 font-medium truncate">領件專區</div>
+                            <div class="text-base sm:text-lg font-black leading-snug truncate">維修據點</div>
+                            <div class="text-xs text-emerald-100 font-medium truncate">各站點與交通</div>
                         </div>
-                    </button>
+                    </a>
+                </div>
 
+                <!-- 3. 第三排：參加須知、服務須知、常見問題、志工招募 (四張小輔助卡片) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
                     <button type="button" id="btn-home-notice" onclick="openBookingNoticeModal(null)"
-                            class="col-span-2 sm:col-span-1 w-full text-left p-3 sm:p-3.5 md:p-4 rounded-xl text-white shadow-md transition transform active:scale-98 flex items-center gap-2 md:gap-3 cursor-pointer min-h-[56px] md:min-h-[74px]"
-                            style="background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                        <span class="text-2xl sm:text-3xl md:text-3xl flex-shrink-0">📌</span>
-                        <div class="min-w-0">
-                            <div class="text-sm sm:text-base md:text-base font-black leading-snug truncate">參加須知</div>
-                            <div class="text-[11px] sm:text-xs text-rose-100 font-medium truncate">規範與注意事項</div>
-                        </div>
+                            class="gov-btn-outline w-full py-2.5 px-2 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[44px]">
+                        <span class="text-base">📌</span> 參加須知
                     </button>
+                    <a id="home-link-guide" href="<?= webAppUrl ?>?source=line&amp;view=guide" target="_top"
+                       class="gov-btn-outline w-full py-2.5 px-2 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[44px]">
+                        <span class="text-base">📖</span> 服務須知
+                    </a>
+                    <a id="home-link-faq" href="<?= webAppUrl ?>?source=line&amp;view=faq" target="_top"
+                       class="gov-btn-outline w-full py-2.5 px-2 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[44px]">
+                        <span class="text-base">❓</span> 常見問題
+                    </a>
+                    <a id="home-link-volunteer" href="https://forms.gle/WzpEmCJXttoLPD7r7" target="_blank" rel="noopener noreferrer"
+                       class="gov-btn-outline w-full py-2.5 px-2 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[44px]">
+                        <span class="text-base">🤝</span> 志工招募
+                    </a>
                 </div>
-                
-                <div class="gov-divider my-1 md:my-2"></div>
-                
-                <!-- 3. 系統後台與輔助功能按鈕 (桌面版高度 48~52px，按鈕易按大器) -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-3">
-                    <button type="button" onclick="promptAdmin()" class="gov-btn-outline w-full py-2 md:py-3 text-xs sm:text-sm md:text-base font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 md:gap-2 rounded-xl border border-gray-300 min-h-[44px] md:min-h-[50px]">
-                        <span class="text-sm md:text-lg">⚙️</span> 系統後台
-                    </button>
-                    <button type="button" onclick="promptModeC()" class="gov-btn-outline w-full py-2 md:py-3 text-xs sm:text-sm md:text-base font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 md:gap-2 rounded-xl border border-gray-300 min-h-[44px] md:min-h-[50px]">
-                        <span class="text-sm md:text-lg">📋</span> 區隊申請
-                    </button>
-                    <button type="button" onclick="window.location.hash='#tv-landscape';applyDisplayMode();" class="gov-btn-outline w-full py-2 md:py-3 text-xs sm:text-sm md:text-base font-bold opacity-90 hover:opacity-100 hidden sm:flex items-center justify-center gap-1.5 md:gap-2 rounded-xl border border-gray-300 col-span-2 sm:col-span-1 min-h-[44px] md:min-h-[50px]">
-                        <span class="text-sm md:text-lg">📺</span> 電視牆
-                    </button>
+
+                <!-- 分隔線與工作人員專區標籤 -->
+                <div class="pt-2 border-t border-gray-200/80">
+                    <div class="text-[11px] sm:text-xs font-bold text-gray-500 mb-2 flex items-center gap-1">
+                        <span>💼</span> 現場作業與管理專區（需授權）
+                    </div>
+
+                    <!-- 4. 工作人員四大功能按鈕 (現場維修、待領結案、系統後台、區隊申請) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button type="button" id="btn-home-volunteer" onclick="promptWorkerPin('repair')"
+                                class="gov-btn-outline w-full py-2 px-1 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[42px]">
+                            <span>🔧</span> 現場維修
+                        </button>
+                        <button type="button" id="btn-home-checkout" onclick="promptWorkerPin('checkout')"
+                                class="gov-btn-outline w-full py-2 px-1 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[42px]">
+                            <span>📦</span> 待領結案
+                        </button>
+                        <button type="button" onclick="promptAdmin()"
+                                class="gov-btn-outline w-full py-2 px-1 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[42px]">
+                            <span>⚙️</span> 系統後台
+                        </button>
+                        <button type="button" onclick="promptModeC()"
+                                class="gov-btn-outline w-full py-2 px-1 text-xs sm:text-sm font-bold opacity-90 hover:opacity-100 flex items-center justify-center gap-1.5 rounded-xl border border-gray-300 bg-white/90 shadow-sm min-h-[42px]">
+                            <span>📋</span> 區隊申請
+                        </button>
+                    </div>
+
+                    <!-- 右下角切換電視牆顯示模式 -->
+                    <div class="flex justify-end mt-2">
+                        <button type="button" onclick="window.location.hash='#tv-landscape';applyDisplayMode();"
+                                class="text-xs text-gray-500 hover:text-gray-800 font-medium inline-flex items-center gap-1 p-1 hover:underline">
+                            <span>📺</span> 切換電視牆顯示模式
+                        </button>
+                    </div>
                 </div>
+
             </div>
 
             <!-- 右欄：宣導海報區塊 (iOS Safari 高度防塌陷相容最佳化) -->
@@ -6571,7 +6610,7 @@ function showWalkInQR(evtId) {
 
         // --- 系統後台 ---
         function switchAdminTab(tab) {
-            ['events', 'c', 'survey', 'block'].forEach(function(t) {
+            ['events', 'bookings', 'c', 'survey', 'block'].forEach(function(t) {
                 var panel = document.getElementById('admin-tab-panel-' + t);
                 var btn = document.getElementById('admin-tab-btn-' + t);
                 if (panel) panel.classList.toggle('hidden', t !== tab);
@@ -6582,6 +6621,7 @@ function showWalkInQR(evtId) {
                     btn.classList.toggle('text-gray-400', t !== tab);
                 }
             });
+            if (tab === 'bookings') { loadAdminBookingsUI(); }
             if (tab === 'c') { loadCModeConfigUI(); renderAdminCQueue('admin-tab-c-tbody'); }
             if (tab === 'survey') { loadSurveyResults(); }
             if (tab === 'block') { renderBlocklistTable(); detectSuspicious(); }
