@@ -862,6 +862,7 @@
         <!-- 分頁標籤 -->
         <div class="flex border-b border-gray-200 mb-6 flex-wrap gap-y-1">
             <button id="admin-tab-btn-events" type="button" onclick="switchAdminTab('events')" class="px-6 py-2 font-bold text-sm border-b-2 border-gray-800 text-gray-800 -mb-px transition">⚙️ 活動場次管理</button>
+            <button id="admin-tab-btn-bookings" type="button" onclick="switchAdminTab('bookings')" class="px-6 py-2 font-bold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 -mb-px transition">📝 民眾預約案件</button>
             <button id="admin-tab-btn-c" type="button" onclick="switchAdminTab('c')" class="px-6 py-2 font-bold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 -mb-px transition">🏢 區隊通報後台</button>
             <button id="admin-tab-btn-survey" type="button" onclick="switchAdminTab('survey')" class="px-6 py-2 font-bold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 -mb-px transition">📋 問卷結果</button>
             <button id="admin-tab-btn-block" type="button" onclick="switchAdminTab('block')" class="px-6 py-2 font-bold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-600 -mb-px transition">🚫 封鎖名單</button>
@@ -1047,6 +1048,69 @@
             </div>
             <div class="mt-3 text-xs text-gray-400">
                 Q1–Q9 評分：1＝非常不同意　2＝不同意　3＝普通　4＝同意　5＝非常同意
+            </div>
+        </div>
+
+        <!-- 分頁五：民眾預約案件管理 -->
+        <div id="admin-tab-panel-bookings" class="hidden">
+            <!-- 篩選列：地點與場次下拉選單、搜尋框與重新整理 -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                    <!-- 地點選擇 -->
+                    <div class="flex items-center gap-2">
+                        <label for="admin-bookings-venue-filter" class="text-xs sm:text-sm font-bold text-gray-700 whitespace-nowrap">📍 地點：</label>
+                        <select id="admin-bookings-venue-filter" onchange="onAdminBookingsVenueChange()" class="border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm font-bold text-gray-800 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">全部地點</option>
+                            <option value="A">🏢 南鳳山維修站</option>
+                            <option value="D">🏭 楠梓維修站</option>
+                            <option value="B">🚚 非定點活動</option>
+                            <option value="C">🏢 區隊雲端通報</option>
+                        </select>
+                    </div>
+
+                    <!-- 場次選擇 -->
+                    <div class="flex items-center gap-2">
+                        <label for="admin-bookings-event-filter" class="text-xs sm:text-sm font-bold text-gray-700 whitespace-nowrap">📅 場次：</label>
+                        <select id="admin-bookings-event-filter" onchange="filterAdminBookings()" class="border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm font-bold text-blue-900 bg-blue-50/70 focus:outline-none focus:ring-2 focus:ring-blue-400 max-w-[220px] sm:max-w-xs">
+                            <option value="">全部場次</option>
+                        </select>
+                    </div>
+
+                    <!-- 關鍵字搜尋 -->
+                    <div class="flex items-center gap-2 flex-1 md:flex-none">
+                        <input type="text" id="admin-bookings-search-input" oninput="filterAdminBookings()" placeholder="🔍 搜尋姓名、電話、單號、物品、身分證..." class="border border-gray-300 rounded-lg px-3 py-2 text-xs sm:text-sm w-full md:w-60 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 self-end md:self-auto flex-shrink-0">
+                    <span id="admin-bookings-count" class="text-xs font-bold text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full">共 0 筆</span>
+                    <button type="button" onclick="refreshAdminBookings()" class="gov-btn-primary px-3.5 py-2 rounded-lg font-bold text-xs sm:text-sm shadow-sm flex items-center gap-1">🔄 重新整理</button>
+                </div>
+            </div>
+
+            <!-- 案件清單表格 -->
+            <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-gray-100 text-gray-700 font-bold text-xs uppercase border-b border-gray-200">
+                        <tr>
+                            <th class="py-3 px-3 w-12 text-center">次序</th>
+                            <th class="py-3 px-3 w-28 whitespace-nowrap">案件單號</th>
+                            <th class="py-3 px-3 min-w-[130px]">場次日期 / 地點</th>
+                            <th class="py-3 px-3 min-w-[100px]">民眾姓名</th>
+                            <th class="py-3 px-3 min-w-[110px]">聯絡電話</th>
+                            <th class="py-3 px-3 min-w-[150px]">類別 / 物品名稱</th>
+                            <th class="py-3 px-3 min-w-[90px] text-center">報到狀態</th>
+                            <th class="py-3 px-3 min-w-[90px] text-center">處理狀態</th>
+                            <th class="py-3 px-3 min-w-[140px] text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-bookings-tbody" class="divide-y divide-gray-100">
+                        <tr><td colspan="9" class="text-center py-8 text-gray-400">點擊切換至此分頁後自動載入</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-3 text-xs text-gray-400 flex items-center justify-between">
+                <span>💡 提示：點擊「✏️ 編輯」可直接修改民眾登記資料或狀態；點擊「🗑️ 刪除」可自 Google Sheet 永久刪除該案件。</span>
             </div>
         </div>
     </div>
@@ -2335,7 +2399,7 @@
 
         // --- 系統後台 ---
         function switchAdminTab(tab) {
-            ['events', 'c', 'survey', 'block'].forEach(function(t) {
+            ['events', 'bookings', 'c', 'survey', 'block'].forEach(function(t) {
                 var panel = document.getElementById('admin-tab-panel-' + t);
                 var btn = document.getElementById('admin-tab-btn-' + t);
                 if (panel) panel.classList.toggle('hidden', t !== tab);
@@ -2346,6 +2410,7 @@
                     btn.classList.toggle('text-gray-400', t !== tab);
                 }
             });
+            if (tab === 'bookings') { loadAdminBookingsUI(); }
             if (tab === 'c') { loadCModeConfigUI(); renderAdminCQueue('admin-tab-c-tbody'); }
             if (tab === 'survey') { loadSurveyResults(); }
             if (tab === 'block') { renderBlocklistTable(); detectSuspicious(); }
@@ -2664,6 +2729,279 @@
                 win.close();
                 SysModal.alert('資料載入失敗：' + (e && e.message ? e.message : ''));
             }).getSurveyData();
+        }
+
+        // ── 後台：民眾預約案件管理 ──
+        window._adminEditingRecordId = null;
+
+        function onAdminBookingsVenueChange() {
+            var venue = (document.getElementById('admin-bookings-venue-filter') || {}).value || '';
+            var eventSel = document.getElementById('admin-bookings-event-filter');
+            if (!eventSel) return;
+
+            var allEvents = sys.getEvents() || [];
+            var filtered = allEvents;
+            if (venue) {
+                filtered = allEvents.filter(function(e) {
+                    if (venue === 'A') return e.mode === 'A';
+                    if (venue === 'D') return e.mode === 'D';
+                    if (venue === 'B') return e.mode === 'B' || (e.mode !== 'A' && e.mode !== 'D' && e.mode !== 'C');
+                    if (venue === 'C') return e.mode === 'C';
+                    return true;
+                });
+            }
+
+            var html = '<option value="">全部場次</option>';
+            if (venue === 'C') {
+                html += '<option value="MODE_C_QUEUE">🏢 區隊雲端通報清單</option>';
+            } else {
+                filtered.forEach(function(ev) {
+                    var dateLabel = ev.isPermanent ? '常態模式' : (ev.date || '');
+                    var timeLabel = ev.isPermanent ? '' : (' (' + (ev.start || '') + '~' + (ev.end || '') + ')');
+                    html += '<option value="' + ev.id + '">' + dateLabel + ' ' + (ev.name || ev.loc || '') + timeLabel + '</option>';
+                });
+            }
+            eventSel.innerHTML = html;
+            filterAdminBookings();
+        }
+
+        function loadAdminBookingsUI() {
+            onAdminBookingsVenueChange();
+        }
+
+        function refreshAdminBookings() {
+            showLoading('同步最新預約案件中...');
+            syncData(function() {
+                hideLoading();
+                loadAdminBookingsUI();
+                SysModal.alert('✅ 已重新整理並取得最新預約案件！');
+            });
+        }
+
+        function filterAdminBookings() {
+            var venueFilter = (document.getElementById('admin-bookings-venue-filter') || {}).value || '';
+            var eventFilter = (document.getElementById('admin-bookings-event-filter') || {}).value || '';
+            var searchInput = document.getElementById('admin-bookings-search-input');
+            var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+            var allRecords = sys.getRecords() || [];
+            var allEvents = sys.getEvents() || [];
+            var eventMap = {};
+            allEvents.forEach(function(ev) { eventMap[ev.id] = ev; });
+
+            var filtered = allRecords.filter(function(r) {
+                // 地點過濾
+                if (venueFilter) {
+                    if (venueFilter === 'C') {
+                        if (r.eventId !== 'MODE_C_QUEUE' && r.activityType !== '區隊通報') return false;
+                    } else {
+                        var ev = eventMap[r.eventId];
+                        if (ev) {
+                            if (venueFilter === 'A' && ev.mode !== 'A') return false;
+                            if (venueFilter === 'D' && ev.mode !== 'D') return false;
+                            if (venueFilter === 'B' && ev.mode !== 'B' && ev.mode === 'A') return false;
+                        } else {
+                            if (r.mode && r.mode !== venueFilter) return false;
+                        }
+                    }
+                }
+                // 場次過濾
+                if (eventFilter && r.eventId !== eventFilter) return false;
+                // 關鍵字搜尋（單號、姓名、電話、身分證、物品名稱、類別、問題）
+                if (query) {
+                    var matchSerial = (r.serialNum || '').toLowerCase().indexOf(query) !== -1;
+                    var matchName = (r.customerName || '').toLowerCase().indexOf(query) !== -1;
+                    var matchPhone = (r.phone || '').toLowerCase().indexOf(query) !== -1;
+                    var matchIdNum = (r.idNumber || '').toLowerCase().indexOf(query) !== -1;
+                    var matchItem = ((r.category || '') + ' ' + (r.brandModel || '')).toLowerCase().indexOf(query) !== -1;
+                    var matchProblem = (r.problem || '').toLowerCase().indexOf(query) !== -1;
+                    if (!matchSerial && !matchName && !matchPhone && !matchIdNum && !matchItem && !matchProblem) return false;
+                }
+                return true;
+            });
+
+            renderAdminBookingsTable(filtered);
+        }
+
+        function renderAdminBookingsTable(records) {
+            var tbody = document.getElementById('admin-bookings-tbody');
+            var countEl = document.getElementById('admin-bookings-count');
+            if (countEl) countEl.innerText = '共 ' + records.length + ' 筆';
+            if (!tbody) return;
+
+            if (records.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center py-8 text-gray-400">目前無符合條件的預約案件</td></tr>';
+                return;
+            }
+
+            var html = '';
+            records.forEach(function(r, idx) {
+                var checkedInBadge = r.checkedIn
+                    ? '<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-green-100 text-green-800">已報到 (#' + (r.checkinNumber || 0) + ')</span>'
+                    : '<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-gray-100 text-gray-500">未報到</span>';
+
+                var statusColor = 'bg-blue-100 text-blue-800';
+                if (r.status === '待審核') statusColor = 'bg-yellow-100 text-yellow-800';
+                if (r.status === '已結案') statusColor = 'bg-emerald-100 text-emerald-800';
+                if (r.status === '已退回' || r.status === '已退件') statusColor = 'bg-red-100 text-red-800';
+                if (r.status === '待取件') statusColor = 'bg-purple-100 text-purple-800';
+                var statusBadge = '<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold ' + statusColor + '">' + (r.status || '待處理') + '</span>';
+
+                var eventLabel = (r.eventDate || '') + '<br><span class="text-xs text-gray-500 truncate block max-w-[150px]">' + (r.eventLoc || '') + '</span>';
+                var itemLabel = '<span class="font-bold text-gray-800">' + (r.brandModel || '未填寫') + '</span><br><span class="text-xs text-gray-500">[' + (r.category || '一般') + ']</span>';
+
+                html += '<tr class="border-b hover:bg-blue-50/50 transition">' +
+                    '<td class="py-3 px-3 text-center text-xs text-gray-500 font-mono">' + (idx + 1) + '</td>' +
+                    '<td class="py-3 px-3 font-mono font-bold text-blue-700 text-xs whitespace-nowrap">' + (r.serialNum || '-') + '</td>' +
+                    '<td class="py-3 px-3 text-xs">' + eventLabel + '</td>' +
+                    '<td class="py-3 px-3 text-sm font-bold text-gray-900">' + (r.customerName || '-') + '</td>' +
+                    '<td class="py-3 px-3 text-xs font-mono text-gray-700">' + (r.phone || '-') + '</td>' +
+                    '<td class="py-3 px-3 text-sm">' + itemLabel + '</td>' +
+                    '<td class="py-3 px-3 text-center">' + checkedInBadge + '</td>' +
+                    '<td class="py-3 px-3 text-center">' + statusBadge + '</td>' +
+                    '<td class="py-3 px-3 text-center whitespace-nowrap">' +
+                        '<div class="inline-flex items-center gap-1.5">' +
+                            '<button type="button" onclick="openAdminEditRecordModal(\'' + r.id + '\')" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg text-xs transition shadow-sm">✏️ 編輯</button>' +
+                            '<button type="button" onclick="adminDeleteRecord(\'' + r.id + '\', \'' + (r.serialNum || '') + '\')" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-xs transition shadow-sm">🗑️ 刪除</button>' +
+                        '</div>' +
+                    '</td>' +
+                '</tr>';
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function openAdminEditRecordModal(recordId) {
+            var records = sys.getRecords() || [];
+            var r = records.find(function(x) { return x.id === recordId; });
+            if (!r) return SysModal.alert('找不到此案件資料');
+
+            window._adminEditingRecordId = recordId;
+            document.getElementById('aer-serialNum').innerText = r.serialNum || '-';
+            document.getElementById('aer-eventDate').innerText = (r.eventDate || '') + ' ' + (r.eventLoc || '');
+            document.getElementById('aer-customerName').value = r.customerName || '';
+            document.getElementById('aer-phone').value = r.phone || '';
+            document.getElementById('aer-idNumber').value = r.idNumber || '';
+            document.getElementById('aer-email').value = r.email || '';
+            document.getElementById('aer-category').value = r.category || '小家電';
+            document.getElementById('aer-brandModel').value = r.brandModel || '';
+            document.getElementById('aer-accessories').value = r.accessories || '';
+            document.getElementById('aer-problem').value = r.problem || '';
+            document.getElementById('aer-status').value = r.status || '待審核';
+
+            var modal = document.getElementById('admin-edit-record-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeAdminEditRecordModal() {
+            var modal = document.getElementById('admin-edit-record-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+            }
+            window._adminEditingRecordId = null;
+        }
+
+        function saveAdminEditRecord() {
+            var id = window._adminEditingRecordId;
+            if (!id) return;
+            var customerName = (document.getElementById('aer-customerName').value || '').trim();
+            var phone = (document.getElementById('aer-phone').value || '').trim();
+            var idNumber = (document.getElementById('aer-idNumber').value || '').trim().toUpperCase();
+            var email = (document.getElementById('aer-email').value || '').trim();
+            var category = document.getElementById('aer-category').value;
+            var brandModel = (document.getElementById('aer-brandModel').value || '').trim();
+            var accessories = (document.getElementById('aer-accessories').value || '').trim();
+            var problem = (document.getElementById('aer-problem').value || '').trim();
+            var status = document.getElementById('aer-status').value;
+
+            if (!customerName) return SysModal.alert('請填寫民眾姓名！');
+            if (!phone) return SysModal.alert('請填寫聯絡電話！');
+            if (!brandModel) return SysModal.alert('請填寫物品名稱！');
+            if (isUnsupportedBrand(brandModel)) {
+                return showUnsupportedBrandModal();
+            }
+
+            var updateData = {
+                id: id,
+                customerName: customerName,
+                phone: phone,
+                idNumber: idNumber,
+                email: email,
+                category: category,
+                brandModel: brandModel,
+                accessories: accessories,
+                problem: problem,
+                status: status
+            };
+
+            showLoading('正在儲存修改至 Google Sheet...');
+            if (typeof google !== 'undefined' && google.script && google.script.run) {
+                google.script.run
+                    .withSuccessHandler(function() {
+                        hideLoading();
+                        closeAdminEditRecordModal();
+                        // 同步更新本機 records 快取
+                        var records = sys.getRecords() || [];
+                        var r = records.find(function(x) { return x.id === id; });
+                        if (r) {
+                            r.customerName = customerName;
+                            r.phone = phone;
+                            r.idNumber = idNumber;
+                            r.email = email;
+                            r.category = category;
+                            r.brandModel = brandModel;
+                            r.accessories = accessories;
+                            r.problem = problem;
+                            r.status = status;
+                        }
+                        filterAdminBookings();
+                        SysModal.alert('✅ 預約案件資料已成功更新！');
+                    })
+                    .withFailureHandler(function(err) {
+                        hideLoading();
+                        SysModal.alert('❌ 儲存失敗：' + (err && err.message ? err.message : err));
+                    })
+                    .updateRecordInSheet(updateData);
+            } else {
+                hideLoading();
+                closeAdminEditRecordModal();
+                SysModal.alert('⚠️ 測試模式：已在本地修改案件資料。');
+            }
+        }
+
+        function adminDeleteRecord(recordId, serialNum) {
+            SysModal.confirm('確定要刪除預約案件「' + (serialNum || recordId) + '」嗎？<br><br><span class="text-red-600 font-bold">⚠️ 此操作將永久自 Google 試算表中刪除該列紀錄，無法復原！</span>', function(ok) {
+                if (!ok) return;
+                showLoading('正在自 Google Sheet 刪除案件...');
+                if (typeof google !== 'undefined' && google.script && google.script.run) {
+                    google.script.run
+                        .withSuccessHandler(function(res) {
+                            hideLoading();
+                            // 從記憶體中移除
+                            var records = sys.getRecords() || [];
+                            var remaining = records.filter(function(x) { return x.id !== recordId; });
+                            sys.setRecords(remaining);
+                            filterAdminBookings();
+                            SysModal.alert('✅ ' + (res && res.message ? res.message : '預約案件已成功刪除！'));
+                        })
+                        .withFailureHandler(function(err) {
+                            hideLoading();
+                            SysModal.alert('❌ 刪除失敗：' + (err && err.message ? err.message : err));
+                        })
+                        .deleteRecordFromSheet(recordId);
+                } else {
+                    hideLoading();
+                    var records = sys.getRecords() || [];
+                    var remaining = records.filter(function(x) { return x.id !== recordId; });
+                    sys.setRecords(remaining);
+                    filterAdminBookings();
+                    SysModal.alert('⚠️ 測試模式：已在本地刪除案件。');
+                }
+            });
         }
 
         // --- 測試模式 ---
@@ -7074,6 +7412,87 @@ window.addEventListener('resize', function() {
             <div class="grid grid-cols-2 gap-3 pt-2">
                 <button type="button" onclick="closeWorkerPinModal()" class="py-2.5 px-4 rounded-xl font-bold text-gray-700 bg-gray-200 hover:bg-gray-300 transition">取消</button>
                 <button type="button" onclick="submitWorkerPin()" class="py-2.5 px-4 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition shadow">進入工作模式</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 民眾預約案件編輯 Modal (後台專用) -->
+    <div id="admin-edit-record-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[10001] flex justify-center items-center p-3 sm:p-4" style="display:none;">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col max-h-[92vh] animate-fadeIn">
+            <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center flex-shrink-0">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">✏️</span>
+                    <h3 class="text-lg font-bold text-gray-900">編輯預約案件資料</h3>
+                </div>
+                <button type="button" onclick="closeAdminEditRecordModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-light leading-none p-1">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 flex-1 text-left">
+                <div class="bg-blue-50/80 border border-blue-200 rounded-xl p-3.5 flex flex-wrap justify-between items-center text-sm gap-2">
+                    <div>
+                        <span class="text-gray-500 font-bold">案件單號：</span>
+                        <span id="aer-serialNum" class="font-mono font-black text-blue-800 text-base"></span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 font-bold">場次日期：</span>
+                        <span id="aer-eventDate" class="font-bold text-gray-800"></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">民眾姓名 <span class="text-red-500">*</span></label>
+                        <input type="text" id="aer-customerName" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">聯絡電話 <span class="text-red-500">*</span></label>
+                        <input type="tel" id="aer-phone" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">身分證字號</label>
+                        <input type="text" id="aer-idNumber" maxlength="10" class="w-full border border-gray-300 rounded-lg p-2 text-sm uppercase focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="例：A123456789">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">電子信箱</label>
+                        <input type="email" id="aer-email" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="通知信接收用">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">物品類別 <span class="text-red-500">*</span></label>
+                        <select id="aer-category" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <option value="小家電">小家電</option>
+                            <option value="玩具">玩具</option>
+                            <option value="木工維修">木工簡易維修</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">物品名稱 (廠牌/品名) <span class="text-red-500">*</span></label>
+                        <input type="text" id="aer-brandModel" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="例：國際牌吹風機">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold text-gray-700 mb-1">機號 / 配件 / 數量</label>
+                        <input type="text" id="aer-accessories" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold text-gray-700 mb-1">故障描述</label>
+                        <textarea id="aer-problem" rows="3" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="請填寫故障原因或描述"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">案件狀態</label>
+                        <select id="aer-status" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <option value="待審核">待審核</option>
+                            <option value="待檢修">待檢修</option>
+                            <option value="待現場判定">待現場判定</option>
+                            <option value="檢修中">檢修中</option>
+                            <option value="待取件">待取件</option>
+                            <option value="已結案">已結案</option>
+                            <option value="已退回">已退回</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end gap-3 flex-shrink-0">
+                <button type="button" onclick="closeAdminEditRecordModal()" class="px-5 py-2 rounded-xl font-bold text-gray-600 bg-white border border-gray-300 hover:bg-gray-100 transition text-sm">取消</button>
+                <button type="button" onclick="saveAdminEditRecord()" class="gov-btn-primary px-6 py-2 rounded-xl font-bold text-sm shadow-md">💾 儲存修改</button>
             </div>
         </div>
     </div>

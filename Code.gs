@@ -758,10 +758,17 @@ function updateRecordInSheet(updateData) {
         var row = i + 1;
         if (updateData.eventDate    !== undefined) sheet.getRange(row, 4).setValue(s(updateData.eventDate));
         if (updateData.eventTime    !== undefined) sheet.getRange(row, 5).setValue(s(updateData.eventTime));
+        if (updateData.customerName !== undefined) sheet.getRange(row, 7).setValue(s(updateData.customerName));
+        if (updateData.phone        !== undefined) sheet.getRange(row, 8).setValue(s(updateData.phone));
+        if (updateData.email        !== undefined) sheet.getRange(row, 9).setValue(s(updateData.email));
+        if (updateData.category     !== undefined) sheet.getRange(row, 10).setValue(s(updateData.category));
         if (updateData.brandModel   !== undefined) {
           if (isUnsupportedBrand_(updateData.brandModel)) throw new Error('UNSUPPORTED_BRAND:此品牌目前無法提供維修服務（小米／米家／Dyson）');
           sheet.getRange(row, 11).setValue(s(updateData.brandModel));
         }
+        if (updateData.accessories  !== undefined) sheet.getRange(row, 12).setValue(s(updateData.accessories));
+        if (updateData.appearanceNote !== undefined) sheet.getRange(row, 14).setValue(s(updateData.appearanceNote));
+        if (updateData.problem      !== undefined) sheet.getRange(row, 15).setValue(s(updateData.problem));
         if (updateData.repairResult !== undefined) sheet.getRange(row, 18).setValue(s(updateData.repairResult));
         if (updateData.satisfaction !== undefined) sheet.getRange(row, 19).setValue(s(updateData.satisfaction));
         if (updateData.repairDetails!== undefined) sheet.getRange(row, 20).setValue(s(updateData.repairDetails));
@@ -788,6 +795,7 @@ function updateRecordInSheet(updateData) {
           sheet.getRange(row, 41).setValue(updateData.checkedIn ? 'true' : 'false');
         }
         if (updateData.customerSigned  !== undefined) sheet.getRange(row, 42).setValue(updateData.customerSigned ? 'true' : 'false');
+        if (updateData.idNumber        !== undefined) sheet.getRange(row, 43).setValue(s(updateData.idNumber));
         // 已結案時自動寫入填報頂表
         if (updateData.status === '已結案') {
           var exportResult = appendSingleClosedCaseToResultSheet(updateData, data[i]);
@@ -800,6 +808,33 @@ function updateRecordInSheet(updateData) {
     throw new Error('找不到指定維修紀錄');
   } catch(error) { throw new Error(error.toString()); }
   finally { lock.releaseLock(); }
+}
+
+function deleteRecordFromSheet(recordId) {
+  var lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(10000);
+    var sheets = setupSheets();
+    var sheet = sheets.recordSheet;
+    var data = sheet.getDataRange().getValues();
+    var targetIndex = -1;
+    var eventId = '';
+    for (var i = 1; i < data.length; i++) {
+      if ((recordId && s(data[i][33]) === s(recordId)) || (recordId && s(data[i][2]) === s(recordId))) {
+        targetIndex = i;
+        eventId = s(data[i][34]);
+        break;
+      }
+    }
+    if (targetIndex < 0) throw new Error('找不到欲刪除的維修紀錄');
+    sheet.deleteRow(targetIndex + 1);
+    if (eventId) refreshOnlineSnapshotBeforeStart_(eventId, sheets);
+    return { success: true, message: '預約案件已成功自試算表刪除' };
+  } catch(error) {
+    throw new Error(error.toString());
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function checkInRecord(recordId, serialNum) {
