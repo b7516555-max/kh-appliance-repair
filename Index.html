@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <base target="_top">
@@ -631,7 +631,7 @@
         <!-- 主標題橫幅 -->
         <div class="gov-header-bar rounded-2xl shadow-lg mb-6 px-5 py-7 md:py-9 text-center relative overflow-hidden">
             <div class="absolute inset-0 opacity-[0.06]" style="background-image:radial-gradient(circle at 20% 20%, #fff 0, transparent 45%), radial-gradient(circle at 85% 75%, #fff 0, transparent 40%);"></div>
-            <img src="https://docs.google.com/drawings/d/e/2PACX-1vT4X9PHctOR4vM6iIbqY6eGuhe9_MQkCZKlKgK04mwTYWl-Do2gwNUFtJeOy7k4DxuPoA74sIC_IvMo/pub?w=251&amp;h=250" alt="高雄市政府環境保護局 局徽" class="relative mx-auto mb-3 h-16 w-16 sm:h-20 sm:w-20 object-contain drop-shadow">
+            <img src="https://b7516555-max.github.io/kh-appliance-repair/assets/kaohsiung-epb-logo.png" alt="高雄市政府環境保護局 局徽" class="relative mx-auto mb-3 h-16 w-16 sm:h-20 sm:w-20 object-contain drop-shadow">
             <h1 class="relative text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 leading-snug tracking-wide">
                 <span class="block mb-1">高雄市政府環境保護局</span>
                 <span class="block">環境管理處</span>
@@ -679,7 +679,7 @@
                        style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                         <span class="text-3xl sm:text-4xl flex-shrink-0">📋</span>
                         <div class="min-w-0">
-                            <div class="text-base sm:text-lg font-black leading-snug truncate">查詢進度</div>
+                            <div class="text-base sm:text-lg font-black leading-snug truncate">查詢/更改進度</div>
                             <div class="text-xs text-sky-100 font-medium truncate">維修案件查詢</div>
                         </div>
                     </a>
@@ -754,9 +754,9 @@
 
             <!-- 右欄：宣導海報區塊 (iOS Safari 高度防塌陷相容最佳化) -->
             <div class="md:col-span-7 flex flex-col justify-center min-h-[280px] sm:min-h-[360px]">
-                <div class="relative w-full h-full min-h-[280px] sm:min-h-[360px] rounded-2xl overflow-hidden shadow-xl border-2 border-white/60 group cursor-pointer bg-slate-900/10 flex items-center justify-center" onclick="openPhotoModal('https://docs.google.com/drawings/d/e/2PACX-1vT7fk2CwZGIF40ZA7URHu9Wm1jRJfnOoNseU1N210MILASrX9pVrPUULKM6dwqZecVtXFmC1BTk8E5M/pub?w=1440&amp;h=1080')">
+                <div class="relative w-full h-full min-h-[280px] sm:min-h-[360px] rounded-2xl overflow-hidden shadow-xl border-2 border-white/60 group cursor-pointer bg-slate-900/10 flex items-center justify-center" onclick="openPhotoModal('https://b7516555-max.github.io/kh-appliance-repair/assets/appliance-repair-poster.png')">
                     <!-- 宣導海報圖片：完整展延，高度在 Safari 不塌陷 -->
-                    <img src="https://docs.google.com/drawings/d/e/2PACX-1vT7fk2CwZGIF40ZA7URHu9Wm1jRJfnOoNseU1N210MILASrX9pVrPUULKM6dwqZecVtXFmC1BTk8E5M/pub?w=1440&amp;h=1080" alt="高雄市政府環保局小家電及玩具檢修宣導海報" class="w-full h-auto max-h-full object-contain sm:object-cover rounded-2xl group-hover:scale-[1.01] transition duration-300 block">
+                    <img src="https://b7516555-max.github.io/kh-appliance-repair/assets/appliance-repair-poster.png" alt="高雄市政府環保局小家電及玩具檢修宣導海報" class="w-full h-auto max-h-full object-contain sm:object-cover rounded-2xl group-hover:scale-[1.01] transition duration-300 block">
                 </div>
             </div>
 
@@ -813,7 +813,7 @@
             <!-- 頂部識別 -->
             <div class="flex items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-4">
-                    <img src="https://docs.google.com/drawings/d/e/2PACX-1vT4X9PHctOR4vM6iIbqY6eGuhe9_MQkCZKlKgK04mwTYWl-Do2gwNUFtJeOy7k4DxuPoA74sIC_IvMo/pub?w=251&amp;h=250" alt="高雄市政府環境保護局 局徽" class="h-14 w-14 object-contain drop-shadow flex-shrink-0">
+                    <img src="https://b7516555-max.github.io/kh-appliance-repair/assets/kaohsiung-epb-logo.png" alt="高雄市政府環境保護局 局徽" class="h-14 w-14 object-contain drop-shadow flex-shrink-0">
                     <div>
                         <div class="text-lg md:text-xl font-black leading-tight">高雄市政府環境保護局 環境管理處</div>
                         <div class="text-sm md:text-base opacity-80">小家電、玩具維修雲端系統</div>
@@ -1227,9 +1227,24 @@
             </div>
             <div>
                 <label class="block font-bold text-gray-700 mb-2">2. 選擇場次：</label>
-                <select id="volunteer-event-select" onchange="renderVolunteerTable(); updateWalkInQRBtn();" class="w-full p-2 border border-orange-300 rounded-lg font-bold text-orange-800 bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-400" disabled>
+                <select id="volunteer-event-select" onchange="renderVolunteerTable(); renderStaffCheckinQueue(); updateWalkInQRBtn();" class="w-full p-2 border border-orange-300 rounded-lg font-bold text-orange-800 bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-400" disabled>
                     <option value="">-- 請先選擇類型 --</option>
                 </select>
+            </div>
+        </div>
+        <div class="mb-5 rounded-xl border-2 border-sky-300 bg-sky-50 p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                <div>
+                    <h3 class="font-black text-sky-900">🧑‍💼 工作人員協助報到區</h3>
+                    <p class="text-xs text-sky-800 mt-1">供壓線到場、來不及自行操作的民眾使用；由工作人員輸入確認碼辦理，不會在民眾首頁顯示。</p>
+                </div>
+                <button type="button" onclick="renderStaffCheckinQueue()" class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-2 rounded-lg text-sm font-bold">🔄 更新待報到名單</button>
+            </div>
+            <div class="overflow-x-auto rounded-lg border border-sky-200 bg-white">
+                <table class="min-w-full text-sm">
+                    <thead class="bg-sky-100 text-sky-900"><tr><th class="py-2 px-2">單號</th><th class="py-2 px-2">姓名</th><th class="py-2 px-2">物品</th><th class="py-2 px-2">操作</th></tr></thead>
+                    <tbody id="staff-checkin-tbody"><tr><td colspan="4" class="py-5 text-center text-gray-500">請先選擇場次</td></tr></tbody>
+                </table>
             </div>
         </div>
         <div class="mb-4 flex flex-wrap items-center gap-3">
@@ -1677,7 +1692,7 @@
         <div class="p-6 md:p-8">
             <div class="flex justify-between items-center mb-6 border-b-2 pb-4" style="border-color:var(--gov-primary-light);">
                 <h2 class="text-2xl gov-section-title">📝 登錄檢修結果</h2>
-                <button type="button" onclick="nav('checkout-list-section')" class="gov-btn-outline px-4 py-2 rounded font-bold">🔙 返回清單</button>
+                <button type="button" onclick="if(!repairSavePending) returnToHomeCase()" class="gov-btn-outline px-4 py-2 rounded font-bold">🔙 返回主頁</button>
             </div>
 
             <div class="gov-card p-4 mb-6">
@@ -1724,7 +1739,10 @@
                     <p>送出後，系統將自動更改狀態為「待取件」，並<span class="text-red-600">自動發送 Email 取件通知</span>給民眾。</p>
                 </div>
 
-                <button type="button" onclick="submitRepairResult()" class="w-full gov-btn-primary font-bold py-4 rounded-lg text-xl transition">💾 儲存並自動發送取件通知</button>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button type="button" onclick="submitRepairResult(true)" class="gov-btn-primary font-bold py-4 rounded-lg text-lg transition">✍️ 儲存並繼續簽收</button>
+                    <button type="button" onclick="submitRepairResult(false)" class="gov-btn-outline font-bold py-4 rounded-lg text-lg transition">💾 儲存並返回主頁</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1773,7 +1791,7 @@
         <div class="p-6 md:p-8">
             <div class="flex justify-between items-center mb-6 border-b-2 pb-4" style="border-color:var(--gov-accent-light);">
                 <h2 class="text-2xl font-bold" style="color:var(--gov-accent-dark);">🤝 領回簽收與結案</h2>
-                <button type="button" onclick="nav('checkout-list-section')" class="gov-btn-outline px-4 py-2 rounded font-bold">🔙 返回清單</button>
+                <button type="button" onclick="if(!pickupSavePending) returnToHomeCase()" class="gov-btn-outline px-4 py-2 rounded font-bold">🔙 返回主頁</button>
             </div>
 
             <div class="p-5 rounded-lg mb-6 border" style="background:var(--gov-accent-light);border-color:var(--gov-accent);">
@@ -1821,9 +1839,9 @@
     <div id="success-section" class="hidden max-w-2xl mx-auto mt-12">
         <div class="bg-white p-8 rounded-xl shadow-lg text-center border-t-8 border-gray-800">
             <div class="text-7xl mb-4">🎉</div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-3" id="success-title">表單送出成功！</h2>
-            <p class="text-base text-gray-600 mb-5">單號：<span id="success-serial" class="font-bold text-red-600 text-xl"></span><br><span id="success-desc" class="font-bold text-blue-700">請靜候志工評估照片。<br>審核通過後，將發送「電子收件單」至您的信箱。</span></p>
-            <!-- 登記序號資訊（A/B 模式才顯示） -->
+            <h2 class="text-3xl font-bold text-gray-800 mb-3" id="success-title">預約成功！</h2>
+            <p class="text-base text-gray-600 mb-5"><span id="success-serial" class="hidden"></span><span id="success-desc" class="font-bold text-blue-700">如審查發現問題（不可修、重複填寫、資訊不完整等），本處將以您留下的電話號碼聯繫。<br>如判定沒有問題，請至首頁該場次下方點選下拉式選單，確認是否有您的姓名；確認後請於活動報到時間內前來。<br>您也可以到「<a href="<?= webAppUrl ?>?source=line&amp;view=status" target="_top" class="underline text-blue-700 hover:text-blue-900">查詢/更改進度</a>」確認案件狀態。</span></p>
+            <!-- 保留容器供既有程式相容，預約完成時不顯示登記序號 -->
             <div id="success-queue-info" class="hidden rounded-2xl border-2 border-blue-300 bg-blue-50 p-5 mb-4 text-center">
                 <p class="text-gray-500 text-sm mb-1">您的登記序號</p>
                 <p class="text-8xl font-black text-blue-700 leading-none" id="success-queue-num">-</p>
@@ -2108,6 +2126,34 @@
         var currentAdminEvent = null; 
         var currentEditingId = null; 
         var currentReturnMode = 'B';
+        var repairEntryCode = '';
+        var repairSavePending = false;
+        var pickupSavePending = false;
+        var homeCasePosition = null;
+
+        function rememberHomeCasePosition(id) {
+            var home = document.getElementById('home-section');
+            if (home && !home.classList.contains('hidden')) {
+                homeCasePosition = { id: id, scrollY: window.scrollY,
+                    rosters: Array.from(document.querySelectorAll('[id^="roster-"]'))
+                        .filter(function(el) { return el.id.indexOf('roster-arrow-') !== 0 && !el.classList.contains('hidden'); })
+                        .map(function(el) { return el.id; }) };
+            }
+        }
+
+        function returnToHomeCase() {
+            repairEntryCode = '';
+            nav('home-section');
+            if (homeCasePosition) {
+                homeCasePosition.rosters.forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.classList.remove('hidden');
+                    var arrow = document.getElementById(id.replace('roster-', 'roster-arrow-'));
+                    if (arrow) arrow.textContent = '▲';
+                });
+                window.scrollTo(0, homeCasePosition.scrollY);
+            }
+        }
 
         function nav(sectionId) {
             var sections = ['home-section', 'admin-section', 'admin-c-section', 'queue-section', 'step1-section', 'repair-result-section', 'pickup-sign-section', 'receipt-section', 'success-section', 'checkout-list-section', 'confirm-section', 'volunteer-section', 'already-registered-section', 'walkin-section', 'walkin-success-section', 'walkin-full-section', 'survey-section', 'blocked-section'];
@@ -2131,10 +2177,21 @@
             return n[0] + n.slice(1, n.length - 1).replace(/./g, '*') + n[n.length - 1];
         }
 
+        // 報到身分確認畫面只顯示必要的尾碼，完整資料仍保留在內部供核對。
+        function maskTail(value, visibleDigits) {
+            if (value === undefined || value === null || String(value).trim() === '') return '—';
+            var text = String(value).trim();
+            var count = Math.max(1, Number(visibleDigits) || 1);
+            if (text.length <= count) return '*'.repeat(text.length);
+            return '*'.repeat(text.length - count) + text.slice(-count);
+        }
+
         // ── 報到流程 ──
         window._pendingCheckinId = null;
+        window._pendingCheckinStaffAssist = false;
+        window._pendingCheckinStaffCode = '';
 
-        function checkInAtEvent(recordId) {
+        function checkInAtEvent(recordId, staffAssist) {
             var r = sys.getRecords().find(function(x) { return x.id === recordId; });
             if (!r) return SysModal.alert('找不到此筆記錄。');
             if (r.status !== '待檢修' && r.status !== '待現場判定' && r.status !== '待判定') return SysModal.alert('此筆記錄目前狀態不符報到條件。');
@@ -2164,20 +2221,27 @@
             if (matchedEvent && !matchedEvent.isPermanent && matchedEvent.date && matchedEvent.start && matchedEvent.end) {
               var startAt = new Date(matchedEvent.date + 'T' + matchedEvent.start + ':00');
               var deadlineAt = new Date(matchedEvent.date + 'T' + matchedEvent.end + ':00');
-              deadlineAt.setMinutes(deadlineAt.getMinutes() - 90);
+              if (!staffAssist) deadlineAt.setMinutes(deadlineAt.getMinutes() - 90);
               if (now < startAt) return SysModal.alert('本場次尚未開始，請於活動開始時間後再辦理報到。');
-              if (now >= deadlineAt) return SysModal.alert('已超過本場次報到／收件截止時間，無法完成報到。');
+              if (now >= deadlineAt) return SysModal.alert(staffAssist ? '本場活動已結束，無法完成報到。' : '已超過本場次報到／收件截止時間，無法完成報到。');
             }
             window._pendingCheckinId = recordId;
+            window._pendingCheckinStaffAssist = !!staffAssist;
+            window._pendingCheckinStaffCode = '';
 
             var infoHtml = 
                 '<div class="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 space-y-1 text-sm mb-4 text-left">' +
-                '<div>👤 姓名：<b class="text-gray-800">' + (r.customerName || '—') + '</b></div>' +
+                '<div>👤 姓名：<b class="text-gray-800">' + maskName(r.customerName) + '</b></div>' +
                 '<div>🔧 送修物品：<b class="text-gray-800">' + (r.brandModel || r.category || '—') + '</b></div>' +
                 '<div>🔢 單號：<b class="text-gray-800 font-mono">' + (r.serialNum || '—') + '</b></div>' +
-                '<div>🪪 身分證字號（供志工核對）：<b class="text-red-700 font-mono">' + (r.idNumber || '—') + '</b></div>' +
-                '<div>📞 聯絡電話：<b class="text-gray-800 font-mono">' + (r.phone || '—') + '</b></div>' +
+                '<div>🪪 身分證字號（僅顯示後 4 碼供核對）：<b class="text-red-700 font-mono">' + maskTail(r.idNumber, 4) + '</b></div>' +
+                '<div>📞 聯絡電話（僅顯示後 3 碼）：<b class="text-gray-800 font-mono">' + maskTail(r.phone, 3) + '</b></div>' +
                 '</div>';
+
+            if (staffAssist) {
+                showStaffConfirmCode('🔐 工作人員協助報到');
+                return;
+            }
 
             SysModal.show('📲 選擇報到方式',
                 infoHtml +
@@ -2223,11 +2287,11 @@
             var r = sys.getRecords().find(function(x) { return x.id === window._pendingCheckinId; });
             var infoHtml = r ? (
                 '<div class="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 space-y-1 text-sm mb-4 text-left">' +
-                '<div>👤 姓名：<b class="text-gray-800">' + (r.customerName || '—') + '</b></div>' +
+                '<div>👤 姓名：<b class="text-gray-800">' + maskName(r.customerName) + '</b></div>' +
                 '<div>🔧 送修物品：<b class="text-gray-800">' + (r.brandModel || r.category || '—') + '</b></div>' +
                 '<div>🔢 單號：<b class="text-gray-800 font-mono">' + (r.serialNum || '—') + '</b></div>' +
-                '<div>🪪 身分證字號（供志工核對）：<b class="text-red-700 font-mono">' + (r.idNumber || '—') + '</b></div>' +
-                '<div>📞 聯絡電話：<b class="text-gray-800 font-mono">' + (r.phone || '—') + '</b></div>' +
+                '<div>🪪 身分證字號（僅顯示後 4 碼供核對）：<b class="text-red-700 font-mono">' + maskTail(r.idNumber, 4) + '</b></div>' +
+                '<div>📞 聯絡電話（僅顯示後 3 碼）：<b class="text-gray-800 font-mono">' + maskTail(r.phone, 3) + '</b></div>' +
                 '</div>'
             ) : '';
             SysModal.show(title,
@@ -2244,6 +2308,7 @@
         function doStaffCheckin() {
             var code = ((document.getElementById('staff-code-input') || {}).value || '').trim();
             if (code !== (window.globalVolunteerCode || '0000')) return SysModal.alert('確認碼錯誤，請重新輸入。');
+            window._pendingCheckinStaffCode = window._pendingCheckinStaffAssist ? code : '';
             SysModal.hide();
             completeCheckin(window._pendingCheckinId);
         }
@@ -2265,7 +2330,7 @@
                     .withSuccessHandler(function(result) {
                         hideLoading();
                         if (result && Number(result.checkinNumber) > 0) myNum = Number(result.checkinNumber);
-                        r.checkedIn = true; r.checkinNumber = myNum; sys.setRecords(recs); renderHomeEvents();
+                        r.checkedIn = true; r.checkinNumber = myNum; sys.setRecords(recs); renderHomeEvents(); renderVolunteerTable(); renderStaffCheckinQueue();
                         SysModal.alert('✅ 報到成功！您的維修號碼為第 <b class="text-2xl text-blue-700">' + myNum + '</b> 號，請稍候等候叫號。');
                     })
                     .withFailureHandler(function(err) {
@@ -2275,7 +2340,7 @@
                         if (msg.indexOf('CHECKIN_CLOSED') !== -1) return SysModal.alert('已超過本場次報到／收件截止時間，無法完成報到。');
                         SysModal.alert('報到失敗：' + msg);
                     })
-                    .checkInRecord(r.id, r.serialNum);
+                    .checkInRecord(r.id, r.serialNum, window._pendingCheckinStaffCode || '');
             }
         }
 
@@ -3315,6 +3380,7 @@
             evtSel.innerHTML = '<option value="">-- 請先選擇類型 --</option>';
             evtSel.disabled = true;
             renderVolunteerTable();
+            renderStaffCheckinQueue();
             nav('volunteer-section');
         }
 
@@ -3325,6 +3391,7 @@
                 evtSel.innerHTML = '<option value="">-- 請先選擇類型 --</option>';
                 evtSel.disabled = true;
                 renderVolunteerTable();
+                renderStaffCheckinQueue();
                 updateWalkInQRBtn();
                 return;
             }
@@ -3339,6 +3406,30 @@
             if (today) evtSel.value = today.id;
             renderVolunteerTable();
             updateWalkInQRBtn();
+        }
+
+        // 工作人員專用的待報到清單，與民眾首頁流程分開
+        function renderStaffCheckinQueue() {
+            var tbody = document.getElementById('staff-checkin-tbody');
+            if (!tbody) return;
+            var evtId = document.getElementById('volunteer-event-select').value;
+            if (!evtId) { tbody.innerHTML = '<tr><td colspan="4" class="py-5 text-center text-gray-500">請先選擇場次</td></tr>'; return; }
+            var recs = sys.getRecords().filter(function(r) {
+                return r.eventId === evtId && (r.mode === 'A' || r.mode === 'B' || r.mode === 'D') &&
+                    !r.checkedIn && (r.status === '待檢修' || r.status === '待現場判定' || r.status === '待判定');
+            });
+            if (!recs.length) { tbody.innerHTML = '<tr><td colspan="4" class="py-5 text-center text-gray-500">目前沒有待報到案件</td></tr>'; return; }
+            tbody.innerHTML = recs.map(function(r) {
+                return '<tr class="border-t border-sky-100">' +
+                    '<td class="py-2 px-2 font-mono text-xs">' + (r.serialNum || '') + '</td>' +
+                    '<td class="py-2 px-2 font-bold">' + maskName(r.customerName || '') + '</td>' +
+                    '<td class="py-2 px-2 text-left">' + (r.brandModel || r.category || '—') + '</td>' +
+                    '<td class="py-2 px-2"><button type="button" onclick="staffAssistCheckin(\'' + r.id + '\')" class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold">🔐 協助報到</button></td></tr>';
+            }).join('');
+        }
+
+        function staffAssistCheckin(recordId) {
+            checkInAtEvent(recordId, true);
         }
 
         function renderVolunteerTable() {
@@ -3500,13 +3591,15 @@
             // 有照片就顯示
             var photoArea = document.getElementById('vol-photo-area');
             var photoImg = document.getElementById('vol-photo-img');
-            if (r.photoData) {
-                photoImg.src = r.photoData;
-                photoArea.classList.remove('hidden');
-            } else {
-                photoImg.src = '';
-                photoArea.classList.add('hidden');
-            }
+            photoImg.src = '';
+            photoArea.classList.add('hidden');
+            loadRecordPhoto_(r, function(photo) {
+                if (currentVolunteerId !== id) return;
+                if (photo) {
+                    photoImg.src = photo;
+                    photoArea.classList.remove('hidden');
+                }
+            });
 
             document.getElementById('vol-code').value = '';
             document.getElementById('vol-code-section').classList.remove('hidden');
@@ -3663,7 +3756,9 @@
                             '您送修的「' + itemName + '」（單號：' + serialNum + '）' +
                             (triage === '可維修' ? '經現場初步評估為【可維修】，' : '需進一步評估，') +
                             '請您攜帶物品至維修現場，工作人員將為您服務。\n\n' +
-                            '如有疑問，請洽高雄市政府環境保護局 環境管理處。\n\n' +
+                            '如有疑問，請洽高雄市政府環境保護局 環境管理處。\n' +
+                            '聯絡人：黃先生、洪小姐、刁先生\n聯絡電話：07-7351684\n' +
+                            '查詢/更改進度：<?= webAppUrl ?>?source=line&view=status\n\n' +
                             '高雄市政府環境保護局 環境管理處 敬上\n' +
                             '==========================\n※ 此信件為系統自動發送，請勿直接回覆 ※';
                     } else if (triage === '無法維修') {
@@ -3672,7 +3767,9 @@
                             '您送修的「' + itemName + '」（單號：' + serialNum + '）' +
                             '經現場專業評估後，因故【無法維修】，案件已辦理退件。\n\n' +
                             '造成不便敬請見諒，感謝您對本活動的支持。\n\n' +
-                            '如有疑問，請洽高雄市政府環境保護局 環境管理處。\n\n' +
+                            '如有疑問，請洽高雄市政府環境保護局 環境管理處。\n' +
+                            '聯絡人：黃先生、洪小姐、刁先生\n聯絡電話：07-7351684\n' +
+                            '查詢/更改進度：<?= webAppUrl ?>?source=line&view=status\n\n' +
                             '高雄市政府環境保護局 環境管理處 敬上\n' +
                             '==========================\n※ 此信件為系統自動發送，請勿直接回覆 ※';
                     }
@@ -3730,7 +3827,7 @@
             if (isTestRec) {
                 setTimeout(doNext, 300);
             } else if (typeof google !== 'undefined' && google.script) {
-                google.script.run.withSuccessHandler(doNext).withFailureHandler(function(err) { hideLoading(); SysModal.alert('儲存失敗：' + err.message); }).updateRecordInSheet(target);
+                google.script.run.withSuccessHandler(doNext).withFailureHandler(function(err) { hideLoading(); SysModal.alert('儲存失敗：' + err.message); }).updateRecordInSheet(Object.assign({}, target, { repairStaffCode: document.getElementById('vol-code').value.trim() }));
             } else { setTimeout(doNext, 500); }
         }
 
@@ -4090,6 +4187,16 @@
         // ==========================================
         // ★ 核心判定與排程邏輯
         // ==========================================
+        function loadRecordPhoto_(record, callback) {
+            if (!record || !record.id || !record.hasPhoto) return callback('');
+            if (record.photoData && record.photoData.indexOf('data:') === 0) return callback(record.photoData);
+            if (typeof google === 'undefined' || !google.script || !google.script.run) return callback('');
+            google.script.run.withSuccessHandler(function(photo) {
+                record.photoData = photo || '';
+                callback(record.photoData);
+            }).withFailureHandler(function() { callback(''); }).getRecordPhoto(record.id);
+        }
+
         function openScheduleModal(id) {
             currentEditingId = id; 
             var r = sys.getRecords().find(function(x){return x.id === id});
@@ -4105,12 +4212,14 @@
                 aiResultDiv.innerHTML = '';
             }
 
-            if(r.photoData) {
-                document.getElementById('schedule-photo').src = r.photoData;
-                document.getElementById('schedule-photo-container').classList.remove('hidden');
-            } else {
-                document.getElementById('schedule-photo-container').classList.add('hidden');
-            }
+            document.getElementById('schedule-photo-container').classList.add('hidden');
+            loadRecordPhoto_(r, function(photo) {
+                if (currentEditingId !== id) return;
+                if (photo) {
+                    document.getElementById('schedule-photo').src = photo;
+                    document.getElementById('schedule-photo-container').classList.remove('hidden');
+                }
+            });
 
             if (r.mode === 'C') {
                 document.getElementById('schedule-time-fields').style.display = 'block';
@@ -4349,10 +4458,29 @@
         // ★ 步驟 2A：登錄檢修結果與全自動 Email (工作人員專用)
         // ==========================================
         function openRepairResult(id, returnMode) {
+            repairEntryCode = '';
+            rememberHomeCasePosition(id);
+            SysModal.prompt('請輸入工作人員確認碼，驗證後才能填寫維修結果：', function(code) {
+                if (!code) return;
+                if (typeof google === 'undefined' || !google.script) return SysModal.alert('請連線至正式系統驗證確認碼。');
+                showLoading('驗證工作人員確認碼...');
+                google.script.run.withSuccessHandler(function() {
+                    hideLoading();
+                    repairEntryCode = code;
+                    _openVerifiedRepairResult(id, returnMode);
+                }).withFailureHandler(function(err) {
+                    hideLoading();
+                    SysModal.alert('驗證失敗：' + err.message);
+                }).verifyRepairStaffCode(code);
+            });
+        }
+
+        function _openVerifiedRepairResult(id, returnMode) {
             currentReturnMode = returnMode || 'B';
             currentEditingId = id;
             var rec = sys.getRecords().find(r => r.id === id);
             
+            if (!rec) return SysModal.alert('找不到此案件。');
             document.getElementById('rr-serial').innerText = rec.serialNum; 
             document.getElementById('rr-name').innerText = rec.mode==='C' ? '['+rec.districtName+'] '+rec.customerName : rec.customerName; 
             document.getElementById('rr-phone').innerText = rec.phone; 
@@ -4362,10 +4490,19 @@
             document.getElementById('form-repair-result').reset();
             document.getElementById('rr-repairDetails').value = '';
             
+            if (rec.repairResult) {
+                var known = ['完全修復', '無法維修', '檢測正常', '未維修'].indexOf(rec.repairResult) >= 0;
+                document.querySelectorAll('input[name="rr-repairResult"]').forEach(function(el) { el.checked = el.value === (known ? rec.repairResult : '其他'); });
+                document.getElementById('form-repair-result').elements['rr-repairOther'].value = known ? '' : rec.repairResult.replace(/^其他[:：]\s*/, '');
+                document.getElementById('rr-repairDetails').value = rec.repairDetails || '';
+                document.querySelectorAll('input[name="rr-returnAction"]').forEach(function(el) { el.checked = el.value === rec.returnAction; });
+            }
             nav('repair-result-section');
         }
 
-        function submitRepairResult() {
+        function submitRepairResult(continuePickup) {
+            if (repairSavePending) return;
+            if (!repairEntryCode) return SysModal.alert('請重新點選填寫維修結果，輸入工作人員確認碼。');
             var form = document.getElementById('form-repair-result');
             
             var repairResultNode = document.querySelector('input[name="rr-repairResult"]:checked');
@@ -4386,20 +4523,24 @@
             var target = null;
             for(var k=0; k<recs.length; k++){ if(recs[k].id === currentEditingId) { target = recs[k]; break; } }
 
+            if (!target) return SysModal.alert('找不到此案件，請重新整理後再試。');
+            target = Object.assign({}, target);
+            repairSavePending = true;
             showLoading('儲存中並自動發送通知信...'); 
             
             target.status = '待取件'; 
             target.repairResult = repairResult === '其他' ? '其他: ' + repairOther : repairResult; 
             target.repairDetails = repairDetails; 
             target.returnAction = returnAction; 
-            sys.setRecords(recs);
-
             var navigateBack = function() {
-                if (currentReturnMode === 'C') { renderAdminCQueue(); nav('admin-c-section'); } 
-                else { renderCheckoutTable(); nav('checkout-list-section'); }
+                repairSavePending = false;
+                if (continuePickup) openPickupSign(target.id, 'HOME');
+                else returnToHomeCase();
             };
 
             var doStaffFinish = function() {
+                repairEntryCode = '';
+                sys.setRecords(sys.getRecords().map(function(r) { return r.id === target.id ? Object.assign({}, r, target) : r; }));
                 if(target.email) {
                     var locInfo = "原送件地點";
                     var eLoc = target.eventLoc || "";
@@ -4419,6 +4560,10 @@
                                "技師處理說明：\n" + target.repairDetails + "\n\n" +
                                "👉 請您於服務時間內，憑【電子收件單】或【單號：" + target.serialNum + "】至【" + locInfo + "】辦理領回手續。\n" +
                                "(若您已經領回，請忽略此信件)\n\n" +
+                               "如需協助，請聯絡高雄市政府環境保護局環境管理處：\n" +
+                               "聯絡人：黃先生、洪小姐、刁先生\n" +
+                               "聯絡電話：07-7351684\n" +
+                               "查詢/更改進度：<?= webAppUrl ?>?source=line&view=status\n\n" +
                                "高雄市政府環境保護局 環境管理處 敬上\n" +
                                "==========================\n" +
                                "※ 此信件為系統自動發送，請勿直接回覆 ※";
@@ -4446,9 +4591,10 @@
             if(typeof google !== 'undefined' && google.script) {
                 google.script.run
                     .withSuccessHandler(doStaffFinish)
-                    .withFailureHandler(function(err){ hideLoading(); SysModal.alert('儲存失敗，錯誤資訊: ' + err.message); })
-                    .updateRecordInSheet(target);
-            } else { setTimeout(doStaffFinish, 600); }
+                    .withFailureHandler(function(err){ repairSavePending = false; hideLoading(); SysModal.alert('儲存失敗，錯誤資訊: ' + err.message); })
+                    .updateRecordInSheet({ id: target.id, status: target.status, repairResult: target.repairResult,
+                        repairDetails: target.repairDetails, returnAction: target.returnAction, repairStaffCode: repairEntryCode });
+            } else { repairSavePending = false; hideLoading(); SysModal.alert('無法連線，尚未儲存維修結果。'); }
         }
 
         // ==========================================
@@ -4498,10 +4644,13 @@
         }
 
         function openPickupSign(id, returnMode) {
+            rememberHomeCasePosition(id);
             currentReturnMode = returnMode || 'B';
             currentEditingId = id;
             var rec = sys.getRecords().find(r => r.id === id);
 
+            if (!rec) return SysModal.alert('找不到此案件。');
+            if (rec.customerSigned || rec.returnSignature || rec.hasReturnSignature) return SysModal.alert('此案件已完成領回簽收。');
             // 南鳳山(A) 先顯示問卷
             if (rec.mode === 'A') {
                 _buildSurveyQuestions();
@@ -4572,17 +4721,21 @@
         }
 
         function submitPickupSign() {
+            if (pickupSavePending) return;
             var satisfaction = document.getElementById('ps-satisfaction-input').value;
             var recs = sys.getRecords();
             var target = null;
             for(var k=0; k<recs.length; k++){ if(recs[k].id === currentEditingId) { target = recs[k]; break; } }
             
+            if (!target) return SysModal.alert('找不到此案件。');
             if (target.mode !== 'C' && !satisfaction) return SysModal.alert('請點選星星，評分民眾滿意度！');
             
             var receiverName = target.customerName || target.receiverName || '';
             
             if (!pads.B.hasSig) return SysModal.alert('請在下方【簽名區】完成領回簽名！');
             
+            target = Object.assign({}, target);
+            pickupSavePending = true;
             showLoading('結案資料寫入中...'); 
             
             target.status = '已結案'; 
@@ -4590,14 +4743,15 @@
             target.receiverName = receiverName;
             target.returnSignature = pads.B.input.value; 
             target.customerSigned = true;
-            sys.setRecords(recs);
+
 
             var navigateBack = function() {
-                if (currentReturnMode === 'C') { renderAdminCQueue(); nav('admin-c-section'); } 
-                else { renderCheckoutTable(); nav('checkout-list-section'); }
+                returnToHomeCase();
             };
 
             var doStaffFinish = function() {
+                pickupSavePending = false;
+                sys.setRecords(sys.getRecords().map(function(r) { return r.id === target.id ? Object.assign({}, r, target) : r; }));
                 hideLoading(); 
                 SysModal.alert('✅ 已確認簽收並結案！', navigateBack); 
             };
@@ -4605,9 +4759,10 @@
             if(typeof google !== 'undefined' && google.script) {
                 google.script.run
                     .withSuccessHandler(doStaffFinish)
-                    .withFailureHandler(function(err){ hideLoading(); SysModal.alert('結案失敗，錯誤資訊: ' + err.message); })
-                    .updateRecordInSheet(target);
-            } else { setTimeout(doStaffFinish, 600); }
+                    .withFailureHandler(function(err){ pickupSavePending = false; hideLoading(); SysModal.alert('結案失敗，錯誤資訊: ' + err.message); })
+                    .updateRecordInSheet({ id: target.id, status: target.status, satisfaction: target.satisfaction,
+                        receiverName: target.receiverName, returnSignature: target.returnSignature, customerSigned: true });
+            } else { pickupSavePending = false; hideLoading(); SysModal.alert('無法連線，尚未完成簽收。'); }
         }
 
 
@@ -5148,7 +5303,7 @@ function showWalkInQR(evtId) {
                 slotsColor = '#059669';
             }
 
-            var infographicUrl = 'https://docs.google.com/drawings/d/e/2PACX-1vTLd4umUDgDaQV-07VyjoUYlAUeUeffMn31lRWGCDH38xw0ZZTBk1l_DHYw_77gn0Tprh6Oc2g27Mhr/pub?w=960&amp;h=720';
+            var infographicUrl = 'https://b7516555-max.github.io/kh-appliance-repair/assets/repair-care-infographic.png';
             var qrSize = 400;
             var qrImgUrlFinal = CALL_MACHINE_QR_IMAGE;
             var w = window.open('', '_blank');
@@ -5510,6 +5665,10 @@ function showWalkInQR(evtId) {
             var form = document.getElementById('form-step1');
             var mode = document.getElementById('current-mode-input').value;
 
+            if (mode !== 'C' && !window.bookingNoticeAccepted) {
+                return SysModal.alert('請先詳讀並勾選參加注意事項及個人資料使用告知。');
+            }
+
             var dist = form.elements['districtName'].value;
             var drop = form.elements['dropoffLoc'].value;
             var emailVal = form.elements['email'].value.trim();
@@ -5542,6 +5701,12 @@ function showWalkInQR(evtId) {
             if (!customerName) return SysModal.alert('請填寫姓名/聯絡人！');
             if (!gender) return SysModal.alert('請選擇性別，以利後續資料統計！');
             if (!phone) return SysModal.alert('請填寫聯絡電話！');
+            // 手機號碼正規化：補回前導 0，確保 09 開頭共 10 碼
+            var rawPhoneVal = phone.replace(/\D/g, '');
+            if (rawPhoneVal.length === 9 && rawPhoneVal.charAt(0) === '9') rawPhoneVal = '0' + rawPhoneVal;
+            if (rawPhoneVal && !/^09\d{8}$/.test(rawPhoneVal)) return SysModal.alert('手機號碼格式不正確！請填寫 09 開頭共 10 碼的手機號碼。');
+            phone = rawPhoneVal;
+            form.elements['phone'].value = phone;
             var accessories = form.elements['accessories'] ? form.elements['accessories'].value.trim() : '';
 
             if (!category) return SysModal.alert('請選擇物品類別！');
@@ -5675,6 +5840,10 @@ function showWalkInQR(evtId) {
                 var form = document.getElementById('form-step1');
                 var mode = document.getElementById('current-mode-input').value;
 
+                if (mode !== 'C' && !window.bookingNoticeAccepted) {
+                    throw new Error('請先詳讀並勾選參加注意事項及個人資料使用告知。');
+                }
+
                 var dist = form.elements['districtName'].value;
                 var drop = form.elements['dropoffLoc'].value;
                 var emailVal = form.elements['email'].value.trim();
@@ -5683,6 +5852,10 @@ function showWalkInQR(evtId) {
                 var customerName = form.elements['customerName'].value.trim();
                 var gender = form.elements['gender'].value;
                 var phone = form.elements['phone'].value.trim();
+                // 手機號碼正規化
+                var rawPhone2 = phone.replace(/\D/g, '');
+                if (rawPhone2.length === 9 && rawPhone2.charAt(0) === '9') rawPhone2 = '0' + rawPhone2;
+                if (rawPhone2 && /^09\d{8}$/.test(rawPhone2)) phone = rawPhone2;
                 var category = form.elements['category'].value;
                 var brandName = form.elements['brandName'] ? form.elements['brandName'].value.trim() : '';
                 var itemName = form.elements['brandModel'] ? form.elements['brandModel'].value.trim() : '';
@@ -5787,14 +5960,13 @@ function showWalkInQR(evtId) {
                 var doFinish = function() {
                     document.getElementById('success-serial').innerText = data.serialNum;
                     if (mode === 'C') {
+                        document.getElementById('success-title').innerText = '通報送出成功！';
                         document.getElementById('success-desc').innerHTML = '通報已送出！<br><span class="text-purple-700">請靜候後台排程通知。</span>';
                         document.getElementById('success-queue-info').classList.add('hidden');
                     } else {
-                        var qInfo = getEventQueueInfo(data.eventId);
-                        var myNum = qInfo.totalCount;
-                        document.getElementById('success-queue-num').innerText = myNum;
-                        document.getElementById('success-queue-info').classList.remove('hidden');
-                        document.getElementById('success-desc').innerHTML = '線上預約已送出！<br><span class="text-blue-700">志工將線上審核您的照片與故障描述，<br>審核結果（可維修／不可維修）將寄送至您的信箱。<br>收到「<b class="text-green-700">可維修</b>」通知後，再憑電子單據於活動場次時間送件到場。</span>';
+                        document.getElementById('success-title').innerText = '預約成功！';
+                        document.getElementById('success-queue-info').classList.add('hidden');
+                        document.getElementById('success-desc').innerHTML = '如審查發現問題（不可修、重複填寫、資訊不完整等），本處將以您留下的電話號碼聯繫。<br>如判定沒有問題，請至首頁該場次下方點選下拉式選單，確認是否有您的姓名；確認後請於活動報到時間內前來。<br>您也可以到「<a href="<?= webAppUrl ?>?source=line&view=status" target="_top" class="underline text-blue-700 hover:text-blue-900">查詢/更改進度</a>」確認案件狀態。';
                     }
                     finalBtn.disabled = false;
                     finalBtn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -6387,6 +6559,9 @@ function showWalkInQR(evtId) {
                             '<li>現場補位與收件亦於<b class="text-red-600">活動結束前 1 小時 30 分</b>停止。</li>' +
                             '<li>現場補位僅限已抵達現場者，填寫前須由工作人員輸入確認碼。</li>' +
                             '<li><b class="text-red-600">同一人持不同身分證攜帶多件物品，將取消後續預約資格。</b></li>' +
+                            '<li>如遇颱風、地震等不可抗力因素，將依高雄市政府停班停課公告辦理；主辦單位保留變更、修改或終止活動之權利，未盡事宜另行公告於官方網站及粉絲專頁。</li>' +
+                            '<li><b class="text-red-600">申請資料不實、重複預約或違反預約須知者，主辦單位有權逕行取消預約資格，不另行通知。</b></li>' +
+                            '<li>本預約須知如有未盡事宜，主辦單位得隨時修訂並公告於<a href="https://www.facebook.com/recycle.ksepb.gov.tw/?locale=zh_TW" target="_blank" rel="noopener noreferrer" class="underline font-bold text-blue-700">FB樂活綠高雄粉絲專頁</a>。</li>' +
                             '<li><b class="text-red-600">如果物品名稱不清楚或是只填寫小家電或玩具，而且沒有附上該物品的照片，導致無法判斷是否可以維修，本單位有權拒絕收件。</b></li>' +
                             '</ul>' +
                             '<div class="mt-2 text-xs text-blue-700">🔧 當場未完成案件仍保留於原登記場次；如需續修，由工作人員另行安排。</div>' +
@@ -6409,7 +6584,7 @@ function showWalkInQR(evtId) {
 
                             var rows = allRecs.map(function(r) {
                                 // 正式案件狀態優先於初步判定，避免已結案仍顯示「可維修」。
-                                var displayStatus = r.status === '已結案' ? '已結案'
+                                var displayStatus = r.status === '待取件' ? '待取件' : r.status === '已結案' ? '已結案'
                                     : (r.status === '已退件' || r.status === '已退回') ? r.status
                                     : r.triageStatus === '待現場判定' ? '現場判定'
                                     : r.triageStatus ? r.triageStatus : (r.status || '待現場判定');
@@ -6420,15 +6595,19 @@ function showWalkInQR(evtId) {
                                 // 報到 / 簽收按鈕
                                 var checkinBtn = '';
                                 var checkinLabel = r.checkinNumber ? '✅ 第 ' + r.checkinNumber + ' 號' : '✅ 已報到';
-                                var pickupCompleted = !!(r.customerSigned || r.returnSignature);
-                                if (r.status === '待取件') {
+                                var pickupCompleted = !!(r.customerSigned || r.returnSignature || r.hasReturnSignature);
+                                if (pickupCompleted) {
+                                    checkinBtn = '<span class="text-sm font-black text-purple-700 bg-purple-100 px-3 py-1.5 rounded-full">' + checkinLabel + '｜✅ 已領回</span>';
+                                } else if (r.status === '待取件') {
                                     checkinBtn = '<button type="button" onclick="openPickupSign(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-1.5 rounded-full transition">' + checkinLabel + '｜🤝 取件簽收</button>';
                                 } else if (r.status === '已結案' && r.checkedIn) {
                                     // 已結案案件仍可從報到號碼位置完成簽收。
                                     checkinBtn = pickupCompleted
                                         ? '<span class="flex-shrink-0 text-sm font-black text-purple-700 bg-purple-100 px-3 py-1.5 rounded-full">' + checkinLabel + '｜✍ 已簽收</span>'
                                         : '<button type="button" onclick="openPickupSign(\'' + r.id + '\')" class="flex-shrink-0 text-sm bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-1.5 rounded-full transition">' + checkinLabel + '｜✍ 簽收</button>';
-                                } else if (r.checkedIn && r.checkinNumber) {
+                                } else if (r.checkedIn && ['待檢修', '維修中', '待收件', '待現場判定', '待判定'].indexOf(r.status) >= 0) {
+                                    checkinBtn = '<button type="button" onclick="openRepairResult(\'' + r.id + '\', \'HOME\')" class="text-sm bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-4 py-1.5 rounded-full transition">' + checkinLabel + '｜🔧 填寫維修結果</button>';
+                                } else if (r.checkedIn) {
                                     checkinBtn = '<span class="flex-shrink-0 text-sm font-black text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full">' + checkinLabel + '</span>';
                                 } else {
                                     var checkinEligible = (r.status === '待檢修' || r.status === '待現場判定' || r.status === '待判定');
@@ -6454,7 +6633,7 @@ function showWalkInQR(evtId) {
                                         }
                                     }
                                 }
-                                return '<div class="flex items-center gap-2 py-2.5 border-b border-gray-200 last:border-0">' +
+                                return '<div class="flex flex-wrap items-center gap-2 py-2.5 border-b border-gray-200 last:border-0">' +
                                     '<span class="text-gray-700 text-base font-bold w-16 flex-shrink-0">' + maskName(r.customerName) + '</span>' +
                                     '<span class="text-gray-500 text-base flex-1 truncate">' + (r.brandModel || r.itemName || '—') + '</span>' +
                                     '<span class="text-sm font-bold px-2 py-0.5 rounded-full ' + statusColor + '">' + displayStatus + '</span>' +
@@ -6755,6 +6934,7 @@ function openBookingNoticeModal(eventId) {
     window.bookingNoticeAccepted = false;
     var modal = document.getElementById('booking-notice-modal');
     var chk = document.getElementById('booking-notice-checkbox');
+    var privacyChk = document.getElementById('booking-privacy-checkbox');
     var btn = document.getElementById('btn-confirm-notice');
     var checkboxWrap = document.getElementById('booking-notice-agree-container');
     
@@ -6769,6 +6949,7 @@ function openBookingNoticeModal(eventId) {
     } else {
         if (checkboxWrap) checkboxWrap.classList.remove('hidden');
         if (chk) chk.checked = false;
+        if (privacyChk) privacyChk.checked = false;
         if (btn) {
             btn.disabled = true;
             btn.textContent = '同意並進入預約 ➔';
@@ -6798,7 +6979,11 @@ function closeBookingNoticeModal() {
 function toggleNoticeAgree(isChecked) {
     var btn = document.getElementById('btn-confirm-notice');
     if (!btn) return;
-    if (isChecked) {
+    var noticeEl = document.getElementById('booking-notice-checkbox');
+    var privacyEl = document.getElementById('booking-privacy-checkbox');
+    var noticeChecked = !!(noticeEl && noticeEl.checked);
+    var privacyChecked = !!(privacyEl && privacyEl.checked);
+    if (noticeChecked && privacyChecked) {
         btn.disabled = false;
         btn.className = 'flex-2 sm:flex-none py-2.5 px-6 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-700 cursor-pointer transition text-sm shadow active:scale-98';
     } else {
@@ -6814,8 +6999,9 @@ function confirmNoticeAndProceed() {
         return;
     }
     var chk = document.getElementById('booking-notice-checkbox');
-    if (!chk || !chk.checked) {
-        SysModal.alert('請先詳讀並勾選「我已詳讀並同意上述參加注意事項」。');
+    var privacyChk = document.getElementById('booking-privacy-checkbox');
+    if (!chk || !chk.checked || !privacyChk || !privacyChk.checked) {
+        SysModal.alert('請先詳讀並勾選參加注意事項及個人資料使用告知。');
         return;
     }
     window.bookingNoticeAccepted = true;
@@ -7356,6 +7542,11 @@ window.addEventListener('resize', function() {
                     <span>請務必詳閱以下預約及維修規範，確認同意後再進行預約。</span>
                 </div>
 
+                <div class="p-4 sm:p-5 bg-blue-50 border-2 border-blue-400 rounded-xl text-blue-950 shadow-sm">
+                    <p class="font-black text-sm sm:text-base mb-1">🔒 個人資料使用說明</p>
+                    <p class="text-xs sm:text-sm leading-relaxed">填寫預約及報到時會使用完整個人資訊，僅供本處內部身分核對及辦理服務使用，不會公開或外流；畫面顯示時將依需要進行個資屏蔽處理。</p>
+                </div>
+
                 <div class="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 shadow-sm space-y-3">
                     <div class="flex items-start gap-2.5">
                         <span class="text-base flex-shrink-0">📋</span>
@@ -7401,6 +7592,18 @@ window.addEventListener('resize', function() {
                         <span class="text-base flex-shrink-0">⏰</span>
                         <p>報到、現場補位與收件均於<b class="text-red-600">活動結束前 1 小時 30 分</b>停止；到達截止時間即停止受理。</p>
                     </div>
+                    <div class="flex items-start gap-2.5 p-3 bg-sky-50 rounded-lg border border-sky-200">
+                        <span class="text-base flex-shrink-0">🌪️</span>
+                        <p>本活動如遇不可抗力之因素（如颱風、地震等天災），將依高雄市政府停班停課公告辦理。主辦單位（高雄市環保局）<b class="text-red-600">保留變更、修改或終止本活動之權利，如有未盡事宜，將另行公告於官方網站及粉絲專頁。</b></p>
+                    </div>
+                    <div class="flex items-start gap-2.5 p-3 bg-rose-50 rounded-lg border border-rose-200">
+                        <span class="text-base flex-shrink-0">⚖️</span>
+                        <p>為維護市民參與權益，申請人填寫之資料如有不實、重複預約或違反預約須知之情事，<b class="text-red-600">主辦單位有權逕行取消其預約資格，不另行通知。</b></p>
+                    </div>
+                    <div class="flex items-start gap-2.5 p-3 bg-violet-50 rounded-lg border border-violet-200">
+                        <span class="text-base flex-shrink-0">📣</span>
+                        <p>本預約須知如有未盡事宜，<b class="text-red-600">主辦單位得隨時修訂並公告於FB樂活綠高雄粉絲專頁</b>（<a href="https://www.facebook.com/recycle.ksepb.gov.tw/?locale=zh_TW" target="_blank" rel="noopener noreferrer" class="underline font-bold text-blue-700 break-all">https://www.facebook.com/recycle.ksepb.gov.tw/?locale=zh_TW</a>）。</p>
+                    </div>
                     <div class="flex items-start gap-2.5">
                         <span class="text-base flex-shrink-0">🚫</span>
                         <p>線上預約滿額時，活動當天恕不接受現場補位，預約者未到場也不會額外釋出名額。</p>
@@ -7427,11 +7630,19 @@ window.addEventListener('resize', function() {
                     </p>
                 </div>
 
-                <div id="booking-notice-agree-container" class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-300 flex items-center gap-3 cursor-pointer hover:bg-emerald-100/80 transition" onclick="var c = document.getElementById('booking-notice-checkbox'); c.checked = !c.checked; toggleNoticeAgree(c.checked);">
-                    <input type="checkbox" id="booking-notice-checkbox" class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500 cursor-pointer" onclick="event.stopPropagation(); toggleNoticeAgree(this.checked);">
+                <div id="booking-notice-agree-container" class="space-y-3">
+                  <div class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-300 flex items-center gap-3 cursor-pointer hover:bg-emerald-100/80 transition" onclick="var c = document.getElementById('booking-notice-checkbox'); c.checked = !c.checked; toggleNoticeAgree();">
+                    <input type="checkbox" id="booking-notice-checkbox" class="w-5 h-5 min-w-5 min-h-5 flex-shrink-0 text-emerald-600 rounded focus:ring-emerald-500 cursor-pointer" onclick="event.stopPropagation(); toggleNoticeAgree();">
                     <label for="booking-notice-checkbox" class="font-bold text-gray-900 text-xs sm:text-sm cursor-pointer select-none">
                         我已詳讀並同意上述參加注意事項 <span class="text-red-500">*</span>
                     </label>
+                  </div>
+                  <div class="p-3.5 bg-blue-50 rounded-xl border border-blue-300 flex items-start gap-3 cursor-pointer hover:bg-blue-100/80 transition" onclick="var c = document.getElementById('booking-privacy-checkbox'); c.checked = !c.checked; toggleNoticeAgree();">
+                    <input type="checkbox" id="booking-privacy-checkbox" class="w-5 h-5 min-w-5 min-h-5 flex-shrink-0 text-blue-600 rounded focus:ring-blue-500 cursor-pointer" onclick="event.stopPropagation(); toggleNoticeAgree();">
+                    <label for="booking-privacy-checkbox" class="font-bold text-gray-900 text-xs sm:text-sm leading-relaxed cursor-pointer select-none">
+                        我已了解，填寫預約及報到時會使用完整個人資訊，僅供本處內部身分核對及辦理服務使用，不會公開或外流；畫面顯示時將依需要進行個資屏蔽處理。 <span class="text-red-500">*</span>
+                    </label>
+                  </div>
                 </div>
             </div>
             <div class="p-4 bg-gray-100 border-t border-gray-200 flex justify-end gap-3 flex-shrink-0">
