@@ -562,7 +562,7 @@
 
                     <!-- 零件費 -->
                     <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 space-y-2">
-                        <label class="block text-sm font-bold text-yellow-800">是否收取零件費？</label>
+                        <label class="block text-sm font-bold text-yellow-800">零件費（如有收費，請填寫名稱與金額）</label>
                         <div class="flex gap-4">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="vol-parts-fee" value="no" class="w-4 h-4" checked onchange="togglePartsFeeFields(false)">
@@ -573,7 +573,7 @@
                                 <span class="font-bold text-sm text-yellow-700">收取零件費</span>
                             </label>
                         </div>
-                        <div id="vol-parts-fields" class="hidden grid grid-cols-2 gap-2 pt-1">
+                        <div id="vol-parts-fields" class="grid grid-cols-2 gap-2 pt-1">
                             <div>
                                 <label class="block text-xs font-bold mb-1 text-gray-700">零件名稱 <span class="text-red-500">*</span></label>
                                 <input type="text" id="vol-parts-name" class="w-full p-2 border rounded border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm" placeholder="例：電容、電源線">
@@ -3691,7 +3691,7 @@
                 for (var i = 0; i < radios.length; i++) radios[i].checked = false;
                 var feeRadios = document.querySelectorAll('input[name="vol-parts-fee"]');
                 for (var j = 0; j < feeRadios.length; j++) feeRadios[j].checked = (feeRadios[j].value === 'no');
-                document.getElementById('vol-parts-fields').classList.add('hidden');
+                document.getElementById('vol-parts-fields').classList.remove('hidden');
                 document.getElementById('vol-parts-name').value = '';
                 document.getElementById('vol-parts-amount').value = '';
                 updateReturnActionOptions();
