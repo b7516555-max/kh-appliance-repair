@@ -208,14 +208,12 @@
     .brand-logo {
       width: 42px;
       height: 42px;
-      background: linear-gradient(135deg, var(--primary), #0f766e);
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 1.35rem;
-      box-shadow: 0 4px 8px rgba(4,120,87,0.25);
+      object-fit: contain;
+      box-shadow: 0 4px 8px rgba(4,120,87,0.18);
     }
 
     .brand-title {
@@ -683,9 +681,9 @@
   <header class="site-header">
     <div class="container nav-inner">
       <div class="brand-wrap">
-        <div class="brand-logo" aria-hidden="true">🌱</div>
+        <img class="brand-logo" src="kaohsiung-epb-logo.png" alt="高雄市環境保護局局徽">
         <div>
-          <div class="brand-title">高雄市資源循環推動</div>
+          <div class="brand-title">高雄市環境保護局環境管理處</div>
           <div class="brand-sub">小家電、玩具維修雲端系統</div>
         </div>
       </div>
@@ -1031,7 +1029,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
-            <span style="font-size:1.5rem;">🌱</span>
+            <img src="kaohsiung-epb-logo.png" alt="高雄市環境保護局局徽" style="width:36px; height:36px; object-fit:contain;">
             <strong style="color:#ffffff; font-size:1.1rem;">小家電、玩具維修雲端系統</strong>
           </div>
           <p style="font-size:0.9rem; line-height:1.7; margin-bottom:1rem;">
