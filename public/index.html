@@ -680,13 +680,12 @@
     .home-page .footer-grid { grid-template-columns: 1fr; margin-bottom: 2rem; }
     .home-page .footer-grid > .footer-col:not(:first-child) { display: none; }
 
-    /* 首頁滿版呈現，移除主視覺與頁首的分隔線。 */
+    /* 首頁依內容收合高度，移除主視覺與頁首的分隔線。 */
     .home-page header.site-header { border-bottom: 0; }
     .home-page .hero-section {
-      min-height: calc(100vh - 68px);
-      display: flex;
-      align-items: center;
-      padding: 5rem 0 6rem;
+      min-height: auto;
+      display: block;
+      padding: 4rem 0 3rem;
       border-bottom: 0;
     }
   </style>
