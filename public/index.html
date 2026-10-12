@@ -677,6 +677,16 @@
     /* 首頁只保留主視覺；其餘資訊由上方選單進入獨立頁面。 */
     .home-page main > section:not(.hero-section),
     .home-page .site-footer { display: none !important; }
+
+    /* 首頁滿版呈現，移除主視覺與頁首的分隔線。 */
+    .home-page header.site-header { border-bottom: 0; }
+    .home-page .hero-section {
+      min-height: calc(100vh - 68px);
+      display: flex;
+      align-items: center;
+      padding: 5rem 0 6rem;
+      border-bottom: 0;
+    }
   </style>
 </head>
 <body class="home-page">
