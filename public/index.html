@@ -675,8 +675,10 @@
     }
 
     /* 首頁只保留主視覺；其餘資訊由上方選單進入獨立頁面。 */
-    .home-page main > section:not(.hero-section),
-    .home-page .site-footer { display: none !important; }
+    .home-page main > section:not(.hero-section) { display: none !important; }
+    .home-page .site-footer { display: block !important; }
+    .home-page .footer-grid { grid-template-columns: 1fr; margin-bottom: 2rem; }
+    .home-page .footer-grid > .footer-col:not(:first-child) { display: none; }
 
     /* 首頁滿版呈現，移除主視覺與頁首的分隔線。 */
     .home-page header.site-header { border-bottom: 0; }
