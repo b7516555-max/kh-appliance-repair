@@ -673,20 +673,24 @@
       .steps-wrapper { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
     }
+
+    /* 首頁只保留主視覺；其餘資訊由上方選單進入獨立頁面。 */
+    .home-page main > section:not(.hero-section),
+    .home-page .site-footer { display: none !important; }
   </style>
 </head>
-<body>
+<body class="home-page">
 
   <!-- 頂部導航 -->
   <header class="site-header">
     <div class="container nav-inner">
-      <div class="brand-wrap">
+      <a class="brand-wrap brand-home" href="index.html" aria-label="回到小家電、玩具維修雲端系統首頁">
         <img class="brand-logo" src="kaohsiung-epb-logo.png" alt="高雄市環境保護局局徽">
         <div>
           <div class="brand-title">高雄市環境保護局環境管理處</div>
           <div class="brand-sub">小家電、玩具維修雲端系統</div>
         </div>
-      </div>
+      </a>
       <nav class="nav-links" aria-label="主要導航">
         <a href="services.html">服務內容</a>
         <a href="why-repair.html">以修代買</a>
