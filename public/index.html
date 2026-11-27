@@ -673,44 +673,29 @@
       .steps-wrapper { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
     }
-
-    /* 首頁只保留主視覺；其餘資訊由上方選單進入獨立頁面。 */
-    .home-page main > section:not(.hero-section) { display: none !important; }
-    .home-page .site-footer { display: block !important; }
-    .home-page .footer-grid { grid-template-columns: 1fr; margin-bottom: 2rem; }
-    .home-page .footer-grid > .footer-col:not(:first-child) { display: none; }
-
-    /* 首頁依內容收合高度，移除主視覺與頁首的分隔線。 */
-    .home-page header.site-header { border-bottom: 0; }
-    .home-page .hero-section {
-      min-height: auto;
-      display: block;
-      padding: 4rem 0 3rem;
-      border-bottom: 0;
-    }
   </style>
 </head>
-<body class="home-page">
+<body>
 
   <!-- 頂部導航 -->
   <header class="site-header">
     <div class="container nav-inner">
-      <a class="brand-wrap brand-home" href="index.html" aria-label="回到小家電、玩具維修雲端系統首頁">
+      <div class="brand-wrap">
         <img class="brand-logo" src="kaohsiung-epb-logo.png" alt="高雄市環境保護局局徽">
         <div>
           <div class="brand-title">高雄市環境保護局環境管理處</div>
           <div class="brand-sub">小家電、玩具維修雲端系統</div>
         </div>
-      </a>
+      </div>
       <nav class="nav-links" aria-label="主要導航">
-        <a href="services.html">服務內容</a>
-        <a href="why-repair.html">以修代買</a>
-        <a href="process.html">申請流程</a>
-        <a href="locations.html">維修據點</a>
-        <a href="faq.html">常見問題</a>
+        <a href="#services">服務內容</a>
+        <a href="#why-repair">以修代買</a>
+        <a href="#process">申請流程</a>
+        <a href="#locations">維修據點</a>
+        <a href="#faq">常見問題</a>
       </nav>
       <div class="header-cta">
-        <a href="https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem; min-height: 38px;" target="_blank" rel="noopener noreferrer" aria-label="開啟線上預約系統">立即預約</a>
+        <a href="#cta" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem; min-height: 38px;">立即預約</a>
       </div>
     </div>
   </header>
@@ -728,12 +713,22 @@
           為落實源頭減量與綠色生活，推動小家電、玩具檢測修復、線上預約、案件進度即時查詢與維修據點資訊，陪伴市民實踐永續低碳日常。
         </p>
 
+        <!-- 年度場次公告：每年更新本區塊文字即可同步維護民眾提醒 -->
+        <section id="annual-session-notice" role="status" aria-labelledby="annual-session-notice-title" style="margin:1.25rem auto 1rem; max-width:880px; padding:1rem 1.25rem; border:1px solid #f2c66d; border-radius:16px; background:#fff8e7; color:#713f12; text-align:left; box-shadow:0 8px 22px rgba(113,63,18,.08);">
+          <h2 id="annual-session-notice-title" style="margin:0 0 .45rem; font-size:1.15rem; font-weight:800;">📣 115 年度最後場次提醒</h2>
+          <p id="annual-session-last-sessions" style="margin:0; line-height:1.7; font-weight:650;">南鳳山場：11 月 25 日；楠梓場：11 月 27 日，兩場皆為各據點今年最後場次。</p>
+          <p id="annual-session-next-year" style="margin:.25rem 0 0; line-height:1.7;">116 年度場次時間尚未確定，確定後將於本頁公告，敬請留意。</p>
+        </section>
+
         <div class="cta-group" id="cta">
           <a href="https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec" class="btn btn-primary" id="btn-hero-booking" target="_blank" rel="noopener noreferrer">
             <span>📝</span> 立即預約檢修
           </a>
           <a href="https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec?view=status" class="btn btn-secondary" id="btn-hero-status" target="_blank" rel="noopener noreferrer">
             <span>🔍</span> 案件進度查詢
+          </a>
+          <a href="https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec" class="btn btn-outline" id="btn-hero-system" target="_blank" rel="noopener noreferrer">
+            <span>⚡</span> 進入檢修服務系統
           </a>
           <a href="https://lin.ee/Y1qWz75x" class="btn btn-line" id="btn-hero-line" target="_blank" rel="noopener noreferrer">
             <span>💬</span> 加入官方 LINE
@@ -1082,6 +1077,25 @@
     // 集中管理 Google Apps Script 正式端點
     const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyVlstjdm3eUxwWY6mu5C6mJO74Rok7GmBid6pImzd3Tigfhj0wywsnEFUt9_a7AZZf/exec";
     
+    // 從 Apps Script 讀取後台公告，維持與預約首頁一致。
+    window.applyAnnualNotice = function(notice) {
+      if (!notice) return;
+      var box = document.getElementById('annual-session-notice');
+      var title = document.getElementById('annual-session-notice-title');
+      var dates = document.getElementById('annual-session-last-sessions');
+      var next = document.getElementById('annual-session-next-year');
+      if (!box) return;
+      box.style.display = notice.enabled === false ? 'none' : '';
+      if (title) title.textContent = notice.title || '';
+      if (dates) dates.textContent = notice.lastSessions || '';
+      if (next) next.textContent = notice.nextYearNotice || '';
+    };
+    (function loadAnnualNotice() {
+      var script = document.createElement('script');
+      script.src = GAS_WEB_APP_URL + '?action=getAnnualNotice&callback=applyAnnualNotice&_=' + Date.now();
+      script.onerror = function() { script.remove(); };
+      document.head.appendChild(script);
+    })();
     // Google Analytics 4 設定預留位
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
@@ -1090,3 +1104,4 @@
   </script>
 </body>
 </html>
+
